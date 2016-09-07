@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class Player {
     int id;
-    ArrayList<Card> hand = new ArrayList<>();
+    ArrayList<Card> hand;
     boolean isDealer;
     final String[] NAMES = {"Matt", "Mark", "Luke", "John", "Bob"};
     String name;
@@ -15,6 +15,7 @@ public class Player {
         this.id = id;
         name = NAMES[id];
         isDealer = false;
+        hand  = new ArrayList<>();
     }
 
 

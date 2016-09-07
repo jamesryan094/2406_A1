@@ -18,7 +18,7 @@ public class GenerateDeckFromPLIST {
      * Generate ArrayList of String objects containing data parsed from PLIST file.
      */
 
-    public static void main(String[] args) {
+    public static Deck buildDeck() {
         Deck deck = new Deck();
 //        Open the plist file as a file
         File cardsFile = new File("MstCards_151021.plist");
@@ -82,7 +82,9 @@ public class GenerateDeckFromPLIST {
                 }
 
             }
-            deck.displayCards();
+//            deck.displayCards();
+            deck.shuffle();
+//            deck.displayCards();
 
 
         } catch (ParserConfigurationException e) {
@@ -92,7 +94,7 @@ public class GenerateDeckFromPLIST {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return deck;
     }
 
 }
