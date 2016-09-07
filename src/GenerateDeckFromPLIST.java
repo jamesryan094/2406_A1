@@ -1,7 +1,3 @@
-/**Practising parsing an XML plist file
- * Created by James on 23/08/2016.
- */
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,6 +13,11 @@ import java.util.ArrayList;
 
 
 public class GenerateDeckFromPLIST {
+    /**
+     * Created by James on 23/08/2016.
+     * Generate ArrayList of String objects containing data parsed from PLIST file.
+     */
+
     public static void main(String[] args) {
         Deck deck = new Deck();
 //        Open the plist file as a file
@@ -69,12 +70,12 @@ public class GenerateDeckFromPLIST {
                     }
                     if (valArray.size() == 13) {
                         MineralCard tempCard = new MineralCard(valArray);
-//                        tempCard.displayAttributes();
+//                        tempCard.printAttributes();
                         deck.addToDeck(tempCard);
                     }
                     else{
                         TrumpCard tempCard = new TrumpCard(valArray);
-//                        tempCard.displayAttributes();
+//                        tempCard.printAttributes();
                         deck.addToDeck(tempCard);
                     }
 

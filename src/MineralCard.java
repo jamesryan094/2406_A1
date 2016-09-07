@@ -2,14 +2,16 @@ import java.util.ArrayList;
 
 /**
  * Created by james on 6/09/2016.
+ *
  */
 public class MineralCard extends Card{
 
-    String chemistry, classification, crystalSystem,
-            hardness, specificGravity, cleavage, crustalAbundance, economicValue;
-    ArrayList occourence = new ArrayList();
 
-    String subtitle;
+    private String chemistry, classification,
+            crystalSystem, hardness,
+            specificGravity, cleavage,
+            crustalAbundance, economicValue;
+    private ArrayList occurrence = new ArrayList();
 
 
     public MineralCard(ArrayList cardAttributes) {
@@ -19,7 +21,7 @@ public class MineralCard extends Card{
         crystalSystem = (String) cardAttributes.get(6);
         ArrayList occurrenceList = (ArrayList) cardAttributes.get(7);
         for (int x = 0; x < occurrenceList.size(); ++x) {
-            occourence.add((String) occurrenceList.get(x));
+            occurrence.add((String) occurrenceList.get(x));
         }
         hardness = (String) cardAttributes.get(8);
         specificGravity = (String) cardAttributes.get(9);
@@ -28,8 +30,17 @@ public class MineralCard extends Card{
         economicValue = (String) cardAttributes.get(12);
     }
 
-    public void displayAttributes(){
-        super.displayAttributes();
-        System.out.println(chemistry + classification + crystalSystem + occourence + hardness + specificGravity + cleavage + crustalAbundance + economicValue);
+    public void printAttributes(){
+        super.printAttributes();
+        System.out.println("Chemistry: " + chemistry +
+                "\nClassification: " + classification +
+                "\nCrystal System: " + crystalSystem +
+                "\nOccurrence: " + occurrence +
+                "\nHardness: " + hardness +
+                "\nSpecific Gravity: " + specificGravity +
+                "\nCleavage: " + cleavage +
+                "\nCrustal Abundance: " + crustalAbundance +
+                "\nEconomic Value: " + economicValue +
+        "\n--------------------");
     }
 }
