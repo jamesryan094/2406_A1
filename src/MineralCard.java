@@ -10,7 +10,9 @@ public class MineralCard extends Card{
     private String chemistry, classification,
             crystalSystem, hardness,
             specificGravity, cleavage,
-            crustalAbundance, economicValue;
+            crustalAbundance;
+//            economicValue;
+    AssignEconomicValue.ECONOMIC_VALUE economicValue;
     private ArrayList occurrence = new ArrayList();
 
 
@@ -27,8 +29,8 @@ public class MineralCard extends Card{
         specificGravity = (String) cardAttributes.get(9);
         cleavage = (String) cardAttributes.get(10);
         crustalAbundance = (String) cardAttributes.get(11);
-        economicValue = (String) cardAttributes.get(12);
-//        economicValue = Enum_play.ECONOMIC_VALUE.values(5)
+//        economicValue = (String) cardAttributes.get(12);
+        economicValue = AssignEconomicValue.enumerateEconomicValue((String) cardAttributes.get(12));
 //Todo: will have to make functions for each ordinal attribute to assign enum value based on string, eg:
         /** economicValue = enumerateEconomicValue((String) cardAttributes.get(12);
          *
