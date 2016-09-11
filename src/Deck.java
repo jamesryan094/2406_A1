@@ -1,4 +1,3 @@
-//Todo: Create and .Deal method
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -26,11 +25,6 @@ public class Deck {
     }
 
     public void initialDeal(Game newGame){
-//        TODO: THIS!
-//        for each player:
-//            for i=0<9:
-//                cardFromTopofDeck.remove
-//                playerhand.add(cardFromTopofDeck)
         for(Player player:newGame.players){
             for(int i = 0; i < 8; i++){
                 player.hand.add(cards.get(0));

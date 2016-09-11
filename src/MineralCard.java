@@ -28,6 +28,13 @@ public class MineralCard extends Card{
         cleavage = (String) cardAttributes.get(10);
         crustalAbundance = (String) cardAttributes.get(11);
         economicValue = (String) cardAttributes.get(12);
+//        economicValue = Enum_play.ECONOMIC_VALUE.values(5)
+//Todo: will have to make functions for each ordinal attribute to assign enum value based on string, eg:
+        /** economicValue = enumerateEconomicValue((String) cardAttributes.get(12);
+         *
+         * public static enum<EconomicValue> enumEconomicValue (String eValue)
+         *
+         */
     }
 
     public void printAttributes(){
@@ -41,6 +48,6 @@ public class MineralCard extends Card{
                 "\nCleavage: " + cleavage +
                 "\nCrustal Abundance: " + crustalAbundance +
                 "\nEconomic Value: " + economicValue +
-        "\n--------------------");
+                "\n--------------------");
     }
 }

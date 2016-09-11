@@ -24,6 +24,6 @@ public class Card {
                 "\nImage Name: " + imageName +
                 "\nCard Type: " + cardType +
                 "\nTitle: " + title +
-        "\n--------------------");
+                "\n--------------------");
     }
 }
