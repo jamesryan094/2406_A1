@@ -52,4 +52,13 @@ public class MineralCard extends Card{
                 "\nEconomic Value: " + economicValue +
                 "\n--------------------");
     }
+
+    public Boolean compareEValue (MineralCard otherCard){
+        if(this.economicValue.ordinal() > otherCard.economicValue.ordinal()) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
