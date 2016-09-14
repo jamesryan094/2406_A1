@@ -14,6 +14,7 @@ public class SpecificGravity{
         String SGStringStripped = SGString.replaceAll("\\s+","");
         if (SGStringStripped.contains("-")){
 //            Todo: This may be exactly the same as Hardness.parse and therefore redundant
+//            Todo: Make TrumpCategory class that this function as parseRange(String rangeString)
             int SGIndex = SGStringStripped.indexOf('-') + 1;
             return Double.parseDouble(SGStringStripped.substring(SGIndex));
         }

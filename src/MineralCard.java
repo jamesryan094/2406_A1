@@ -8,8 +8,9 @@ public class MineralCard extends Card{
 
 
     private String chemistry, classification,
-            crystalSystem,
-            cleavage;
+            crystalSystem;
+
+    Cleavage cleavage;
 
     CrustalAbundance crustalAbundance;
     EconomicValue economicValue;
@@ -29,7 +30,8 @@ public class MineralCard extends Card{
         }
         hardness = new Hardness((String) cardAttributes.get(8));
         specificGravity = new SpecificGravity((String) cardAttributes.get(9));
-        cleavage = (String) cardAttributes.get(10);
+//        cleavage = (String) cardAttributes.get(10);
+        cleavage = new Cleavage((String) cardAttributes.get(10));
         crustalAbundance = new CrustalAbundance((String) cardAttributes.get(11));
         economicValue = new EconomicValue((String) cardAttributes.get(12));
     }
