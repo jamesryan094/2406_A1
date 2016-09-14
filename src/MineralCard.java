@@ -8,11 +8,13 @@ public class MineralCard extends Card{
 
 
     private String chemistry, classification,
-            crystalSystem, hardness,
+            crystalSystem,
             specificGravity, cleavage,
             crustalAbundance;
 //            economicValue;
     AssignEconomicValue.ECONOMIC_VALUE economicValue;
+    double hardness;
+    String hardnessString;
     private ArrayList occurrence = new ArrayList();
 
 
@@ -25,18 +27,14 @@ public class MineralCard extends Card{
         for (int x = 0; x < occurrenceList.size(); ++x) {
             occurrence.add((String) occurrenceList.get(x));
         }
-        hardness = (String) cardAttributes.get(8);
+//        hardness = (String) cardAttributes.get(8);
+//        hardness = this.AssignHardness((String) cardAttributes.get(8));
+        AssignHardness((String) cardAttributes.get(8));
         specificGravity = (String) cardAttributes.get(9);
         cleavage = (String) cardAttributes.get(10);
         crustalAbundance = (String) cardAttributes.get(11);
 //        economicValue = (String) cardAttributes.get(12);
         economicValue = AssignEconomicValue.enumerateEconomicValue((String) cardAttributes.get(12));
-//Todo: will have to make functions for each ordinal attribute to assign enum value based on string, eg:
-        /** economicValue = enumerateEconomicValue((String) cardAttributes.get(12);
-         *
-         * public static enum<EconomicValue> enumEconomicValue (String eValue)
-         *
-         */
     }
 
     public void printAttributes(){
@@ -59,6 +57,37 @@ public class MineralCard extends Card{
         }
         else{
             return false;
+        }
+    }
+
+    public void AssignHardness(String hardnessString){
+//        if (hardnessString.length() == 1 || hardnessString.length() == 2){
+//            this.hardness = Double.parseDouble(hardnessString);
+//        }
+//        else if (hardnessString.length() == 3){
+//            if(hardnessString.charAt(1) == '.') {
+//                this.hardness = Double.parseDouble(hardnessString);
+//            }
+//            else{
+//                this.hardness = Double.parseDouble(hardnessString.substring(2));
+//            }
+//        }
+//        else if (hardnessString.charAt(hardnessString.length() - 2) == '.'){
+//            String hardnessStringPortion = hardnessString.substring((hardnessString.length()-3), (hardnessString.length()));
+//            this.hardness = Double.parseDouble(hardnessStringPortion);
+//        }
+//        else{
+//            this.hardness = Double.parseDouble(hardnessString.substring(hardnessString.length()-1));
+//        }
+
+//        Boolean isRange;
+        this.hardnessString = hardnessString;
+        String hardnessStringStripped = hardnessString.replaceAll("\\s+", "");
+        if (hardnessStringStripped.contains("-")){
+            this.hardness = Double.parseDouble(hardnessStringStripped.substring(hardnessStringStripped.indexOf('-')+1));
+        }
+        else{
+            this.hardness = Double.parseDouble(hardnessStringStripped);
         }
     }
 }
