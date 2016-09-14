@@ -7,18 +7,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    public static ArrayList<Player> players = new ArrayList<>();
-    public static int numPlayers;
+    public ArrayList<Player> players = new ArrayList<>();
+    public int numPlayers;
     public static int dealerIndex;
 
 
-    public Game(int numPlayers){
-        this.numPlayers = numPlayers;
+    public Game(int num){
+        numPlayers = num;
         players = generatePlayers();
         System.out.println("Player array assigned to Game attribute; players");
     }
 
-    public static ArrayList<Player> generatePlayers() {
+    public ArrayList<Player> generatePlayers() {
         ArrayList<Player> playerArray =  new ArrayList<>(numPlayers);
         for(int i =0; i < numPlayers; ++i){
            playerArray.add(new Player(i));
@@ -34,11 +34,11 @@ public class Game {
         System.out.println(dealerIndex);
     }
 
-    public static int getNumPlayers(){
+    public int getNumPlayers(){
         return numPlayers;
     }
 
-    public static void setNumPlayers(int num){
+    public void setNumPlayers(int num){
         numPlayers = num;
     }
 

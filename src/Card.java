@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+//Todo: This may be better as interface or abstract class.
 public class Card {
     /**
      * Created by James on 31/08/2016.
@@ -7,8 +8,6 @@ public class Card {
      * No Card type objects will be directly instantiated, instead each game card
      * will belong more specifically to one of three subclasses.
      */
-
-//Todo: Check if this should be an interface or not. I think maybe.
 
     String fileName, imageName, cardType, title;
 

@@ -4,7 +4,6 @@
 public class CrustalAbundance extends TrumpCategory{
     private enum CRUSTAL_ABUNDANCE{ULTRATRACE, TRACE, LOW, MODERATE, HIGH, VERY_HIGH, ERROR}
     private CRUSTAL_ABUNDANCE value;
-//    private String asStr;
 
     public CrustalAbundance(String CAValueString){
         asStr = CAValueString;
@@ -39,9 +38,6 @@ public class CrustalAbundance extends TrumpCategory{
         return CAValue;
     }
 
-//    public String toString(){
-//        return asStr;
-//    }
 
     public CRUSTAL_ABUNDANCE getValue(){
         return value;
