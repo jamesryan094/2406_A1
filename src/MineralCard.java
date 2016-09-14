@@ -9,13 +9,10 @@ public class MineralCard extends Card{
 
     private String chemistry, classification,
             crystalSystem,
-            cleavage,
-            crustalAbundance;
-//            economicValue;
-//    EconomicValue.ECONOMIC_VALUE economicValue;
+            cleavage;
+
+    CrustalAbundance crustalAbundance;
     EconomicValue economicValue;
-//    double hardness;
-//    String hardnessString, specificGravityString;
     Hardness hardness;
     SpecificGravity specificGravity;
     private ArrayList occurrence = new ArrayList();
@@ -33,8 +30,7 @@ public class MineralCard extends Card{
         hardness = new Hardness((String) cardAttributes.get(8));
         specificGravity = new SpecificGravity((String) cardAttributes.get(9));
         cleavage = (String) cardAttributes.get(10);
-        crustalAbundance = (String) cardAttributes.get(11);
-//        economicValue = EconomicValue.enumerateEconomicValue((String) cardAttributes.get(12));
+        crustalAbundance = new CrustalAbundance((String) cardAttributes.get(11));
         economicValue = new EconomicValue((String) cardAttributes.get(12));
     }
 

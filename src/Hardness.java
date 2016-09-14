@@ -15,8 +15,8 @@ public class Hardness {
         String hardnessStringStripped = hardnessString.replaceAll("\\s+", "");
         if (hardnessStringStripped.contains("-")){
 //            Assign the portion of the string following the hyphen as a double to hardness attribute
-//            Todo: refactor into multiple lines for readability
-            return Double.parseDouble(hardnessStringStripped.substring(hardnessStringStripped.indexOf('-')+1));
+            int hardnessIndex = hardnessStringStripped.indexOf('-') + 1;
+            return Double.parseDouble(hardnessStringStripped.substring(hardnessIndex));
         }
         else{
             return Double.parseDouble(hardnessStringStripped);

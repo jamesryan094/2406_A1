@@ -13,7 +13,9 @@ public class SpecificGravity{
     public static double parseSG(String SGString){
         String SGStringStripped = SGString.replaceAll("\\s+","");
         if (SGStringStripped.contains("-")){
-            return Double.parseDouble(SGStringStripped.substring(SGStringStripped.indexOf('-')+1));
+//            Todo: This may be exactly the same as Hardness.parse and therefore redundant
+            int SGIndex = SGStringStripped.indexOf('-') + 1;
+            return Double.parseDouble(SGStringStripped.substring(SGIndex));
         }
         else{
             return Double.parseDouble(SGStringStripped);
