@@ -13,8 +13,9 @@ public class MineralCard extends Card{
             crustalAbundance;
 //            economicValue;
     AssignEconomicValue.ECONOMIC_VALUE economicValue;
-    double hardness;
-    String hardnessString;
+//    double hardness;
+//    String hardnessString, specificGravityString;
+    Hardness hardness;
     private ArrayList occurrence = new ArrayList();
 
 
@@ -29,7 +30,9 @@ public class MineralCard extends Card{
         }
 //        hardness = (String) cardAttributes.get(8);
 //        hardness = this.AssignHardness((String) cardAttributes.get(8));
-        AssignHardness((String) cardAttributes.get(8));
+//        AssignHardness((String) cardAttributes.get(8));
+//        hardness =Hardness.parseHardness((String) cardAttributes.get(8));
+        hardness = new Hardness((String) cardAttributes.get(8));
         specificGravity = (String) cardAttributes.get(9);
         cleavage = (String) cardAttributes.get(10);
         crustalAbundance = (String) cardAttributes.get(11);
@@ -43,7 +46,7 @@ public class MineralCard extends Card{
                 "\nClassification: " + classification +
                 "\nCrystal System: " + crystalSystem +
                 "\nOccurrence: " + occurrence +
-                "\nHardness: " + hardness +
+                "\nHardness: " + hardness.asStr +
                 "\nSpecific Gravity: " + specificGravity +
                 "\nCleavage: " + cleavage +
                 "\nCrustal Abundance: " + crustalAbundance +
@@ -60,34 +63,17 @@ public class MineralCard extends Card{
         }
     }
 
-    public void AssignHardness(String hardnessString){
-//        if (hardnessString.length() == 1 || hardnessString.length() == 2){
-//            this.hardness = Double.parseDouble(hardnessString);
-//        }
-//        else if (hardnessString.length() == 3){
-//            if(hardnessString.charAt(1) == '.') {
-//                this.hardness = Double.parseDouble(hardnessString);
-//            }
-//            else{
-//                this.hardness = Double.parseDouble(hardnessString.substring(2));
-//            }
-//        }
-//        else if (hardnessString.charAt(hardnessString.length() - 2) == '.'){
-//            String hardnessStringPortion = hardnessString.substring((hardnessString.length()-3), (hardnessString.length()));
-//            this.hardness = Double.parseDouble(hardnessStringPortion);
+//    public void AssignHardness(String hardnessString){
+//
+//        this.hardnessString = hardnessString;
+//        String hardnessStringStripped = hardnessString.replaceAll("\\s+", "");
+//        if (hardnessStringStripped.contains("-")){
+////            Assign the portion of the string following the hyphen as a double to hardness attribute
+////            Todo: refactor into multiple lines for readability
+//            this.hardness = Double.parseDouble(hardnessStringStripped.substring(hardnessStringStripped.indexOf('-')+1));
 //        }
 //        else{
-//            this.hardness = Double.parseDouble(hardnessString.substring(hardnessString.length()-1));
+//            this.hardness = Double.parseDouble(hardnessStringStripped);
 //        }
-
-//        Boolean isRange;
-        this.hardnessString = hardnessString;
-        String hardnessStringStripped = hardnessString.replaceAll("\\s+", "");
-        if (hardnessStringStripped.contains("-")){
-            this.hardness = Double.parseDouble(hardnessStringStripped.substring(hardnessStringStripped.indexOf('-')+1));
-        }
-        else{
-            this.hardness = Double.parseDouble(hardnessStringStripped);
-        }
-    }
+//    }
 }

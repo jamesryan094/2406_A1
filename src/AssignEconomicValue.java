@@ -9,7 +9,7 @@ public class AssignEconomicValue {
         ECONOMIC_VALUE eValue;
 
         switch (eValueString) {
-            case "trival":
+            case "trivial":
                 eValue = ECONOMIC_VALUE.TRIVIAL;
                 break;
             case "low":
