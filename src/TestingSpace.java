@@ -7,7 +7,7 @@ public class TestingSpace {
         for (Card card:deck.cards){
             if (card instanceof MineralCard) {
                 MineralCard tempCard = (MineralCard) card;
-                System.out.println("String: " + tempCard.cleavage.toString() + "\nEnumValue: " + tempCard.cleavage.getValue() + "\n");
+                System.out.println("String: " + tempCard.cleavage.toString() + "\nValue: " + tempCard.cleavage.getValue() + "\n");
             }
         }
     }

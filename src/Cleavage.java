@@ -2,12 +2,12 @@
  * Created by james on 14/09/2016.
  * Take cleavage String parsed from PLIST and assign corresponding Enumeration.
  */
-public class Cleavage {
+public class Cleavage extends TrumpCategory{
     private enum CLEAVAGE{NONE, POOR_NONE, POOR1, POOR2, GOOD1, GOOD1_POOR1,
     GOOD2, GOOD3, PERFECT1, PERFECT1_GOOD1, PERFECT1_GOOD2, PERFECT2_GOOD1,
     PERFECT3, PERFECT4, PERFECT6, ERROR}
     private CLEAVAGE value;
-    private String asStr;
+//    private String asStr;
 
     public Cleavage(String cleavageString){
         asStr = cleavageString;
@@ -68,9 +68,9 @@ public class Cleavage {
         return cValue;
     }
 
-    public String toString(){
-        return asStr;
-    }
+//    public String toString(){
+//        return asStr;
+//    }
 
     public CLEAVAGE getValue(){
         return value;

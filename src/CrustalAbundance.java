@@ -1,10 +1,10 @@
 /**
  * Created by james on 14/09/2016.
  */
-public class CrustalAbundance {
+public class CrustalAbundance extends TrumpCategory{
     private enum CRUSTAL_ABUNDANCE{ULTRATRACE, TRACE, LOW, MODERATE, HIGH, VERY_HIGH, ERROR}
     private CRUSTAL_ABUNDANCE value;
-    private String asStr;
+//    private String asStr;
 
     public CrustalAbundance(String CAValueString){
         asStr = CAValueString;
@@ -39,9 +39,9 @@ public class CrustalAbundance {
         return CAValue;
     }
 
-    public String toString(){
-        return asStr;
-    }
+//    public String toString(){
+//        return asStr;
+//    }
 
     public CRUSTAL_ABUNDANCE getValue(){
         return value;

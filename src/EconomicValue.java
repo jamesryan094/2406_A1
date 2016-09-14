@@ -2,10 +2,10 @@
  * Created by james on 10/09/2016.
  */
 
-public class EconomicValue {
+public class EconomicValue extends TrumpCategory{
     private enum ECONOMIC_VALUE {TRIVIAL, LOW, MODERATE, HIGH, VERY_HIGH, IM_RICH}
     private ECONOMIC_VALUE value;
-    private String asStr;
+//    private String asStr;
 
     public EconomicValue(String eValueString){
         asStr = eValueString;
@@ -40,9 +40,9 @@ public class EconomicValue {
         return eValue;
     }
 
-    public String toString(){
-        return asStr;
-    }
+//    public String toString(){
+//        return asStr;
+//    }
 
     public ECONOMIC_VALUE getValue(){
         return value;
