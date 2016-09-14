@@ -2,8 +2,8 @@
  * Created by james on 14/09/2016.
  */
 public class Hardness {
-    double value;
-    String asStr;
+    private double value;
+    private String asStr;
     public Hardness(String hardnessString){
         asStr = hardnessString;
         value = parseHardness(hardnessString);
@@ -21,5 +21,13 @@ public class Hardness {
         else{
             return Double.parseDouble(hardnessStringStripped);
         }
+    }
+    public double getValue(){
+        return value;
+    }
+
+    public String toString(){
+//        Todo: This is really more of a getter than a toString(). Ask if this is okay!
+        return asStr;
     }
 }

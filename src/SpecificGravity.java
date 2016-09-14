@@ -1,17 +1,30 @@
 /**
  * Created by james on 14/09/2016.
  */
-public class SpecificGravity {
-//    public static void assignSpecificGravity(String SGStr){
-//        this.specificGravityString = SGStr;
-//        String SGStringStripped = SGStr.replaceAll("\\s+", "");
-//        if (SGStringStripped.contains("-")){
-////            Assign the portion of the string following the hyphen as a double to specific gravity attribute
-////            Todo: refactor into multiple lines for readability
-//            this.specificGravity= Double.parseDouble(hardnessStringStripped.substring(hardnessStringStripped.indexOf('-')+1));
-//        }
-//        else{
-//            this.hardness = Double.parseDouble(hardnessStringStripped);
-//        }
-//    }
+public class SpecificGravity{
+    private String asStr;
+    private Double value;
+
+    public SpecificGravity(String SGStr){
+        asStr = SGStr;
+        value = parseSG(SGStr);
+    }
+
+    public static double parseSG(String SGString){
+        String SGStringStripped = SGString.replaceAll("\\s+","");
+        if (SGStringStripped.contains("-")){
+            return Double.parseDouble(SGStringStripped.substring(SGStringStripped.indexOf('-')+1));
+        }
+        else{
+            return Double.parseDouble(SGStringStripped);
+        }
+    }
+
+    public double getValue(){
+        return value;
+    }
+
+    public String toString(){
+        return asStr;
+    }
 }

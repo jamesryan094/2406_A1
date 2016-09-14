@@ -7,7 +7,7 @@ public class TestingSpace {
         for (Card card:deck.cards){
             if (card instanceof MineralCard) {
                 MineralCard tempCard = (MineralCard) card;
-                System.out.println("String: " + tempCard.hardness.asStr + "\nDouble: " + tempCard.hardness.value + "\n");
+                System.out.println("String: " + tempCard.specificGravity.toString() + "\nDouble: " + tempCard.specificGravity.getValue() + "\n");
             }
         }
     }
