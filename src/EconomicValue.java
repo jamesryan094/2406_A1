@@ -2,10 +2,17 @@
  * Created by james on 10/09/2016.
  */
 
-public class AssignEconomicValue {
-    public enum ECONOMIC_VALUE {TRIVIAL, LOW, MODERATE, HIGH, VERY_HIGH, IM_RICH}
+public class EconomicValue {
+    private enum ECONOMIC_VALUE {TRIVIAL, LOW, MODERATE, HIGH, VERY_HIGH, IM_RICH}
+    private ECONOMIC_VALUE value;
+    private String asStr;
 
-    public static ECONOMIC_VALUE enumerateEconomicValue(String eValueString) {
+    public EconomicValue(String eValueString){
+        asStr = eValueString;
+        value = enumerateEconomicValue(eValueString);
+    }
+
+    private static ECONOMIC_VALUE enumerateEconomicValue(String eValueString) {
         ECONOMIC_VALUE eValue;
 
         switch (eValueString) {
@@ -31,6 +38,14 @@ public class AssignEconomicValue {
                 eValue = ECONOMIC_VALUE.TRIVIAL;
         }
         return eValue;
+    }
+
+    public String toString(){
+        return asStr;
+    }
+
+    public ECONOMIC_VALUE getValue(){
+        return value;
     }
 }
 
