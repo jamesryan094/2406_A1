@@ -25,4 +25,8 @@ public class Card {
                 "\nTitle: " + title +
                 "\n--------------------");
     }
+
+    public String getCardType() {
+        return cardType;
+    }
 }

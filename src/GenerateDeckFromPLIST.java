@@ -83,7 +83,7 @@ public class GenerateDeckFromPLIST {
 
             }
 //            deck.displayCards();
-            deck.shuffle();
+//            deck.shuffle();
 //            deck.displayCards();
 
 

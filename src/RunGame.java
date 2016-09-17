@@ -14,37 +14,63 @@ public class RunGame {
     static Scanner keys = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String menuChoice;
-
-        Deck deck = GenerateDeckFromPLIST.buildDeck();
 
         System.out.print(MENU_MESSAGE);
-        menuChoice = getValidMenuChoice();
-        while(!menuChoice.equals("Q")) {
+        String menuChoice = getValidMenuChoice();
+        while (!menuChoice.equals("Q")) {
             if (menuChoice.equals("P")) {
-                int numPlayersChoice = Game.getValidNumPlayers();
-                Game newGame = new Game(numPlayersChoice);
-                newGame.assignDealer();
-                newGame.printParty();
-                deck.initialDeal(newGame);
-                for(int i = 0; i < newGame.players.size();++i){
-                    System.out.println(newGame.players.get(i).name);
-                    for (Card card:newGame.players.get(i).hand){
-                        System.out.println("New Card");
-                        card.printAttributes();
-                    }
-                }
+                Game newGame = prepareNewGame();
+                System.out.println("Current Player: " + newGame.getCurrentPlayer().getName());
+
             }
             System.out.print(MENU_MESSAGE);
             menuChoice = getValidMenuChoice();
         }
-
         System.out.println("Thank you for playing :V");
-
     }
 
 
 
+    private static Game prepareNewGame() {
+        int numPlayersChoice = getValidNumPlayers();
+        Scanner keys = new Scanner(System.in);
+        System.out.println("Enter Username: ");
+        String userName = keys.nextLine();
+        Game newGame = new Game(numPlayersChoice, userName);
+        newGame.assignDealer();
+        System.out.println("Dealer is: " + newGame.getDealer().getName());
+//        newGame.printParty();
+        newGame.initialDeal();
+        System.out.println("Your hand has been dealt");
+//        for(int i = 0; i < newGame.players.size();++i){
+//            System.out.println(newGame.players.get(i).name);
+//            for (Card card:newGame.players.get(i).hand){
+//                System.out.println("New Card");
+//                card.printAttributes();
+//            }
+//                }
+        return newGame;
+    }
+
+
+
+
+    public static int getValidNumPlayers(){
+        Scanner keys = new Scanner(System.in);
+        int num;
+
+        System.out.println("How many players (3-5)?");
+        num = keys.nextInt();
+        keys.nextLine();
+
+        while ((num != 3) && (num != 4) && (num != 5)){
+            System.out.println("Invalid choice, try again");
+            System.out.println("How many players (3-5)?");
+            num = keys.nextInt();
+            keys.nextLine();
+        }
+        return num;
+    }
 
     private static String getValidMenuChoice() {
         Boolean isValid = false;
