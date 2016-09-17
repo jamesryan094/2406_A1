@@ -3,6 +3,7 @@
  * Acts as conduit between player and system by taking input and print output, controls flow of game.
  */
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -23,7 +24,9 @@ public class Game {
         for(int i =0; i < numPlayers; ++i){
            playerArray.add(new Player(i));
         }
-        System.out.println("Players made, returning player array");
+//        System.out.println("Players made, returning player array");
+//        playerArray shuffled to establish random playing order
+        Collections.shuffle(playerArray);
         return playerArray;
     }
 
@@ -68,4 +71,6 @@ public class Game {
                     "\n--------------------");
         }
     }
+
+
 }

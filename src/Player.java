@@ -18,5 +18,8 @@ public class Player {
         hand  = new ArrayList<>();
     }
 
+//    public void playCard(int CardID){
+//
+//    }
 
 }

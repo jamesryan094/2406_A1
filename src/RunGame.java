@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Created by james on 6/09/2016.
  *
  */
-public class RunMenu {
+public class RunGame {
     static String MENU_MESSAGE = "MINERAL SUPER TRUMPS" +
             "\n--------------------" +
             "\n(P)lay" +
@@ -17,11 +17,9 @@ public class RunMenu {
         String menuChoice;
 
         Deck deck = GenerateDeckFromPLIST.buildDeck();
-//        deck.displayCards();
 
         System.out.print(MENU_MESSAGE);
-        menuChoice = keys.nextLine().toUpperCase();
-        getValidMenuChoice(menuChoice);
+        menuChoice = getValidMenuChoice();
         while(!menuChoice.equals("Q")) {
             if (menuChoice.equals("P")) {
                 int numPlayersChoice = Game.getValidNumPlayers();
@@ -38,8 +36,7 @@ public class RunMenu {
                 }
             }
             System.out.print(MENU_MESSAGE);
-            menuChoice = keys.nextLine().toUpperCase();
-            getValidMenuChoice(menuChoice);
+            menuChoice = getValidMenuChoice();
         }
 
         System.out.println("Thank you for playing :V");
@@ -49,8 +46,11 @@ public class RunMenu {
 
 
 
-    private static String getValidMenuChoice(String userInput) {
+    private static String getValidMenuChoice() {
         Boolean isValid = false;
+        Scanner keys = new Scanner(System.in);
+
+        String userInput = keys.nextLine().toUpperCase();
 
         while (!isValid){
             if ((userInput.equals("Q")) || (userInput.equals("P"))){
