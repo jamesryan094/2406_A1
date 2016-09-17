@@ -1,3 +1,5 @@
+package Game;
+
 import java.util.Scanner;
 
 /**
@@ -44,8 +46,8 @@ public class RunGame {
         System.out.println("Your hand has been dealt");
 //        for(int i = 0; i < newGame.players.size();++i){
 //            System.out.println(newGame.players.get(i).name);
-//            for (Card card:newGame.players.get(i).hand){
-//                System.out.println("New Card");
+//            for (Cards.Card card:newGame.players.get(i).hand){
+//                System.out.println("New Cards.Card");
 //                card.printAttributes();
 //            }
 //                }

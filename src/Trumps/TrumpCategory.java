@@ -1,7 +1,9 @@
+package Trumps;
+
 /**
  * Created by james on 14/09/2016.
  * Parent class of trump category classes
- * Child Classes: (Cleavage, CrustalAbundance, EconomicValue, Hardness, SpecificGravity)
+ * Child Classes: (Trumps.Cleavage, Trumps.CrustalAbundance, Trumps.EconomicValue, Trumps.Hardness, Trumps.SpecificGravity)
  */
 public class TrumpCategory {
 //    public enum CATEGORY {CLEAVAGE, CRUSTAL_ABUNDANCE, ECONOMIC_VALUE, HARDNESS, SPECIFIC_GRAVITY, ERROR}

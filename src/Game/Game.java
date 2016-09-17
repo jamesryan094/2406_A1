@@ -1,28 +1,31 @@
-/**
+package Game; /**
  * Created by james on 6/09/2016.
  * Acts as conduit between player and system by taking input and print output, controls flow of game.
  */
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import java.util.Scanner;
+import Cards.Card;
+import Deck.Deck;
+import Deck.GenerateDeckFromPLIST;
+import Player.Player;
 
-public class Game {
+import java.util.ArrayList;
+import java.util.Random;
+
+class Game {
     private static final int NUM_CARDS_PER_HAND = 8;
     private final Deck deck;
-    public Player[] players;
-    public int numPlayers;
-    public static int dealerIndex;
+    private Player[] players;
+    private int numPlayers;
+    private static int dealerIndex;
     private Player currentPlayer;
 
-    public Game(int num, String userName){
+    Game(int num, String userName){
         this.deck = GenerateDeckFromPLIST.buildDeck();
         numPlayers = num;
         players = generatePlayers(userName);
-        System.out.println("Player array assigned to Game attribute; players");
+        System.out.println("Player.Player array assigned to Game.Game attribute; players");
     }
 
-    public Player[] generatePlayers(String userName) {
+    private Player[] generatePlayers(String userName) {
         Player[] playerArray =  new Player[numPlayers];
         playerArray[0] = new Player(0, userName);
         for(int i =1; i < numPlayers; ++i){
@@ -34,14 +37,14 @@ public class Game {
         return playerArray;
     }
 
-    public void assignDealer(){
+    void assignDealer(){
         Random rn = new Random();
         dealerIndex = rn.nextInt(numPlayers);
-        players[dealerIndex].isDealer = true;
+        players[dealerIndex].setIsDealer(true);
         System.out.println(dealerIndex);
     }
 
-    public void initialDeal(){
+    void initialDeal(){
         deck.removeRuleCards();
         deck.shuffle();
         for(Player player:this.players){
@@ -62,7 +65,7 @@ public class Game {
 
 //    public void printParty(){
 //        for(int i = 0; i < players.length;++i){
-//            System.out.println("Player: " + (i+1) +
+//            System.out.println("Player.Player: " + (i+1) +
 //                    "\nName: " + players.get(i).name +
 //                    "\nID: " + players.get(i).id +
 //                    "\nDealer: " + players.get(i).isDealer +
@@ -71,7 +74,7 @@ public class Game {
 //    }
 
 
-    public Player getCurrentPlayer() {
+    Player getCurrentPlayer() {
         int currentPlayerId = currentPlayer.getId();
         if (currentPlayerId == players.length - 1){
             currentPlayer = players[0];
@@ -82,11 +85,11 @@ public class Game {
         return currentPlayer;
     }
 
-    public Player getDealer() {
+    Player getDealer() {
         return players[dealerIndex];
     }
 
-//    public void setCurrentPlayer(Player currentPlayer) {
+//    public void setCurrentPlayer(Player.Player currentPlayer) {
 //        this.currentPlayer = currentPlayer;
 //    }
 }

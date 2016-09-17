@@ -1,3 +1,7 @@
+package Player;
+
+import Cards.Card;
+
 import java.util.ArrayList;
 
 /**
@@ -5,9 +9,9 @@ import java.util.ArrayList;
  */
 public class Player {
     private int id;
-    ArrayList<Card> hand;
-    boolean isDealer;
-    final String[] NAMES = {"Matt", "Mark", "Luke", "John"};
+    private ArrayList<Card> hand;
+    private boolean isDealer;
+    private final String[] NAMES = {"Matt", "Mark", "Luke", "John"};
     private String name;
 
     public Player(int id)
@@ -36,6 +40,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public void setIsDealer(boolean isDealer) {
+        this.isDealer = isDealer;
     }
 
 //    public void playCard(int CardID){

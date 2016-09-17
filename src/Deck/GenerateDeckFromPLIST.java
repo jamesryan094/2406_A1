@@ -1,3 +1,5 @@
+package Deck;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -10,6 +12,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import Cards.Card;
+import Cards.MineralCard;
+import Cards.TrumpCard;
 
 
 public class GenerateDeckFromPLIST {
@@ -32,7 +38,7 @@ public class GenerateDeckFromPLIST {
             NodeList deckList = properties.getElementsByTagName("dict");
 
             for (int i = 1; i < deckList.getLength(); ++i) {
-                ArrayList valArray = new ArrayList();
+                ArrayList<String> valArray = new ArrayList<>();
 //          Accessing just one card at a time. Checking that the node is an element node, and typecasting.
                 Node cardNode = deckList.item(i);
                 if (cardNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -43,7 +49,7 @@ public class GenerateDeckFromPLIST {
                         Node attributeValNode = childNodes.item(j);
                         String attributeValName = attributeValNode.getNodeName();
                         if (attributeValName.equals("array")){
-                            ArrayList occurrenceArray = new ArrayList();
+                            ArrayList<String> occurrenceArray = new ArrayList<>();
                             NodeList arrayStrings = attributeValNode.getChildNodes();
 //                            Need to nest another loop to iterate through and pull each occurrence string separately
                             for (int k = 0; k < arrayStrings.getLength(); ++k){
@@ -55,7 +61,7 @@ public class GenerateDeckFromPLIST {
                                     occurrenceArray.add(occurrenceText);
                                 }
                             }
-                            valArray.add(occurrenceArray);
+                            valArray.add(occurrenceArray.toString());
                         }
                         else if (attributeValName.equals("string")) {
                             valArray.add(attributeValNode.getTextContent());
@@ -69,12 +75,12 @@ public class GenerateDeckFromPLIST {
                         }
                     }
                     if (valArray.size() == 13) {
-                        MineralCard tempCard = new MineralCard(valArray);
+                        Card tempCard = new MineralCard(valArray);
 //                        tempCard.printAttributes();
                         deck.addToDeck(tempCard);
                     }
                     else{
-                        TrumpCard tempCard = new TrumpCard(valArray);
+                        Card tempCard = new TrumpCard(valArray);
 //                        tempCard.printAttributes();
                         deck.addToDeck(tempCard);
                     }

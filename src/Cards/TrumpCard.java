@@ -1,3 +1,5 @@
+package Cards;
+
 import java.util.ArrayList;
 
 public class TrumpCard extends Card {
@@ -6,7 +8,8 @@ public class TrumpCard extends Card {
      *
      */
 
-    String subTitle;
+    private String subTitle;
+
     public TrumpCard(ArrayList cardAttributes){
         super(cardAttributes);
         subTitle = cardAttributes.get(4).toString();

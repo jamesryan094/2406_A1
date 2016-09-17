@@ -1,3 +1,5 @@
+package Trumps;
+
 /**
  * Created by james on 10/09/2016.
  */
@@ -51,7 +53,7 @@ public class EconomicValue extends TrumpCategory{
 
 //    public static void compare() {
 //
-//Card c1= new card
+//Cards.Card c1= new card
 //        c2 =
 //                if(c1.enconvalue <= c2.)
 

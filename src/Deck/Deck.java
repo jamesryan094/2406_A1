@@ -1,16 +1,19 @@
+package Deck;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import Cards.Card;
 
 public class Deck {
 
     /**
      * Created by james on 6/09/2016.
-     * ArrayList to store, shuffle and deal Card type objects.
+     * ArrayList to store, shuffle and deal Cards.Card type objects.
      */
 
-    ArrayList<Card> cards = new ArrayList<>();
+    private ArrayList<Card> cards = new ArrayList<>();
 
-    public void addToDeck(Card card){
+    void addToDeck(Card card){
         cards.add(card);
     }
 
@@ -24,8 +27,8 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
-//    public void initialDeal(Game newGame){
-//        for(Player player:newGame.players){
+//    public void initialDeal(Game.Game newGame){
+//        for(Player.Player player:newGame.players){
 //            for(int i = 0; i < 8; i++){
 //                player.hand.add(cards.get(0));
 //                cards.remove(0);
@@ -46,7 +49,7 @@ public class Deck {
     }
 
     public void removeRuleCards() {
-//        for (Card card : cards){
+//        for (Cards.Card card : cards){
 //            String currentCardType = card.getCardType();
 //            if (currentCardType.equals("rule")){
 //                cards.remove(card);
@@ -58,5 +61,9 @@ public class Deck {
         cards.remove(cards.size()-1);
         cards.remove(cards.size()-1);
 
+    }
+
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 }

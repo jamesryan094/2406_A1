@@ -1,3 +1,5 @@
+package Trumps;
+
 /**
  * Created by james on 14/09/2016.
  * Take cleavage String parsed from PLIST and assign corresponding Enumeration.
