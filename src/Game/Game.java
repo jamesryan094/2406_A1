@@ -7,6 +7,9 @@ import Deck.Deck;
 import Deck.GenerateDeckFromPLIST;
 import Player.Player;
 
+import Player.HumanPlayer;
+import Player.NonHumanPlayer;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,19 +20,21 @@ class Game {
     private int numPlayers;
     private static int dealerIndex;
     private Player currentPlayer;
+    private boolean isWon;
 
     Game(int num, String userName){
         this.deck = GenerateDeckFromPLIST.buildDeck();
         numPlayers = num;
         players = generatePlayers(userName);
-        System.out.println("Player.Player array assigned to Game.Game attribute; players");
+        isWon = false;
+        System.out.println("Player array assigned to Game attribute; players");
     }
 
     private Player[] generatePlayers(String userName) {
         Player[] playerArray =  new Player[numPlayers];
-        playerArray[0] = new Player(0, userName);
+        playerArray[0] = new HumanPlayer(userName);
         for(int i =1; i < numPlayers; ++i){
-           playerArray[i] = new Player(i);
+           playerArray[i] = new NonHumanPlayer(i);
         }
 //        System.out.println("Players made, returning player array");
 //        playerArray shuffled to establish random playing order
@@ -41,7 +46,13 @@ class Game {
         Random rn = new Random();
         dealerIndex = rn.nextInt(numPlayers);
         players[dealerIndex].setIsDealer(true);
-        System.out.println(dealerIndex);
+        System.out.println("Dealer: " + players[dealerIndex].getName());
+    }
+
+    void testAssignDealer(){
+        dealerIndex = numPlayers-1;
+        players[dealerIndex].setIsDealer(true);
+        System.out.println("Dealer: " + players[dealerIndex].getName());
     }
 
     void initialDeal(){
@@ -74,7 +85,7 @@ class Game {
 //    }
 
 
-    Player getCurrentPlayer() {
+    protected Player setCurrentPlayer() {
         int currentPlayerId = currentPlayer.getId();
         if (currentPlayerId == players.length - 1){
             currentPlayer = players[0];
@@ -85,8 +96,20 @@ class Game {
         return currentPlayer;
     }
 
+    protected Player getCurrentPlayer(){
+        return currentPlayer;
+    }
+
     Player getDealer() {
         return players[dealerIndex];
+    }
+
+    Player[] getPlayers(){
+        return players;
+    }
+
+    public boolean isWon() {
+        return isWon;
     }
 
 //    public void setCurrentPlayer(Player.Player currentPlayer) {

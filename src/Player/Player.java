@@ -13,9 +13,11 @@ public class Player {
     private boolean isDealer;
     private final String[] NAMES = {"Matt", "Mark", "Luke", "John"};
     private String name;
+    private boolean isHuman;
 
     public Player(int id)
     {
+        isHuman = false;
         this.id = id;
         name = NAMES[id-1];
         isDealer = false;
@@ -24,6 +26,7 @@ public class Player {
 
     public Player(int id, String userName)
     {
+        isHuman = true;
         this.id = id;
         name = userName;
         isDealer = false;
@@ -50,4 +53,13 @@ public class Player {
 //
 //    }
 
+    public boolean isHuman(){
+        return this.isHuman;
+    }
+
+    public void displayHand(){
+        for(int i=0; i < this.hand.size(); ++i){
+            hand.get(i).printAttributes();
+        }
+    }
 }

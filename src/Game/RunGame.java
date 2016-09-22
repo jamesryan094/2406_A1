@@ -22,7 +22,39 @@ public class RunGame {
         while (!menuChoice.equals("Q")) {
             if (menuChoice.equals("P")) {
                 Game newGame = prepareNewGame();
+                newGame.setCurrentPlayer();
                 System.out.println("Current Player: " + newGame.getCurrentPlayer().getName());
+//                Todo: implement
+                while (!newGame.isWon()){
+                    if (newGame.getCurrentPlayer().isHuman()){
+                        PlayTurn.turnMenu(newGame);
+                        newGame.setCurrentPlayer();
+                    }
+                    else{
+//                        playTurn.robotTurn();
+                        System.out.println("Player Up: " + newGame.getCurrentPlayer().getName());
+                        newGame.setCurrentPlayer();
+//                        System.out.println("Oh no");
+                    }
+                }
+
+
+
+
+
+
+
+//                If the current player is human
+//                if (newGame.getCurrentPlayer().getName().equals(newGame.getPlayers()[0].getName())){
+//
+//                }
+//                if (user is up){
+//                    get user card choice
+//                            playturn (card choice)
+//                }
+//                else {
+//                    playturn();
+//                }
 
             }
             System.out.print(MENU_MESSAGE);
@@ -32,18 +64,20 @@ public class RunGame {
     }
 
 
-
-    private static Game prepareNewGame() {
+//Todo: change to private after testing
+    protected static Game prepareNewGame() {
         int numPlayersChoice = getValidNumPlayers();
         Scanner keys = new Scanner(System.in);
         System.out.println("Enter Username: ");
         String userName = keys.nextLine();
         Game newGame = new Game(numPlayersChoice, userName);
         newGame.assignDealer();
-        System.out.println("Dealer is: " + newGame.getDealer().getName());
+//        newGame.testAssignDealer();
+//        System.out.println("Dealer is: " + newGame.getDealer().getName());
 //        newGame.printParty();
         newGame.initialDeal();
         System.out.println("Your hand has been dealt");
+
 //        for(int i = 0; i < newGame.players.size();++i){
 //            System.out.println(newGame.players.get(i).name);
 //            for (Cards.Card card:newGame.players.get(i).hand){

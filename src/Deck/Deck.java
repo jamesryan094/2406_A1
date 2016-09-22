@@ -12,6 +12,7 @@ public class Deck {
      */
 
     private ArrayList<Card> cards = new ArrayList<>();
+    private boolean hasCards = true;
 
     void addToDeck(Card card){
         cards.add(card);
