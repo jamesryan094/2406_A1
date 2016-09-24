@@ -22,6 +22,7 @@ class Game {
     private Player currentPlayer;
     private boolean isWon;
     private int roundNum;
+    private boolean humanPlayedCard = false;
 
 
     Game(int num, String userName){
@@ -130,6 +131,14 @@ class Game {
         else{
             return false;
         }
+    }
+
+    public void cardHasBeenPlayed() {
+        humanPlayedCard = true;
+    }
+
+    public boolean getHumanPlayedCard(){
+        return humanPlayedCard;
     }
 
 //    public void setCurrentPlayer(Player.Player currentPlayer) {

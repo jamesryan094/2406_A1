@@ -44,21 +44,25 @@ public class RunGame {
                         switch (turnChoice){
                             case 0:
                                 System.out.println("Display Hand");
-                                displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice);
+                                displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
 
                                 break;
                             case 1:
                                 System.out.println("play card");
 //                                playcard()
-                                displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice);
-                                newGame.setCurrentPlayer();
+                                displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
+                                if(newGame.getHumanPlayedCard()) {
+                                    newGame.setCurrentPlayer();
+                                }
                                 break;
 
                             case 2:
                                 System.out.println("pass");
+
                                 newGame.setCurrentPlayer();
                                 break;
                         }
+
                     }
 //                    Round.playRound(newGame);
                 }
@@ -181,23 +185,42 @@ public class RunGame {
         }
         return turnMenuChoice;
     }
-    public static void displayHandMenu(ArrayList<Card> userHand, int menuChoice){
+    public static void displayHandMenu(ArrayList<Card> userHand, int menuChoice, Game newGame){
         int handMenuChoice;
         Scanner keys = new Scanner(System.in);
-        for(int i=0; i < userHand.size(); ++i){
-            System.out.println("("+ i + ") " + userHand.get(i).getTitle());
-        }
-        System.out.print("Enter Card Index >>> ");
+
+
+        printCards(userHand);
         handMenuChoice = keys.nextInt();
         keys.nextLine();
-        Card cardChoice = userHand.get(handMenuChoice);
-        if(menuChoice== 0) {
-            cardChoice.printAttributes();
+
+        if (handMenuChoice != 0){
+            Card cardChoice = userHand.get(handMenuChoice -1);
+            if(menuChoice== 0) {
+                cardChoice.printAttributes();
+            }
+            else{
+                System.out.println("display hand menu > play");
+                newGame.cardHasBeenPlayed();
+//            Game.playCard(cardChoice));
+            }
         }
         else{
-            System.out.println("display hand menu > play");
-//            Game.playCard(cardChoice));
-        }
 
         }
+    }
+
+
+    public static void printCards(ArrayList<Card> userHand){
+        for(int i=0; i < userHand.size(); ++i){
+            System.out.println("("+ (i+1) + ") " + userHand.get(i).getTitle());
+        }
+        System.out.println("(0) Back");
+        System.out.print("Enter Card Index >>> ");
+    }
+
+//        public static int getValidHandMenuChoice(){
+//            displayHandMenu();
+//
+//        }
 }
