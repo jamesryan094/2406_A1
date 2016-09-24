@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class PlayTurn {
 
-    static void turnMenu(Game newGame){
+    static void playUserTurn(Game newGame){
         final String MENUMESSAGE = "(0)View Hand\n(1)Play Card\n(2)Pass";
         int menuChoice;
         System.out.println(MENUMESSAGE);
@@ -18,24 +18,27 @@ public class PlayTurn {
         keys.nextLine();
         while(menuChoice != 2){
             if (menuChoice==0){
-                newGame.getCurrentPlayer().displayHand();
+//                newGame.getCurrentPlayer().displayHand();
+                handMenu(newGame, menuChoice);
 
                 System.out.println(MENUMESSAGE);
                 menuChoice = keys.nextInt();
                 keys.nextLine();
             }
             else if(menuChoice == 1){
-                System.out.println("Play Card, Under Construction");
+//                System.out.println("Play Card, Under Construction");
+//                Round.setLastCardPlayedBy(newGame.getCurrentPlayer());
 
-                Round.setLastCardPlayedBy(newGame.getCurrentPlayer());
 //                System.out.println("last card played by: " + Round.getLastCardPlayedBy().getName());
+
+                handMenu(newGame, menuChoice);
 
                 System.out.println(MENUMESSAGE);
                 menuChoice = keys.nextInt();
                 keys.nextLine();
             }
             else{
-                System.out.println("Oh no!!");
+                System.out.println("Oh no playUserTurn!!");
 
                 System.out.println(MENUMESSAGE);
                 menuChoice = keys.nextInt();
@@ -43,5 +46,19 @@ public class PlayTurn {
             }
         }
         System.out.println("You choose to pass this turn");
+    }
+
+    private static void handMenu(Game newGame, int menuChoice){
+        if (menuChoice == 0){
+            newGame.getCurrentPlayer().displayHand();
+        }
+        else if(menuChoice==1){
+            System.out.println("Play Card, Under Construction");
+            Round.setLastCardPlayedBy(newGame.getCurrentPlayer());
+        }
+        else{
+            System.out.println("Oh No handMenu");
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 package Game;
-
+//Todo: Ensure ALL input is collected in THIS file.
+//todo: get username here
 import java.util.Scanner;
 
 /**
@@ -14,6 +15,7 @@ public class RunGame {
             "\n>>>";
 
     static Scanner keys = new Scanner(System.in);
+    static final String TURN_MENU_MESSAGE = "(0)View Hand\n(1)Play Card\n(2)Pass";
 
     public static void main(String[] args) {
 
@@ -22,11 +24,38 @@ public class RunGame {
         while (!menuChoice.equals("Q")) {
             if (menuChoice.equals("P")) {
                 Game newGame = prepareNewGame();
+//                System.out.println("Game Prepared");
                 newGame.setCurrentPlayer();
-//                System.out.println("Current Player: " + newGame.getCurrentPlayer().getName());
+
                 while (!newGame.isWon()){
-                    Round.playRound(newGame);
-//                    newGame.incrementRoundNum();
+                    int turnChoice;
+//                    newGame.setCurrentPlayer();
+
+                    if (!newGame.isHumanUp()){
+//                        newGame.playRobotTurn();
+                        System.out.println(newGame.getCurrentPlayer().getName() + " chooses to pass");
+                        newGame.setCurrentPlayer();
+                    }
+
+                    while (newGame.isHumanUp()){
+                        turnChoice = getValidTurnChoice();
+                        switch (turnChoice){
+                            case 0:
+                                System.out.println("Display Hand");
+                                break;
+                            case 1:
+                                System.out.println("play card");
+//                                playcard()
+                                newGame.setCurrentPlayer();
+                                break;
+
+                            case 2:
+                                System.out.println("pass");
+                                newGame.setCurrentPlayer();
+                                break;
+                        }
+                    }
+//                    Round.playRound(newGame);
                 }
 
 
@@ -127,5 +156,24 @@ public class RunGame {
 
         return userInput;
 
+    }
+
+    static void displayTurnMenu(){
+        System.out.println(TURN_MENU_MESSAGE);
+    }
+
+    static int getValidTurnChoice(){
+        int turnMenuChoice;
+        Scanner keys = new Scanner(System.in);
+        displayTurnMenu();
+        turnMenuChoice = keys.nextInt();
+        keys.nextLine();
+        while (turnMenuChoice != 0 && turnMenuChoice!= 1 && turnMenuChoice != 2){
+            System.out.println("invalid choice, please try again");
+            displayTurnMenu();
+            turnMenuChoice = keys.nextInt();
+            keys.nextLine();
+        }
+        return turnMenuChoice;
     }
 }

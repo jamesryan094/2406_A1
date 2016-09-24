@@ -31,4 +31,8 @@ public class Card {
     public String getCardType() {
         return cardType;
     }
+
+    public String getTitle() {
+        return title;
+    }
 }

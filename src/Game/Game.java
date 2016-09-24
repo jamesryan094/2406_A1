@@ -96,6 +96,7 @@ class Game {
         else{
             currentPlayer = players[currentPlayerId + 1];
         }
+        System.out.println("Current Player: " + currentPlayer.getName());
         return currentPlayer;
     }
 
@@ -120,6 +121,15 @@ class Game {
     }
     public void incrementRoundNum(){
         roundNum+=1;
+    }
+
+    boolean isHumanUp(){
+        if (getCurrentPlayer().isHuman()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 //    public void setCurrentPlayer(Player.Player currentPlayer) {

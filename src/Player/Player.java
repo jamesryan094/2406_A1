@@ -3,6 +3,7 @@ package Player;
 import Cards.Card;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by james on 6/09/2016.
@@ -57,11 +58,23 @@ public class Player {
         return this.isHuman;
     }
 
-    public void displayHand(){
+    public void displayHandDetails(){
         for(int i=0; i < this.hand.size(); ++i){
             hand.get(i).printAttributes();
         }
     }
+
+    public void displayHand(){
+        int menuChoice;
+        Scanner keys = new Scanner(System.in);
+        for(int i=0; i < this.hand.size(); ++i){
+            System.out.println("("+ i + ") " + hand.get(i).getTitle());
+        }
+        menuChoice = keys.nextInt();
+        keys.nextLine();
+        hand.get(menuChoice).printAttributes();
+    }
+
     public boolean equals(Player otherPlayer){
         if ((this.getName().equals(otherPlayer.getName())) && (this.getId()==otherPlayer.getId())){
             return true;
