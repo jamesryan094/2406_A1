@@ -6,6 +6,7 @@ import java.util.Scanner;
 /**
  * Created by james on 22/09/2016.
  */
+
 public class PlayTurn {
 
     static void turnMenu(Game newGame){
@@ -25,6 +26,9 @@ public class PlayTurn {
             }
             else if(menuChoice == 1){
                 System.out.println("Play Card, Under Construction");
+
+                Round.setLastCardPlayedBy(newGame.getCurrentPlayer());
+//                System.out.println("last card played by: " + Round.getLastCardPlayedBy().getName());
 
                 System.out.println(MENUMESSAGE);
                 menuChoice = keys.nextInt();

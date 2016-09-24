@@ -62,4 +62,12 @@ public class Player {
             hand.get(i).printAttributes();
         }
     }
+    public boolean equals(Player otherPlayer){
+        if ((this.getName().equals(otherPlayer.getName())) && (this.getId()==otherPlayer.getId())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

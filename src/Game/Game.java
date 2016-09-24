@@ -21,13 +21,16 @@ class Game {
     private static int dealerIndex;
     private Player currentPlayer;
     private boolean isWon;
+    private int roundNum;
+
 
     Game(int num, String userName){
         this.deck = GenerateDeckFromPLIST.buildDeck();
         numPlayers = num;
         players = generatePlayers(userName);
         isWon = false;
-        System.out.println("Player array assigned to Game attribute; players");
+        roundNum = 0;
+//        System.out.println("Player array assigned to Game attribute; players");
     }
 
     private Player[] generatePlayers(String userName) {
@@ -110,6 +113,13 @@ class Game {
 
     public boolean isWon() {
         return isWon;
+    }
+
+    public int getRoundNum(){
+        return roundNum;
+    }
+    public void incrementRoundNum(){
+        roundNum+=1;
     }
 
 //    public void setCurrentPlayer(Player.Player currentPlayer) {

@@ -23,19 +23,10 @@ public class RunGame {
             if (menuChoice.equals("P")) {
                 Game newGame = prepareNewGame();
                 newGame.setCurrentPlayer();
-                System.out.println("Current Player: " + newGame.getCurrentPlayer().getName());
-//                Todo: implement
+//                System.out.println("Current Player: " + newGame.getCurrentPlayer().getName());
                 while (!newGame.isWon()){
-                    if (newGame.getCurrentPlayer().isHuman()){
-                        PlayTurn.turnMenu(newGame);
-                        newGame.setCurrentPlayer();
-                    }
-                    else{
-//                        playTurn.robotTurn();
-                        System.out.println("Player Up: " + newGame.getCurrentPlayer().getName());
-                        newGame.setCurrentPlayer();
-//                        System.out.println("Oh no");
-                    }
+                    Round.playRound(newGame);
+//                    newGame.incrementRoundNum();
                 }
 
 
@@ -64,8 +55,7 @@ public class RunGame {
     }
 
 
-//Todo: change to private after testing
-    protected static Game prepareNewGame() {
+    static Game prepareNewGame() {
         int numPlayersChoice = getValidNumPlayers();
         Scanner keys = new Scanner(System.in);
         System.out.println("Enter Username: ");
@@ -76,7 +66,7 @@ public class RunGame {
 //        System.out.println("Dealer is: " + newGame.getDealer().getName());
 //        newGame.printParty();
         newGame.initialDeal();
-        System.out.println("Your hand has been dealt");
+//        System.out.println("Your hand has been dealt");
 
 //        for(int i = 0; i < newGame.players.size();++i){
 //            System.out.println(newGame.players.get(i).name);
