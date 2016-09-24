@@ -1,6 +1,8 @@
 package Game;
 //Todo: Ensure ALL input is collected in THIS file.
-//todo: get username here
+import Cards.Card;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -42,10 +44,13 @@ public class RunGame {
                         switch (turnChoice){
                             case 0:
                                 System.out.println("Display Hand");
+                                displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice);
+
                                 break;
                             case 1:
                                 System.out.println("play card");
 //                                playcard()
+                                displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice);
                                 newGame.setCurrentPlayer();
                                 break;
 
@@ -176,4 +181,23 @@ public class RunGame {
         }
         return turnMenuChoice;
     }
+    public static void displayHandMenu(ArrayList<Card> userHand, int menuChoice){
+        int handMenuChoice;
+        Scanner keys = new Scanner(System.in);
+        for(int i=0; i < userHand.size(); ++i){
+            System.out.println("("+ i + ") " + userHand.get(i).getTitle());
+        }
+        System.out.print("Enter Card Index >>> ");
+        handMenuChoice = keys.nextInt();
+        keys.nextLine();
+        Card cardChoice = userHand.get(handMenuChoice);
+        if(menuChoice== 0) {
+            cardChoice.printAttributes();
+        }
+        else{
+            System.out.println("display hand menu > play");
+//            Game.playCard(cardChoice));
+        }
+
+        }
 }

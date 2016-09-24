@@ -63,17 +63,20 @@ public class Player {
             hand.get(i).printAttributes();
         }
     }
-
-    public void displayHand(){
-        int menuChoice;
-        Scanner keys = new Scanner(System.in);
-        for(int i=0; i < this.hand.size(); ++i){
-            System.out.println("("+ i + ") " + hand.get(i).getTitle());
-        }
-        menuChoice = keys.nextInt();
-        keys.nextLine();
-        hand.get(menuChoice).printAttributes();
+    public ArrayList<Card> getHand(){
+        return hand;
     }
+
+//    public void displayHandMenu(){
+//        int menuChoice;
+//        Scanner keys = new Scanner(System.in);
+//        for(int i=0; i < this.hand.size(); ++i){
+//            System.out.println("("+ i + ") " + hand.get(i).getTitle());
+//        }
+//        menuChoice = keys.nextInt();
+//        keys.nextLine();
+//        hand.get(menuChoice).printAttributes();
+//    }
 
     public boolean equals(Player otherPlayer){
         if ((this.getName().equals(otherPlayer.getName())) && (this.getId()==otherPlayer.getId())){

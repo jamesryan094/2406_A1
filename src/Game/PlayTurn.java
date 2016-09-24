@@ -18,7 +18,7 @@ public class PlayTurn {
         keys.nextLine();
         while(menuChoice != 2){
             if (menuChoice==0){
-//                newGame.getCurrentPlayer().displayHand();
+//                newGame.getCurrentPlayer().displayHandMenu();
                 handMenu(newGame, menuChoice);
 
                 System.out.println(MENUMESSAGE);
@@ -50,7 +50,8 @@ public class PlayTurn {
 
     private static void handMenu(Game newGame, int menuChoice){
         if (menuChoice == 0){
-            newGame.getCurrentPlayer().displayHand();
+            System.out.println("Why am i here");
+//            newGame.getCurrentPlayer().displayHand();
         }
         else if(menuChoice==1){
             System.out.println("Play Card, Under Construction");
