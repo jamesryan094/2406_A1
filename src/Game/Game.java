@@ -192,14 +192,30 @@ class Game {
 //        When a player plays a Trump Card:
         Card chosenCard = currentPlayer.playCard(cardChoice);
 //        String trumpChoice = chosenCard.getTitle();
-        String trumpChoice = getTrumpChoicefromTrumpCard(chosenCard.getTitle());
+        String trumpChoice = getTrumpChoiceFromTrumpCard(chosenCard.getTitle());
         setCurrentTrumpCategory(trumpChoice);
         setLastPlayedCard(chosenCard);
         setHumanPlayedCard();
         setCardHasBeenPlayed(true);
     }
 
-    String getTrumpChoicefromTrumpCard(String trumpTitle){
+    public void playFirstTurn() {
+//    When a robot plays first:
+
+        Card cardChoice = currentPlayer.playCard(-1);
+        String trumpChoice;
+        if(cardChoice.getCardType().equals("play")||cardChoice.isGeologist()){
+            trumpChoice = currentPlayer.getTrumpCategoryChoice();
+        }else{
+            trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+        }
+        setCurrentTrumpCategory(trumpChoice);
+        setLastPlayedCard(cardChoice);
+        setCardHasBeenPlayed(true);
+
+    }
+
+    private String getTrumpChoiceFromTrumpCard(String trumpTitle){
         String trumpChoice;
         switch (trumpTitle){
             case "The Miner":
@@ -224,4 +240,6 @@ class Game {
         }
         return trumpChoice;
     }
+
+
 }

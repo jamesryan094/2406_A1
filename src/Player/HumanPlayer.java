@@ -17,4 +17,9 @@ public class HumanPlayer extends Player{
     public Card playCard(int cardChoice) {
         return getHand().remove(cardChoice);
     }
+
+    @Override
+    public String getTrumpCategoryChoice() {
+        return null;
+    }
 }

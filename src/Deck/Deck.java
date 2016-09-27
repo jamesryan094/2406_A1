@@ -40,7 +40,7 @@ public class Deck {
     public  ArrayList<Card> dealHand(int numCardsPerHand){
         ArrayList<Card> hand = new ArrayList<>();
         for(int i = 0; i < numCardsPerHand; i++){
-                hand.add(this.getCard(i));
+                hand.add(this.cards.remove(i));
             }
         return hand;
     }

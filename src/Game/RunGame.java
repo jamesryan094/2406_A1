@@ -34,9 +34,27 @@ public class RunGame {
                     int turnChoice;
 
                     if (!newGame.isHumanUp()){
-//                        newGame.playRobotTurn();
-                        System.out.println(newGame.getCurrentPlayer().getName() + " chooses to pass");
-                        newGame.incrementCurrentPlayer();
+                        if(!newGame.cardHasBeenPlayed()){
+                            newGame.playFirstTurn();
+                            System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
+
+                            System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
+                            System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+
+                            newGame.incrementCurrentPlayer();
+                        } else {
+
+//                            newGame.playFirstTurn();
+//                            System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
+//                            System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
+//                            System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+
+
+
+                            System.out.println("Would usually play card if could");
+                            System.out.println(newGame.getCurrentPlayer().getName() + " chooses to pass");
+                            newGame.incrementCurrentPlayer();
+                        }
                     }
 
                     while (newGame.isHumanUp()){

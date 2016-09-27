@@ -87,4 +87,6 @@ public abstract class Player {
     }
 
     public abstract Card playCard(int cardChoice);
+
+    public abstract String getTrumpCategoryChoice();
 }
