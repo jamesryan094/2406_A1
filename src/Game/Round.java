@@ -15,7 +15,7 @@ public class Round {
 //        do{
             if (newGame.getCurrentPlayer().isHuman()) {
                 PlayTurn.playUserTurn(newGame);
-//                newGame.setCurrentPlayer();
+//                newGame.incrementCurrentPlayer();
             }
             else {
                 //                        playTurn.robotTurn();
@@ -28,7 +28,7 @@ public class Round {
 //        while (!lastCardPlayedBy.equals(newGame.getCurrentPlayer()));
 
 //        System.out.println("Last card Played by same person");
-        newGame.setCurrentPlayer();
+        newGame.incrementCurrentPlayer();
 //        newGame.incrementRoundNum();
     }
 

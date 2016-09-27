@@ -94,7 +94,7 @@ class Game {
 //    }
 
 
-    protected Player setCurrentPlayer() {
+    protected Player incrementCurrentPlayer() {
         int currentPlayerId = currentPlayer.getId();
         if (currentPlayerId == players.length - 1){
             currentPlayer = players[0];
@@ -171,7 +171,15 @@ class Game {
         this.currentTrumpCategory = currentTrumpCategory;
     }
 
-//    public void setCurrentPlayer(Player.Player currentPlayer) {
+    public TrumpCategory getCurrentTrumpValue() {
+        return currentTrumpValue;
+    }
+
+    public void setCurrentTrumpValue(TrumpCategory currentTrumpValue) {
+        this.currentTrumpValue = currentTrumpValue;
+    }
+
+//    public void incrementCurrentPlayer(Player.Player currentPlayer) {
 //        this.currentPlayer = currentPlayer;
 //    }
 }

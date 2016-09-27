@@ -1,9 +1,11 @@
 package Cards;
 
+import Trumps.TrumpCategory;
+
 import java.util.ArrayList;
 
 //Todo: This may be better as interface or abstract class.
-public class Card {
+public abstract class Card {
     /**
      * Created by James on 31/08/2016.
      * Builds Cards.Card superclass based on information parsed from PLIST file.
@@ -35,5 +37,10 @@ public class Card {
     public String getTitle() {
         return title;
     }
-    
+
+//    public abstract String
+
+    public abstract String getCurrentTrumpValueAsString(String currentTrumpCategory);
+
+    public abstract boolean canPlayOn(Card otherCard, String currentTrumpCategory);
 }

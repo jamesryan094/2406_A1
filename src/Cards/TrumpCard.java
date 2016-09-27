@@ -20,4 +20,8 @@ public class TrumpCard extends Card {
         System.out.println(subTitle);
     }
 
+    public String getCurrentTrumpValueAsString(String currentTrumpCategory){
+        return this.subTitle;
+    }
+
 }

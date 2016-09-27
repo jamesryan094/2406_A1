@@ -49,6 +49,16 @@ public class EconomicValue extends TrumpCategory{
     public ECONOMIC_VALUE getValue(){
         return value;
     }
+
+    public boolean isGreaterThan(EconomicValue otherEV){
+        if((getValue().compareTo(otherEV.getValue())) > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 }
 
 //    public static void compare() {

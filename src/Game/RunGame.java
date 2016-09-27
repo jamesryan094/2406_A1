@@ -1,6 +1,8 @@
 package Game;
 //Todo: Ensure ALL input is collected in THIS file.
 import Cards.Card;
+import Cards.MineralCard;
+import Trumps.TrumpCategory;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -27,16 +29,16 @@ public class RunGame {
             if (menuChoice.equals("P")) {
                 Game newGame = prepareNewGame();
 //                System.out.println("Game Prepared");
-                newGame.setCurrentPlayer();
+                newGame.incrementCurrentPlayer();
 
                 while (!newGame.isWon()){
                     int turnChoice;
-//                    newGame.setCurrentPlayer();
+//                    newGame.incrementCurrentPlayer();
 
                     if (!newGame.isHumanUp()){
 //                        newGame.playRobotTurn();
                         System.out.println(newGame.getCurrentPlayer().getName() + " chooses to pass");
-                        newGame.setCurrentPlayer();
+                        newGame.incrementCurrentPlayer();
                     }
 
                     while (newGame.isHumanUp()){
@@ -54,7 +56,7 @@ public class RunGame {
                                 System.out.println("Cool");
                                 if(newGame.getHumanPlayedCard()) {
                                     System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
-                                    newGame.setCurrentPlayer();
+                                    newGame.incrementCurrentPlayer();
                                     newGame.resetHumanPlayedCard();
                                 }
                                 break;
@@ -62,32 +64,11 @@ public class RunGame {
                             case 2:
                                 System.out.println("pass");
 
-                                newGame.setCurrentPlayer();
+                                newGame.incrementCurrentPlayer();
                                 break;
                         }
-
                     }
-//                    Round.playRound(newGame);
                 }
-
-
-
-
-
-
-
-//                If the current player is human
-//                if (newGame.getCurrentPlayer().getName().equals(newGame.getPlayers()[0].getName())){
-//
-//                }
-//                if (user is up){
-//                    get user card choice
-//                            playturn (card choice)
-//                }
-//                else {
-//                    playturn();
-//                }
-
             }
             System.out.print(MENU_MESSAGE);
             menuChoice = getValidMenuChoice();
@@ -212,13 +193,17 @@ public class RunGame {
                     if (!newGame.cardHasBeenPlayed()) {
                         String trumpChoice = getTrumpCategoryFromUser();
                         newGame.setCurrentTrumpCategory(trumpChoice);
+//                        newGame.setCurrentTrumpValue(cardChoice.);
+//                        cardChoice.getCurrentTrumpValueAsString(trumpChoice);
 
                         newGame.setHumanPlayedCard();
                         newGame.setLastPlayedCard(cardChoice);
                         userHand.remove(cardChoice);
+                        newGame.setCardHasBeenPlayed(true);
                         }
                     else {
                         System.out.println("card played");
+
                         newGame.setHumanPlayedCard();
                         newGame.setLastPlayedCard(cardChoice);
                         userHand.remove(cardChoice);

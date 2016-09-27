@@ -21,9 +21,7 @@ public class TrumpCategory {
         }
     }
 
-
     public String toString(){
-////    Todo: This is really more of a getter than a toString(). Ask if this is okay!
         return asStr;
     }
 

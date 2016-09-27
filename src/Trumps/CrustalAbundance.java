@@ -44,4 +44,13 @@ public class CrustalAbundance extends TrumpCategory{
     public CRUSTAL_ABUNDANCE getValue(){
         return value;
     }
+
+    public boolean isGreaterThan(CrustalAbundance otherCrustalAbundance){
+        if((getValue().compareTo(otherCrustalAbundance.getValue())) > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

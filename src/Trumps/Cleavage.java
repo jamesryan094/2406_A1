@@ -80,8 +80,17 @@ public class Cleavage extends TrumpCategory{
         return value;
     }
 
-    public boolean canPlayOn(CLEAVAGE otherValue){
-        if (this.value.compareTo(otherValue) == 1) {
+//    public boolean canPlayOn(CLEAVAGE otherValue){
+//        if (this.value.compareTo(otherValue) == 1) {
+//            return true;
+//        }
+//        else{
+//            return false;
+//        }
+//    }
+
+    public boolean isGreaterThan(Cleavage otherCleavage){
+        if((getValue().compareTo(otherCleavage.getValue())) > 0){
             return true;
         }
         else{
