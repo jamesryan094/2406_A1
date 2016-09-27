@@ -180,7 +180,7 @@ class Game {
     }
 
     public void playFirstTurn(int cardChoice, String trumpChoice) {
-//        When a user is playing a MineralCard:
+//        When a user is playing a MineralCard Or 'The Geologist':
         Card chosenCard = currentPlayer.playCard(cardChoice);
         setCurrentTrumpCategory(trumpChoice);
         setLastPlayedCard(chosenCard);
@@ -188,4 +188,40 @@ class Game {
         setCardHasBeenPlayed(true);
     }
 
+    public void playFirstTurn(int cardChoice) {
+//        When a player plays a Trump Card:
+        Card chosenCard = currentPlayer.playCard(cardChoice);
+//        String trumpChoice = chosenCard.getTitle();
+        String trumpChoice = getTrumpChoicefromTrumpCard(chosenCard.getTitle());
+        setCurrentTrumpCategory(trumpChoice);
+        setLastPlayedCard(chosenCard);
+        setHumanPlayedCard();
+        setCardHasBeenPlayed(true);
+    }
+
+    String getTrumpChoicefromTrumpCard(String trumpTitle){
+        String trumpChoice;
+        switch (trumpTitle){
+            case "The Miner":
+                trumpChoice = "Economic Value";
+                break;
+            case "The Petrologist":
+                trumpChoice = "Crustal Abundance";
+                break;
+            case "The Gemmologist":
+                trumpChoice = "Hardness";
+                break;
+            case "The Mineralogist":
+                trumpChoice = "Cleavage";
+                break;
+            case "The Geophysicist":
+                trumpChoice = "Specific Gravity";
+                break;
+            default:
+                System.out.println("Error GetTrumpChoiceFromTrumpCard()");
+                trumpChoice = "The Petrologist";
+                break;
+        }
+        return trumpChoice;
+    }
 }

@@ -43,4 +43,8 @@ public abstract class Card {
     public abstract String getCurrentTrumpValueAsString(String currentTrumpCategory);
 
     public abstract boolean canPlayOn(Card otherCard, String currentTrumpCategory);
+
+    public boolean isGeologist() {
+        return title.equals("The Geologist");
+    }
 }

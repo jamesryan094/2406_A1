@@ -179,8 +179,13 @@ public class RunGame {
 //            Else User wants to play card.
             else {
                 if (cardChoice.getCardType().equals("trump")) {
-                    String trumpChoice = getTrumpCategoryFromUser();
-                    newGame.setCurrentTrumpCategory(trumpChoice);
+                    if(cardChoice.isGeologist()){
+                        String trumpChoice = getTrumpCategoryFromUser();
+                        newGame.playFirstTurn(cardIndex, trumpChoice);
+                    }
+                    else{
+                        newGame.playFirstTurn(cardIndex);
+                    }
                 }
                 else{
                     System.out.println("display hand menu > play");
