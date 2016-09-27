@@ -35,4 +35,5 @@ public class Card {
     public String getTitle() {
         return title;
     }
+    
 }

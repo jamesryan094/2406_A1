@@ -66,4 +66,8 @@ public class MineralCard extends Card{
 //        }
 //    }
 
+
+//    public int playCard(Card cardChoice){
+//
+//    }
 }

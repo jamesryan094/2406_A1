@@ -51,8 +51,11 @@ public class RunGame {
                                 System.out.println("play card");
 //                                playcard()
                                 displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
+                                System.out.println("Cool");
                                 if(newGame.getHumanPlayedCard()) {
+                                    System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
                                     newGame.setCurrentPlayer();
+                                    newGame.resetHumanPlayedCard();
                                 }
                                 break;
 
@@ -199,16 +202,52 @@ public class RunGame {
             if(menuChoice== 0) {
                 cardChoice.printAttributes();
             }
-            else{
-                System.out.println("display hand menu > play");
-                newGame.cardHasBeenPlayed();
-//            Game.playCard(cardChoice));
+//            Else User wants to play card.
+            else {
+                if (cardChoice.getCardType().equals("trump")) {
+//                    get/set category
+                }
+                else{
+                    System.out.println("display hand menu > play");
+                    if (!newGame.cardHasBeenPlayed()) {
+                        String trumpChoice = getTrumpCategoryFromUser();
+                        newGame.setCurrentTrumpCategory(trumpChoice);
+
+                        newGame.setHumanPlayedCard();
+                        newGame.setLastPlayedCard(cardChoice);
+                        userHand.remove(cardChoice);
+                        }
+                    else {
+                        System.out.println("card played");
+                        newGame.setHumanPlayedCard();
+                        newGame.setLastPlayedCard(cardChoice);
+                        userHand.remove(cardChoice);
+                        }
+                    }
+                }
+//                else{
+////                    If not trump card:
+////                    newGame.getCurrentTrumpCategory();
+////                    MineralCard.playCard(Card cardChoice, String currentTrumpCategory);
+//                }
             }
         }
-        else{
 
-        }
+    private static String getTrumpCategoryFromUser() {
+        Scanner keys = new Scanner(System.in);
+        int trumpChoice;
+        String TRUMP_CATEGORY_MESSAGE = "(1) Cleavage\n(2) Crustal Abundance\n(3) Economic Value" +
+                "\n(4) Hardness\n(5) Specific Gravity";
+        String[] trumpStrings = {"Cleavage", "Crustal Abundance", "Economic Value", "Hardness", "Specific Gravity"};
+        System.out.println(TRUMP_CATEGORY_MESSAGE);
+        trumpChoice = keys.nextInt();
+        keys.nextLine();
+        return trumpStrings[trumpChoice-1];
+
+
+
     }
+
 
 
     public static void printCards(ArrayList<Card> userHand){

@@ -1,5 +1,7 @@
 package Trumps;
 
+import Cards.MineralCard;
+
 /**
  * Created by james on 14/09/2016.
  * Take cleavage String parsed from PLIST and assign corresponding Enumeration.
@@ -76,5 +78,14 @@ public class Cleavage extends TrumpCategory{
 
     public CLEAVAGE getValue(){
         return value;
+    }
+
+    public boolean canPlayOn(CLEAVAGE otherValue){
+        if (this.value.compareTo(otherValue) == 1) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

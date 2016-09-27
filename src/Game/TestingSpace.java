@@ -14,8 +14,9 @@ import Trumps.*;
 public class TestingSpace {
     public static void main(String[] args) {
 
-        Game newGame = RunGame.prepareNewGame();
-        System.out.println("Current Player: " + newGame.getCurrentPlayer().getName());
+
+//        Game newGame = RunGame.prepareNewGame();
+//        System.out.println("Current Player: " + newGame.getCurrentPlayer().getName());
 //        System.out.print(MENU_MESSAGE);
 //        String menuChoice = getValidMenuChoice();
 //        while (!menuChoice.equals("Q")) {

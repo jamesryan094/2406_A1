@@ -9,6 +9,7 @@ import Player.Player;
 
 import Player.HumanPlayer;
 import Player.NonHumanPlayer;
+import Trumps.TrumpCategory;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,6 +24,10 @@ class Game {
     private boolean isWon;
     private int roundNum;
     private boolean humanPlayedCard = false;
+    private boolean cardHasBeenPlayed = false;
+    private Card lastPlayedCard;
+    private TrumpCategory currentTrumpValue;
+    private String currentTrumpCategory;
 
 
     Game(int num, String userName){
@@ -133,12 +138,37 @@ class Game {
         }
     }
 
-    public void cardHasBeenPlayed() {
-        humanPlayedCard = true;
-    }
 
     public boolean getHumanPlayedCard(){
         return humanPlayedCard;
+    }
+    public void setHumanPlayedCard() {
+        humanPlayedCard = true;
+    }
+    public void resetHumanPlayedCard(){
+        humanPlayedCard = false;
+    }
+
+    public Card getLastPlayedCard() {
+        return lastPlayedCard;
+    }
+    public void setLastPlayedCard(Card lastPlayedCard) {
+        this.lastPlayedCard = lastPlayedCard;
+    }
+
+    public boolean cardHasBeenPlayed() {
+        return cardHasBeenPlayed;
+    }
+    public void setCardHasBeenPlayed(boolean cardHasBeenPlayed) {
+        this.cardHasBeenPlayed = cardHasBeenPlayed;
+    }
+
+    public String getCurrentTrumpCategory() {
+        return currentTrumpCategory;
+    }
+
+    public void setCurrentTrumpCategory(String currentTrumpCategory) {
+        this.currentTrumpCategory = currentTrumpCategory;
     }
 
 //    public void setCurrentPlayer(Player.Player currentPlayer) {

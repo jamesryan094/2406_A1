@@ -6,7 +6,8 @@ package Trumps;
  * Child Classes: (Trumps.Cleavage, Trumps.CrustalAbundance, Trumps.EconomicValue, Trumps.Hardness, Trumps.SpecificGravity)
  */
 public class TrumpCategory {
-//    public enum CATEGORY {CLEAVAGE, CRUSTAL_ABUNDANCE, ECONOMIC_VALUE, HARDNESS, SPECIFIC_GRAVITY, ERROR}
+    public enum CATEGORY {CLEAVAGE, CRUSTAL_ABUNDANCE, ECONOMIC_VALUE, HARDNESS, SPECIFIC_GRAVITY, ERROR}
+    String[] trumpStrings = {"Cleavage", "Crustal Abundance", "Economic Value", "Hardness", "Specific Gravity"};
     protected String asStr;
 
     protected double parseRange(String rangeString){
