@@ -22,7 +22,6 @@ public class RunGame {
     static final String TURN_MENU_MESSAGE = "(0)View Hand\n(1)Play Card\n(2)Pass";
 
     public static void main(String[] args) {
-
         System.out.print(MENU_MESSAGE);
         String menuChoice = getValidMenuChoice();
         while (!menuChoice.equals("Q")) {
@@ -33,7 +32,6 @@ public class RunGame {
 
                 while (!newGame.isWon()){
                     int turnChoice;
-//                    newGame.incrementCurrentPlayer();
 
                     if (!newGame.isHumanUp()){
 //                        newGame.playRobotTurn();
@@ -56,6 +54,9 @@ public class RunGame {
                                 System.out.println("Cool");
                                 if(newGame.getHumanPlayedCard()) {
                                     System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
+                                    System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
+                                    System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+
                                     newGame.incrementCurrentPlayer();
                                     newGame.resetHumanPlayedCard();
                                 }
@@ -84,19 +85,9 @@ public class RunGame {
         String userName = keys.nextLine();
         Game newGame = new Game(numPlayersChoice, userName);
         newGame.assignDealer();
-//        newGame.testAssignDealer();
-//        System.out.println("Dealer is: " + newGame.getDealer().getName());
-//        newGame.printParty();
-        newGame.initialDeal();
-//        System.out.println("Your hand has been dealt");
 
-//        for(int i = 0; i < newGame.players.size();++i){
-//            System.out.println(newGame.players.get(i).name);
-//            for (Cards.Card card:newGame.players.get(i).hand){
-//                System.out.println("New Cards.Card");
-//                card.printAttributes();
-//            }
-//                }
+        newGame.initialDeal();
+
         return newGame;
     }
 
@@ -180,28 +171,25 @@ public class RunGame {
 
         if (handMenuChoice != 0){
             Card cardChoice = userHand.get(handMenuChoice -1);
+            int cardIndex = handMenuChoice -1;
+//            Card cardChoice = newGame.getCurrentPlayer().playCard()
             if(menuChoice== 0) {
                 cardChoice.printAttributes();
             }
 //            Else User wants to play card.
             else {
                 if (cardChoice.getCardType().equals("trump")) {
-//                    get/set category
+                    String trumpChoice = getTrumpCategoryFromUser();
+                    newGame.setCurrentTrumpCategory(trumpChoice);
                 }
                 else{
                     System.out.println("display hand menu > play");
                     if (!newGame.cardHasBeenPlayed()) {
                         String trumpChoice = getTrumpCategoryFromUser();
-                        newGame.setCurrentTrumpCategory(trumpChoice);
-//                        newGame.setCurrentTrumpValue(cardChoice.);
-//                        cardChoice.getCurrentTrumpValueAsString(trumpChoice);
-
-                        newGame.setHumanPlayedCard();
-                        newGame.setLastPlayedCard(cardChoice);
-                        userHand.remove(cardChoice);
-                        newGame.setCardHasBeenPlayed(true);
+                        newGame.playFirstTurn(cardIndex, trumpChoice);
                         }
                     else {
+//                        if canplayon()
                         System.out.println("card played");
 
                         newGame.setHumanPlayedCard();
@@ -210,11 +198,7 @@ public class RunGame {
                         }
                     }
                 }
-//                else{
-////                    If not trump card:
-////                    newGame.getCurrentTrumpCategory();
-////                    MineralCard.playCard(Card cardChoice, String currentTrumpCategory);
-//                }
+
             }
         }
 
@@ -243,8 +227,5 @@ public class RunGame {
         System.out.print("Enter Card Index >>> ");
     }
 
-//        public static int getValidHandMenuChoice(){
-//            displayHandMenu();
-//
-//        }
+
 }

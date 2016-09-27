@@ -24,4 +24,8 @@ public class TrumpCard extends Card {
         return this.subTitle;
     }
 
+    public boolean canPlayOn(Card otherCard, String currentTrumpCategory){
+        return true;
+    }
+
 }

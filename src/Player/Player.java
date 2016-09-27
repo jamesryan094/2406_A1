@@ -3,12 +3,11 @@ package Player;
 import Cards.Card;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by james on 6/09/2016.
  */
-public class Player {
+public abstract class Player {
     private int id;
     private ArrayList<Card> hand;
     private boolean isDealer;
@@ -86,4 +85,6 @@ public class Player {
             return false;
         }
     }
+
+    public abstract Card playCard(int cardChoice);
 }

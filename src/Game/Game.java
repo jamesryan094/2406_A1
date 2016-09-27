@@ -179,7 +179,13 @@ class Game {
         this.currentTrumpValue = currentTrumpValue;
     }
 
-//    public void incrementCurrentPlayer(Player.Player currentPlayer) {
-//        this.currentPlayer = currentPlayer;
-//    }
+    public void playFirstTurn(int cardChoice, String trumpChoice) {
+//        When a user is playing a MineralCard:
+        Card chosenCard = currentPlayer.playCard(cardChoice);
+        setCurrentTrumpCategory(trumpChoice);
+        setLastPlayedCard(chosenCard);
+        setHumanPlayedCard();
+        setCardHasBeenPlayed(true);
+    }
+
 }
