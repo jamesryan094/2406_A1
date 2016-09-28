@@ -14,6 +14,7 @@ public abstract class Player {
     private final String[] NAMES = {"Matt", "Mark", "Luke", "John"};
     private String name;
     private boolean isHuman;
+    private boolean hasPassed;
 
     public Player(int id)
     {
@@ -22,6 +23,7 @@ public abstract class Player {
         name = NAMES[id-1];
         isDealer = false;
         hand  = new ArrayList<>();
+        hasPassed = false;
     }
 
     public Player(int id, String userName)
@@ -31,6 +33,7 @@ public abstract class Player {
         name = userName;
         isDealer = false;
         hand  = new ArrayList<>();
+        hasPassed = false;
     }
 
     public void setCurrentHand(ArrayList<Card> currentHand) {
@@ -95,4 +98,14 @@ public abstract class Player {
     public abstract boolean hasPlayableCards(Card lastPlayedCard, String currentTrump);
 //Todo: drawCard may not be abstract.
     public abstract void drawCard(Deck deck);
+
+    public boolean getHasPassed() {
+        return hasPassed;
+    }
+
+
+    public void setHasPassed(boolean hasPassed) {
+        this.hasPassed = hasPassed;
+    }
+
 }

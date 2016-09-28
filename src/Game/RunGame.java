@@ -7,6 +7,7 @@ import Trumps.TrumpCategory;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Todo: Game loops if player before human passes. refactor code so increment player is done elsewhere (in play/pass)
 /**
  * Created by james on 6/09/2016.
  *
@@ -28,13 +29,12 @@ public class RunGame {
             if (menuChoice.equals("P")) {
                 Game newGame = prepareNewGame();
 //                System.out.println("Game Prepared");
-                newGame.incrementCurrentPlayer();
 
-                while (!newGame.isWon()){
+                while (!newGame.isWon()) {
                     int turnChoice;
-
-                    if (!newGame.isHumanUp()){
-                        if(!newGame.cardHasBeenPlayed()){
+                    if(!newGame.getCurrentPlayer().getHasPassed()){
+                    if (!newGame.isHumanUp()) {
+                        if (!newGame.cardHasBeenPlayed()) {
                             newGame.playFirstTurn();
                             System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
 
@@ -42,51 +42,60 @@ public class RunGame {
                             System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
 
                             newGame.incrementCurrentPlayer();
-                        }
-                        else {
+                        } else {
 //                            newGame.playFirstTurn();
 
-                            if (newGame.getCurrentPlayer().hasPlayableCards(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
+                            if (newGame.getCurrentPlayer().hasPlayableCards(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())) {
                                 newGame.playTurn();
                                 System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
                                 System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
                                 System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
-                            } else{
+                            } else {
                                 newGame.passTurn();
                                 System.out.println(newGame.getCurrentPlayer().getName() + " choose to Pass");
+                                newGame.incrementNumPasses();
                             }
                             newGame.incrementCurrentPlayer();
                         }
-                    }
+                    } else {
 
-                    while (newGame.isHumanUp()){
-                        turnChoice = getValidTurnChoice();
-                        switch (turnChoice){
-                            case 0:
-                                System.out.println("Display Hand");
-                                displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
+                        while (newGame.isHumanUp()) {
+                            turnChoice = getValidTurnChoice();
+                            switch (turnChoice) {
+                                case 0:
+                                    System.out.println("Display Hand");
+                                    displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
 
-                                break;
-                            case 1:
-                                System.out.println("play card");
-                                displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
-                                System.out.println("Cool");
-                                if(newGame.getHumanPlayedCard()) {
-                                    System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
-                                    System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
-                                    System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+                                    break;
+                                case 1:
+                                    System.out.println("play card");
+                                    displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
+                                    System.out.println("Cool");
+                                    if (newGame.getHumanPlayedCard()) {
+                                        System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
+                                        System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
+                                        System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
 
+                                        newGame.incrementCurrentPlayer();
+                                        newGame.resetHumanPlayedCard();
+                                    }
+                                    break;
+
+                                case 2:
+                                    newGame.passTurn();
+                                    System.out.println(newGame.getCurrentPlayer().getName() + " choose to Pass");
+
+                                    newGame.incrementNumPasses();
                                     newGame.incrementCurrentPlayer();
-                                    newGame.resetHumanPlayedCard();
-                                }
-                                break;
-
-                            case 2:
-                                newGame.passTurn();
-                                System.out.println(newGame.getCurrentPlayer().getName() + " choose to Pass");
-                                newGame.incrementCurrentPlayer();
-                                break;
+                                    break;
+                            }
                         }
+                    }
+                }
+                else{
+                    if (newGame.getNumPasses() != newGame.getNumPlayers()-1) {
+                        newGame.incrementCurrentPlayer();
+                    }
                     }
                 }
             }
@@ -106,6 +115,7 @@ public class RunGame {
         newGame.assignDealer();
 
         newGame.initialDeal();
+        newGame.incrementCurrentPlayer();
 
         return newGame;
     }

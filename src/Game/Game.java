@@ -18,16 +18,18 @@ class Game {
     private static final int NUM_CARDS_PER_HAND = 8;
     private final Deck deck;
     private Player[] players;
+    private ArrayList<Player> playersInRound = new ArrayList<>();
     private int numPlayers;
     private static int dealerIndex;
     private Player currentPlayer;
     private boolean isWon;
-    private int roundNum;
+//    private int roundNum;
     private boolean humanPlayedCard = false;
     private boolean cardHasBeenPlayed = false;
     private Card lastPlayedCard;
     private TrumpCategory currentTrumpValue;
     private String currentTrumpCategory;
+    private int numPasses;
 
 
     Game(int num, String userName){
@@ -35,7 +37,8 @@ class Game {
         numPlayers = num;
         players = generatePlayers(userName);
         isWon = false;
-        roundNum = 0;
+        numPasses = 0;
+//        roundNum = 0;
 //        System.out.println("Player array assigned to Game attribute; players");
     }
 
@@ -55,6 +58,7 @@ class Game {
         Random rn = new Random();
         dealerIndex = rn.nextInt(numPlayers);
         players[dealerIndex].setIsDealer(true);
+//        Todo: refactor
         System.out.println("Dealer: " + players[dealerIndex].getName());
     }
 
@@ -102,12 +106,14 @@ class Game {
         else{
             currentPlayer = players[currentPlayerId + 1];
         }
-        System.out.println("Current Player: " + currentPlayer.getName());
         return currentPlayer;
     }
 
     protected Player getCurrentPlayer(){
         return currentPlayer;
+    }
+    protected void setCurrentPlayer(Player currentPlayer){
+        this.currentPlayer = currentPlayer;
     }
 
     Player getDealer() {
@@ -122,12 +128,12 @@ class Game {
         return isWon;
     }
 
-    public int getRoundNum(){
-        return roundNum;
-    }
-    public void incrementRoundNum(){
-        roundNum+=1;
-    }
+//    public int getRoundNum(){
+//        return roundNum;
+//    }
+//    public void incrementRoundNum(){
+//        roundNum+=1;
+//    }
 
     boolean isHumanUp(){
         if (getCurrentPlayer().isHuman()){
@@ -196,6 +202,7 @@ class Game {
         setCurrentTrumpCategory(trumpChoice);
         setLastPlayedCard(chosenCard);
         setHumanPlayedCard();
+        resetRound();
         setCardHasBeenPlayed(true);
     }
 
@@ -252,14 +259,61 @@ class Game {
                 }
             }
         if (cardChoice.getCardType().equals("trump")) {
-            String trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+            String trumpChoice;
+            if(cardChoice.isGeologist()){
+                trumpChoice = currentPlayer.getTrumpCategoryChoice();
+            }else {
+                trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+            }
             setCurrentTrumpCategory(trumpChoice);
+            resetRound();
         }
         setLastPlayedCard(cardChoice);
 
     }
 
     public void passTurn() {
-        currentPlayer.drawCard(deck);
+        currentPlayer.setHasPassed(true);
+        removePlayerFromRound();
+        if(deck.getCards().size() != 0) {
+            currentPlayer.drawCard(deck);
+        }
+        else{
+            System.out.println("Deck Empty!");
+        }
+    }
+
+    public int getNumPasses() {
+        return numPasses;
+    }
+    public void resetNumPasses(){
+        numPasses = 0;
+    }
+
+    public void incrementNumPasses() {
+        numPasses +=1 ;
+    }
+
+    public void resetRound() {
+        resetNumPasses();
+        resetPlayersInRound();
+        for (Player player:players){
+            player.setHasPassed(false);
+        }
+    }
+
+    public Player getLastPlayerInRound() {
+        return playersInRound.get(0);
+    }
+
+    public void removePlayerFromRound() {
+        playersInRound.remove(currentPlayer);
+    }
+
+    public void resetPlayersInRound(){
+        playersInRound.clear();
+        for(Player player:getPlayers()){
+            playersInRound.add(player);
+        }
     }
 }
