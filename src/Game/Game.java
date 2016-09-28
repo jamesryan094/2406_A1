@@ -305,6 +305,7 @@ class Game {
         resetNumPasses();
         setCurrentPlayer(getLastPlayerInRound());
         resetPlayersInRound();
+        setCardHasBeenPlayed(false);
 //        Todo: something with the cards! SomeonePlaySomething!
         for (Player player:players){
             player.setHasPassed(false);
