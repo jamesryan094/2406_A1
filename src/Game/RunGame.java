@@ -1,8 +1,6 @@
 package Game;
 //Todo: Ensure ALL input is collected in THIS file.
 import Cards.Card;
-import Cards.MineralCard;
-import Trumps.TrumpCategory;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,6 +29,7 @@ public class RunGame {
 //                System.out.println("Game Prepared");
 
                 while (!newGame.isWon()) {
+                    System.out.println("Current Player: " + newGame.getCurrentPlayer().getName() + "\n--------------------");
                     int turnChoice;
                     if(!newGame.getCurrentPlayer().getHasPassed()){
                     if (!newGame.isHumanUp()) {
@@ -93,10 +92,15 @@ public class RunGame {
                     }
                 }
                 else{
-                    if (newGame.getNumPasses() != newGame.getNumPlayers()-1) {
+                    if (newGame.getNumPasses() == newGame.getNumPlayers()-1) {
+//                        if everyone passes: reset round, set player to round winner.
+                        newGame.resetRound();
+                        System.out.println("okaywhat");
+                    }else {
                         newGame.incrementCurrentPlayer();
                     }
                     }
+                    System.out.println("loop");
                 }
             }
             System.out.print(MENU_MESSAGE);
@@ -227,7 +231,7 @@ public class RunGame {
                             System.out.println("card played");
 
                             newGame.setHumanPlayedCard();
-                            newGame.setLastPlayedCard(cardChoice);
+                            newGame.setLastPlayedAttributes(cardChoice);
                             userHand.remove(cardChoice);
                         }else {
                             System.out.println("Can't play that card, sorry.");
@@ -262,6 +266,8 @@ public class RunGame {
         System.out.println("(0) Back");
         System.out.print("Enter Card Index >>> ");
     }
+
+
 
 
 }

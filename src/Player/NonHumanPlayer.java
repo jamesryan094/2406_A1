@@ -46,7 +46,7 @@ public class NonHumanPlayer extends Player {
         String trumpChoice;
         Random rn = new Random();
         int trumpChoiceNum = rn.nextInt(5);
-        System.out.println(trumpChoiceNum);
+//        System.out.println(trumpChoiceNum);
         switch (trumpChoiceNum){
             case 0:
                 trumpChoice = "Cleavage";

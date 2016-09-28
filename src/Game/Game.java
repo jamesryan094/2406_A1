@@ -30,6 +30,7 @@ class Game {
     private TrumpCategory currentTrumpValue;
     private String currentTrumpCategory;
     private int numPasses;
+    private Player lastPlayer;
 
 
     Game(int num, String userName){
@@ -38,6 +39,7 @@ class Game {
         players = generatePlayers(userName);
         isWon = false;
         numPasses = 0;
+        resetPlayersInRound();
 //        roundNum = 0;
 //        System.out.println("Player array assigned to Game attribute; players");
     }
@@ -116,6 +118,8 @@ class Game {
         this.currentPlayer = currentPlayer;
     }
 
+
+
     Player getDealer() {
         return players[dealerIndex];
     }
@@ -158,7 +162,8 @@ class Game {
     public Card getLastPlayedCard() {
         return lastPlayedCard;
     }
-    public void setLastPlayedCard(Card lastPlayedCard) {
+    public void setLastPlayedAttributes(Card lastPlayedCard) {
+        lastPlayer = currentPlayer;
         this.lastPlayedCard = lastPlayedCard;
     }
 
@@ -189,7 +194,7 @@ class Game {
 //        When a user is playing a MineralCard Or 'The Geologist':
         Card chosenCard = currentPlayer.playCard(cardChoice);
         setCurrentTrumpCategory(trumpChoice);
-        setLastPlayedCard(chosenCard);
+        setLastPlayedAttributes(chosenCard);
         setHumanPlayedCard();
         setCardHasBeenPlayed(true);
     }
@@ -200,9 +205,10 @@ class Game {
 //        String trumpChoice = chosenCard.getTitle();
         String trumpChoice = getTrumpChoiceFromTrumpCard(chosenCard.getTitle());
         setCurrentTrumpCategory(trumpChoice);
-        setLastPlayedCard(chosenCard);
+        setLastPlayedAttributes(chosenCard);
         setHumanPlayedCard();
-        resetRound();
+//        resetRound();
+        resetRoundTrump();
         setCardHasBeenPlayed(true);
     }
 
@@ -217,7 +223,7 @@ class Game {
             trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
         }
         setCurrentTrumpCategory(trumpChoice);
-        setLastPlayedCard(cardChoice);
+        setLastPlayedAttributes(cardChoice);
         setCardHasBeenPlayed(true);
 
     }
@@ -266,9 +272,9 @@ class Game {
                 trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
             }
             setCurrentTrumpCategory(trumpChoice);
-            resetRound();
+            resetRoundTrump();
         }
-        setLastPlayedCard(cardChoice);
+        setLastPlayedAttributes(cardChoice);
 
     }
 
@@ -292,9 +298,19 @@ class Game {
 
     public void incrementNumPasses() {
         numPasses +=1 ;
+        System.out.println("in incrementNumPasses(), numPasses incremented, numPasses = " + numPasses);
     }
 
     public void resetRound() {
+        resetNumPasses();
+        setCurrentPlayer(getLastPlayerInRound());
+        resetPlayersInRound();
+//        Todo: something with the cards! SomeonePlaySomething!
+        for (Player player:players){
+            player.setHasPassed(false);
+        }
+    }
+    public void resetRoundTrump() {
         resetNumPasses();
         resetPlayersInRound();
         for (Player player:players){
@@ -312,8 +328,11 @@ class Game {
 
     public void resetPlayersInRound(){
         playersInRound.clear();
-        for(Player player:getPlayers()){
-            playersInRound.add(player);
+//        for(Player player:getPlayers()){
+//            playersInRound.add(player);
+//        }
+        for(int i = 0; i < getPlayers().length; ++i){
+            playersInRound.add(getPlayers()[i]);
         }
     }
 }
