@@ -22,4 +22,16 @@ public class HumanPlayer extends Player{
     public String getTrumpCategoryChoice() {
         return null;
     }
+
+    @Override
+    public Card playAnyCard() {
+        return null;
+    }
+
+    @Override
+    public boolean hasPlayableCards(Card lastPlayedCard, String currentTrump) {
+        return false;
+    }
+
+
 }

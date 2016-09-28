@@ -89,4 +89,8 @@ public abstract class Player {
     public abstract Card playCard(int cardChoice);
 
     public abstract String getTrumpCategoryChoice();
+
+    public abstract Card playAnyCard();
+
+    public abstract boolean hasPlayableCards(Card lastPlayedCard, String currentTrump);
 }

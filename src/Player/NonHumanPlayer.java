@@ -13,19 +13,35 @@ public class NonHumanPlayer extends Player {
         super(id);
     }
 
-    @Override
-    public Card playCard(int cardChoice) {
-//        System.out.println(getHand().size());
+    public Card playAnyCard() {
+        int cardChoice;
         Random rn = new Random();
         cardChoice = rn.nextInt(getHand().size());
         return getHand().remove(cardChoice);
     }
 
     @Override
+    public boolean hasPlayableCards(Card lastPlayedCard, String currentTrump) {
+        boolean haveCard = false;
+        for(int i=0;i<getHand().size();++i){
+            if (getHand().get(i).canPlayOn(lastPlayedCard, currentTrump)&&!haveCard){
+                haveCard=true;
+            }
+        }
+        return haveCard;
+    }
+
+    @Override
+    public Card playCard(int cardChoiceIndex) {
+        return getHand().remove(cardChoiceIndex);
+    }
+
+    @Override
     public String getTrumpCategoryChoice() {
         String trumpChoice;
         Random rn = new Random();
-        int trumpChoiceNum = rn.nextInt(6);
+        int trumpChoiceNum = rn.nextInt(5);
+        System.out.println(trumpChoiceNum);
         switch (trumpChoiceNum){
             case 0:
                 trumpChoice = "Cleavage";

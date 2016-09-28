@@ -202,7 +202,7 @@ class Game {
     public void playFirstTurn() {
 //    When a robot plays first:
 
-        Card cardChoice = currentPlayer.playCard(-1);
+        Card cardChoice = currentPlayer.playAnyCard();
         String trumpChoice;
         if(cardChoice.getCardType().equals("play")||cardChoice.isGeologist()){
             trumpChoice = currentPlayer.getTrumpCategoryChoice();
@@ -242,4 +242,29 @@ class Game {
     }
 
 
+    public void playTurn() {
+        boolean haveCard = false;
+        Card cardChoice = null;
+        for(int i=0;i<currentPlayer.getHand().size();++i){
+            if (currentPlayer.getHand().get(i).canPlayOn(lastPlayedCard, currentTrumpCategory)&&!haveCard){
+                cardChoice = currentPlayer.playCard(i);
+                haveCard=true;
+                }
+            }
+        if (haveCard) {
+//            currentPlayer.playCard(cardChoice);
+            if (cardChoice.getCardType().equals("trump")) {
+                String trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+                setCurrentTrumpCategory(trumpChoice);
+            }
+            setLastPlayedCard(cardChoice);
+
+        }
+        else{
+            System.out.println(currentPlayer.getName() + " Must Pass");
+
+        }
+
+
+    }
 }

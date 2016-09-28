@@ -42,17 +42,22 @@ public class RunGame {
                             System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
 
                             newGame.incrementCurrentPlayer();
-                        } else {
-
+                        }
+                        else {
 //                            newGame.playFirstTurn();
-//                            System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
-//                            System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
-//                            System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+
+                            if (newGame.getCurrentPlayer().hasPlayableCards(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
+                                newGame.playTurn();
+                                System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
+                                System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
+                                System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+                            } else{
+                                System.out.println("PASSSSSS");
+                            }
 
 
-
-                            System.out.println("Would usually play card if could");
-                            System.out.println(newGame.getCurrentPlayer().getName() + " chooses to pass");
+//                            System.out.println("Would usually play card if could");
+//                            System.out.println(newGame.getCurrentPlayer().getName() + " chooses to pass");
                             newGame.incrementCurrentPlayer();
                         }
                     }
@@ -67,7 +72,6 @@ public class RunGame {
                                 break;
                             case 1:
                                 System.out.println("play card");
-//                                playcard()
                                 displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
                                 System.out.println("Cool");
                                 if(newGame.getHumanPlayedCard()) {
@@ -212,18 +216,20 @@ public class RunGame {
                         newGame.playFirstTurn(cardIndex, trumpChoice);
                         }
                     else {
-//                        if canplayon()
-                        System.out.println("card played");
+                        if (cardChoice.canPlayOn(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
+                            System.out.println("card played");
 
-                        newGame.setHumanPlayedCard();
-                        newGame.setLastPlayedCard(cardChoice);
-                        userHand.remove(cardChoice);
+                            newGame.setHumanPlayedCard();
+                            newGame.setLastPlayedCard(cardChoice);
+                            userHand.remove(cardChoice);
+                        }else {
+                            System.out.println("Can't play that card, sorry.");
                         }
                     }
                 }
-
             }
         }
+    }
 
     private static String getTrumpCategoryFromUser() {
         Scanner keys = new Scanner(System.in);
