@@ -251,20 +251,15 @@ class Game {
                 haveCard=true;
                 }
             }
-        if (haveCard) {
-//            currentPlayer.playCard(cardChoice);
-            if (cardChoice.getCardType().equals("trump")) {
-                String trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
-                setCurrentTrumpCategory(trumpChoice);
-            }
-            setLastPlayedCard(cardChoice);
-
+        if (cardChoice.getCardType().equals("trump")) {
+            String trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+            setCurrentTrumpCategory(trumpChoice);
         }
-        else{
-            System.out.println(currentPlayer.getName() + " Must Pass");
+        setLastPlayedCard(cardChoice);
 
-        }
+    }
 
-
+    public void passTurn() {
+        currentPlayer.drawCard(deck);
     }
 }

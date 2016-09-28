@@ -4,7 +4,6 @@ import Trumps.TrumpCategory;
 
 import java.util.ArrayList;
 
-//Todo: This may be better as interface or abstract class.
 public abstract class Card {
     /**
      * Created by James on 31/08/2016.

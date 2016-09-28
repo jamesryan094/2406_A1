@@ -52,12 +52,9 @@ public class RunGame {
                                 System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
                                 System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
                             } else{
-                                System.out.println("PASSSSSS");
+                                newGame.passTurn();
+                                System.out.println(newGame.getCurrentPlayer().getName() + " choose to Pass");
                             }
-
-
-//                            System.out.println("Would usually play card if could");
-//                            System.out.println(newGame.getCurrentPlayer().getName() + " chooses to pass");
                             newGame.incrementCurrentPlayer();
                         }
                     }
@@ -85,8 +82,8 @@ public class RunGame {
                                 break;
 
                             case 2:
-                                System.out.println("pass");
-
+                                newGame.passTurn();
+                                System.out.println(newGame.getCurrentPlayer().getName() + " choose to Pass");
                                 newGame.incrementCurrentPlayer();
                                 break;
                         }

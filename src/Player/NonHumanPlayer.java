@@ -1,7 +1,7 @@
 package Player;
 
 import Cards.Card;
-
+import Deck.Deck;
 import java.util.Random;
 
 /**
@@ -29,6 +29,11 @@ public class NonHumanPlayer extends Player {
             }
         }
         return haveCard;
+    }
+
+    @Override
+    public void drawCard(Deck deck) {
+        getHand().add(deck.removeCard(0));
     }
 
     @Override

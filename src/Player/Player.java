@@ -1,7 +1,7 @@
 package Player;
 
 import Cards.Card;
-
+import Deck.Deck;
 import java.util.ArrayList;
 
 /**
@@ -93,4 +93,6 @@ public abstract class Player {
     public abstract Card playAnyCard();
 
     public abstract boolean hasPlayableCards(Card lastPlayedCard, String currentTrump);
+//Todo: drawCard may not be abstract.
+    public abstract void drawCard(Deck deck);
 }

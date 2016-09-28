@@ -45,8 +45,8 @@ public class Deck {
         return hand;
     }
 
-    private Card getCard(int i) {
-        return cards.get(i);
+    public Card removeCard(int i) {
+        return cards.remove(i);
     }
 
     public void removeRuleCards() {
