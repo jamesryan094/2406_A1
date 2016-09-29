@@ -31,7 +31,6 @@ public class RunGame {
                     if (newGame.checkWinner()){
                         newGame.updateWinners();
                     }
-                    System.out.println("Current Player: " + newGame.getCurrentPlayer().getName() + "\n--------------------");
                     int turnChoice;
                     if(!newGame.getCurrentPlayer().getHasPassed()){
                         if (newGame.getNumPasses() == newGame.getNumPlayers()-1) {
@@ -39,6 +38,13 @@ public class RunGame {
                             newGame.resetRound();
                             System.out.println("Round Reset");
                         }
+
+                        System.out.println("\nPress Enter to Continue >>>");
+                        keys.nextLine();
+
+                        System.out.println("Current Player: " + newGame.getCurrentPlayer().getName() + "\n--------------------");
+
+
                         if (!newGame.isHumanUp()) {
                             if (!newGame.cardHasBeenPlayed()) {
                                 newGame.playFirstTurn();
@@ -99,8 +105,7 @@ public class RunGame {
                         newGame.incrementCurrentPlayer();
                     }
 //                System.out.println("End of Loop");
-                    System.out.println("\nPress Enter to Continue >>>");
-                    keys.nextLine();
+
                 }
             }
             System.out.print(MENU_MESSAGE);
