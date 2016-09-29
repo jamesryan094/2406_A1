@@ -26,7 +26,11 @@ public class RunGame {
         while (!menuChoice.equals("Q")) {
             if (menuChoice.equals("P")) {
                 Game newGame = prepareNewGame();
+                System.out.println("Ready to Start! Have Fun!\n");
                 while (!newGame.isWon()) {
+                    if (newGame.checkWinner()){
+                        newGame.updateWinners();
+                    }
                     System.out.println("Current Player: " + newGame.getCurrentPlayer().getName() + "\n--------------------");
                     int turnChoice;
                     if(!newGame.getCurrentPlayer().getHasPassed()){
@@ -34,17 +38,6 @@ public class RunGame {
 //                        if everyone passes: reset round, set player to round winner.
                             newGame.resetRound();
                             System.out.println("Round Reset");
-//                            if(newGame.getCurrentPlayer().isHuman()){
-//
-////                                PlayHumanTurn()
-//
-//                            }else{
-//
-////                                PlayRobotTurn()
-//
-//                            }
-
-
                         }
                         if (!newGame.isHumanUp()) {
                             if (!newGame.cardHasBeenPlayed()) {
@@ -73,14 +66,14 @@ public class RunGame {
                                 turnChoice = getValidTurnChoice();
                                 switch (turnChoice) {
                                     case 0:
-                                        System.out.println("Display Hand");
+                                        System.out.println("Display Hand: ");
                                         displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
 
                                         break;
                                     case 1:
-                                        System.out.println("play card");
+                                        System.out.println("Play Card");
                                         displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
-                                        System.out.println("Cool");
+//                                        System.out.println("Cool");
                                         if (newGame.getHumanPlayedCard()) {
                                             System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
                                             System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
@@ -101,11 +94,13 @@ public class RunGame {
                                 }
                             }
                         }
-                }
-                else{
-                    newGame.incrementCurrentPlayer();
                     }
-                    System.out.println("End of Loop");
+                    else{
+                        newGame.incrementCurrentPlayer();
+                    }
+//                System.out.println("End of Loop");
+                    System.out.println("\nPress Enter to Continue >>>");
+                    keys.nextLine();
                 }
             }
             System.out.print(MENU_MESSAGE);
@@ -121,15 +116,24 @@ public class RunGame {
         System.out.println("Enter Username: ");
         String userName = keys.nextLine();
         Game newGame = new Game(numPlayersChoice, userName);
+        System.out.println("\nRandomly assigning dealer...");
         newGame.assignDealer();
-
+        System.out.println("\n"+ newGame.getDealer().getName() + " is dealing the cards...");
         newGame.initialDeal();
+        System.out.println("Cards dealt\n");
         newGame.incrementCurrentPlayer();
-
+        printUserCards(newGame);
         return newGame;
     }
 
-
+    private static void printUserCards(Game newGame) {
+        System.out.println("Your hand contains: ");
+        ArrayList<Card> hand = newGame.getPlayers()[0].getHand();
+        for (int i = 0; i < hand.size(); ++i){
+            System.out.println(hand.get(i).getTitle());
+        }
+        System.out.println("");
+    }
 
 
     public static int getValidNumPlayers(){
@@ -226,14 +230,14 @@ public class RunGame {
                     }
                 }
                 else{
-                    System.out.println("display hand menu > play");
+//                    System.out.println("Play Card: ");
                     if (!newGame.cardHasBeenPlayed()) {
                         String trumpChoice = getTrumpCategoryFromUser();
                         newGame.playFirstTurn(cardIndex, trumpChoice);
                         }
                     else {
                         if (cardChoice.canPlayOn(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
-                            System.out.println("card played");
+//                            System.out.println("card played");
 
                             newGame.setHumanPlayedCard();
                             newGame.setLastPlayedAttributes(cardChoice);

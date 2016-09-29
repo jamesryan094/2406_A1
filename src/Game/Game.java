@@ -31,6 +31,8 @@ class Game {
     private String currentTrumpCategory;
     private int numPasses;
     private Player lastPlayer;
+    private ArrayList<Player> winners = new ArrayList<>();
+
 
 
     Game(int num, String userName){
@@ -281,11 +283,12 @@ class Game {
     public void passTurn() {
         currentPlayer.setHasPassed(true);
         removePlayerFromRound();
-        if(deck.getCards().size() != 0) {
+        if((deck.getCards().size() != 0)&&currentPlayer.getHand().size()!=0) {
+            System.out.println(currentPlayer.getName() + " draws a card!");
             currentPlayer.drawCard(deck);
         }
         else{
-            System.out.println("Deck Empty!");
+//            System.out.println("Deck Empty!");
         }
     }
 
@@ -302,13 +305,16 @@ class Game {
     }
 
     public void resetRound() {
+//        todo: refactor to use get/setters
+//        if(!winners.contains(currentPlayer))
         resetNumPasses();
         setCurrentPlayer(getLastPlayerInRound());
         resetPlayersInRound();
         setCardHasBeenPlayed(false);
-//        Todo: something with the cards! SomeonePlaySomething!
         for (Player player:players){
-            player.setHasPassed(false);
+            if(!winners.contains(player)) {
+                player.setHasPassed(false);
+            }
         }
     }
     public void resetRoundTrump() {
@@ -335,5 +341,30 @@ class Game {
         for(int i = 0; i < getPlayers().length; ++i){
             playersInRound.add(getPlayers()[i]);
         }
+    }
+
+    public boolean checkWinner() {
+        if(getCurrentPlayer().getHand().size()==0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void updateWinners() {
+        if(!winners.contains(currentPlayer)){
+            winners.add(currentPlayer);
+            System.out.println("Congratulations " + currentPlayer.getName() + "! You hav been added to the winner list!");
+            currentPlayer.setHasPassed(true);
+        }
+        if (winners.size() == getPlayers().length - 1){
+            setIsWon();
+            System.out.println("Game Completed! Game over!");
+        }
+    }
+
+    void setIsWon(){
+        isWon = true;
     }
 }
