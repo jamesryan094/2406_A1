@@ -351,14 +351,20 @@ class Game {
             return false;
         }
     }
+    public ArrayList<Player> getWinners(){
+        return winners;
+    }
 
     public void updateWinners() {
         if(!winners.contains(currentPlayer)){
             winners.add(currentPlayer);
             System.out.println("Congratulations " + currentPlayer.getName() + "! You have been added to the winner list!");
 //            currentPlayer.setHasPassed(true);
-            currentPlayer.setHasPassed(true);
+//            currentPlayer.setHasPassed(true);
+        }
+        if(winners.size() == getPlayers().length-1){
             setIsWon();
+            System.out.println("Game Completed! Game over!");
         }
 //        if (winners.size() == getPlayers().length - 1){
 //            setIsWon();

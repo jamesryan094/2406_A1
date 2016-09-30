@@ -8,6 +8,7 @@ import Game.*;
 import Player.*;
 import Trumps.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -15,13 +16,17 @@ import java.util.Random;
  */
 public class TestingSpace {
     public static void main(String[] args) {
-        Random rn = new Random();
-        int trumpChoiceNum;
-        trumpChoiceNum = rn.nextInt(6);
-        System.out.println(trumpChoiceNum);
-        for (int i=0; i<100; ++i){
-            trumpChoiceNum = rn.nextInt(6);
-            System.out.println(trumpChoiceNum);
-        }
+//        Random rn = new Random();
+//        int trumpChoiceNum;
+//        trumpChoiceNum = rn.nextInt(6);
+//        System.out.println(trumpChoiceNum);
+//        for (int i=0; i<100; ++i){
+//            trumpChoiceNum = rn.nextInt(6);
+//            System.out.println(trumpChoiceNum);
+//        }
+
+        ArrayList<Player> player = new ArrayList<>();
+        System.out.println(player.size());
+
     }
 }

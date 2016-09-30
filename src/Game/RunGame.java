@@ -31,13 +31,14 @@ public class RunGame {
                     if (newGame.checkWinner()){
                         newGame.updateWinners();
                     }
-                    int turnChoice;
-                    if(!newGame.getCurrentPlayer().getHasPassed()){
-                        if (newGame.getNumPasses() == newGame.getNumPlayers()-1) {
+                    if (newGame.getNumPasses() == (newGame.getNumPlayers()-1)-newGame.getWinners().size()) {
 //                        if everyone passes: reset round, set player to round winner.
-                            newGame.resetRound();
-                            System.out.println("Round Reset");
-                        }
+                        newGame.resetRound();
+                        System.out.println("\nRound Won By: " + newGame.getCurrentPlayer().getName() + "! Good Job!\nRound Reset\n");
+                    }
+                    int turnChoice;
+                    if(!newGame.getCurrentPlayer().getHasPassed()&&!newGame.getWinners().contains(newGame.getCurrentPlayer())){
+
 
                         System.out.println("\nPress Enter to Continue >>>");
                         keys.nextLine();
@@ -61,8 +62,8 @@ public class RunGame {
                                     System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
                                     System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
                                 } else {
-                                    newGame.passTurn();
                                     System.out.println(newGame.getCurrentPlayer().getName() + " choose to Pass");
+                                    newGame.passTurn();
                                     newGame.incrementNumPasses();
                                 }
                                 newGame.incrementCurrentPlayer();
@@ -91,8 +92,8 @@ public class RunGame {
                                         break;
 
                                     case 2:
-                                        newGame.passTurn();
                                         System.out.println(newGame.getCurrentPlayer().getName() + " choose to Pass");
+                                        newGame.passTurn();
 
                                         newGame.incrementNumPasses();
                                         newGame.incrementCurrentPlayer();
@@ -105,7 +106,10 @@ public class RunGame {
                         newGame.incrementCurrentPlayer();
                     }
 //                System.out.println("End of Loop");
-
+//                    if(newGame.getWinners().contains(newGame.getCurrentPlayer())){
+//                        System.out.println(newGame.getCurrentPlayer().getName() + " has already won! They're sitting out");
+//                        newGame.incrementCurrentPlayer();
+//                    }
                 }
             }
             System.out.print(MENU_MESSAGE);
