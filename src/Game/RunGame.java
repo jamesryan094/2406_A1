@@ -37,6 +37,7 @@ public class RunGame {
                         System.out.println("\nRound Won By: " + newGame.getCurrentPlayer().getName() + "! Good Job!\nRound Reset\n");
                     }
                     int turnChoice;
+//                    If the current player has not passed && if the current player is not in the winner list(is still playing)
                     if(!newGame.getCurrentPlayer().getHasPassed()&&!newGame.getWinners().contains(newGame.getCurrentPlayer())){
 
 
@@ -223,30 +224,30 @@ public class RunGame {
         if (handMenuChoice != 0){
             Card cardChoice = userHand.get(handMenuChoice -1);
             int cardIndex = handMenuChoice -1;
-//            Card cardChoice = newGame.getCurrentPlayer().playCard()
             if(menuChoice== 0) {
                 cardChoice.printAttributes();
             }
 //            Else User wants to play card.
             else {
                 if (cardChoice.getCardType().equals("trump")) {
-                    if(cardChoice.isGeologist()){
-                        String trumpChoice = getTrumpCategoryFromUser();
-                        newGame.playFirstTurn(cardIndex, trumpChoice);
-                    }
-                    else{
-                        newGame.playFirstTurn(cardIndex);
+                    if(newGame.cardHasBeenPlayed()) {
+                        if (cardChoice.isGeologist()) {
+                            String trumpChoice = getTrumpCategoryFromUser();
+                            newGame.playFirstTurn(cardIndex, trumpChoice);
+                        } else {
+                            newGame.playFirstTurn(cardIndex);
+                        }
+                    }else{
+                        System.out.println("\nYou must begin a round with a Mineral Card! Please try again.");
                     }
                 }
                 else{
-//                    System.out.println("Play Card: ");
                     if (!newGame.cardHasBeenPlayed()) {
                         String trumpChoice = getTrumpCategoryFromUser();
                         newGame.playFirstTurn(cardIndex, trumpChoice);
                         }
                     else {
                         if (cardChoice.canPlayOn(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
-//                            System.out.println("card played");
 
                             newGame.setHumanPlayedCard();
                             newGame.setLastPlayedAttributes(cardChoice);

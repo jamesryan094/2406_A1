@@ -202,7 +202,7 @@ class Game {
     }
 
     public void playFirstTurn(int cardChoice) {
-//        When a player plays a Trump Card:
+//        When a user plays a Trump Card:
         Card chosenCard = currentPlayer.playCard(cardChoice);
 //        String trumpChoice = chosenCard.getTitle();
         String trumpChoice = getTrumpChoiceFromTrumpCard(chosenCard.getTitle());
@@ -221,7 +221,8 @@ class Game {
         String trumpChoice;
         if(cardChoice.getCardType().equals("play")||cardChoice.isGeologist()){
             trumpChoice = currentPlayer.getTrumpCategoryChoice();
-        }else{
+        }
+        else{
             trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
         }
         setCurrentTrumpCategory(trumpChoice);
