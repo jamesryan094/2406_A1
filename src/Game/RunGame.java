@@ -19,7 +19,7 @@ public class RunGame {
             "\n>>>";
 
     static Scanner keys = new Scanner(System.in);
-    static final String TURN_MENU_MESSAGE = "(0)Inspect Hand\n(1)Play Card\n(2)Pass";
+    static final String TURN_MENU_MESSAGE = "(0)Inspect Hand\n(1)Play Card\n(2)Combo\n(3)Pass";
 
     public static void main(String[] args) {
         System.out.print(MENU_MESSAGE);
@@ -45,7 +45,8 @@ public class RunGame {
                             keys.nextLine();
                             System.out.println("Current Player: " + currentPlayer.getName() + "\n--------------------");
                             if (!newGame.isHumanUp()) {
-                                if (isNewRound || newGame.isFirstTurn()) {
+                                boolean comboPlayed = newGame.comboPlayed();
+                                if (isNewRound || newGame.isFirstTurn() || comboPlayed) {
                                     newGame.playFirstTurn();
                                     displayTurnResults(newGame);
                                 } else {
@@ -66,15 +67,16 @@ public class RunGame {
                             }
                             else {
                                 while (newGame.isHumanUp()) {
+                                    boolean comboPlayed = newGame.comboPlayed();
                                     turnChoice = getValidTurnChoice();
                                     switch (turnChoice) {
                                         case 0:
                                             System.out.println("Inspect Hand: ");
-                                            displayHandMenu(currentPlayer.getHand(), turnChoice, newGame, isNewRound);
+                                            displayHandMenu(currentPlayer.getHand(), turnChoice, newGame, isNewRound, comboPlayed);
                                             break;
                                         case 1:
                                             System.out.println("Play Card: ");
-                                            displayHandMenu(currentPlayer.getHand(), turnChoice, newGame, isNewRound);
+                                            displayHandMenu(currentPlayer.getHand(), turnChoice, newGame, isNewRound, comboPlayed);
                                             if (newGame.getHumanPlayedCard()) {
                                                 displayTurnResults(newGame);
                                                 newGame.resetHumanPlayedCard();
@@ -86,6 +88,25 @@ public class RunGame {
                                             }
                                             break;
                                         case 2:
+                                            if(currentPlayer.hasCombo()){
+                                                if (newGame.isFirstTurn()){
+                                                    System.out.println("Can't play combo on first turn.");
+                                                }
+                                                else {
+                                                    newGame.playCombo();
+                                                    System.out.println(currentPlayer.getName() + " IS A COMBOBREAKER!!! They go again.");
+                                                    if (newGame.checkWinner()){
+                                                        newGame.updateWinners();
+                                                        System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
+                                                        newGame.incrementCurrentPlayer();
+                                                    }
+                                                }
+                                            }
+                                            else {
+                                                System.out.println("You do not have the combo.");
+                                            }
+                                            break;
+                                        case 3:
                                             System.out.println(newGame.getCurrentPlayer().getName() + " chose to Pass");
                                             newGame.passTurn();
                                             newGame.incrementNumPasses();
@@ -206,7 +227,7 @@ public class RunGame {
         displayTurnMenu();
         turnMenuChoice = keys.nextInt();
         keys.nextLine();
-        while (turnMenuChoice != 0 && turnMenuChoice!= 1 && turnMenuChoice != 2){
+        while (turnMenuChoice != 0 && turnMenuChoice!= 1 && turnMenuChoice != 2 && turnMenuChoice != 3){
             System.out.println("invalid choice, please try again");
             displayTurnMenu();
             turnMenuChoice = keys.nextInt();
@@ -214,7 +235,7 @@ public class RunGame {
         }
         return turnMenuChoice;
     }
-    public static void displayHandMenu(ArrayList<Card> userHand, int menuChoice, Game newGame, boolean isNewRound){
+    public static void displayHandMenu(ArrayList<Card> userHand, int menuChoice, Game newGame, boolean isNewRound, boolean comboPlayed){
         int handMenuChoice;
         Scanner keys = new Scanner(System.in);
 
@@ -241,7 +262,7 @@ public class RunGame {
                         newGame.playFirstTurn(cardIndex, trumpChoice);
                     }
                 }
-                else if (isNewRound){
+                else if (isNewRound || comboPlayed){
                     //new round and user chose trump
                     if (cardChoice.getCardType().equals("trump")) {
                         if (cardChoice.isGeologist()) {

@@ -13,6 +13,7 @@ public class Deck {
 
     private ArrayList<Card> cards = new ArrayList<>();
     private boolean hasCards = true;
+    private Card geophys;
 
     void addToDeck(Card card){
         cards.add(card);
@@ -66,5 +67,25 @@ public class Deck {
 
     public ArrayList<Card> getCards() {
         return cards;
+    }
+
+    public Card getGeophys() {
+        int index = -1;
+        for (int i =0 ; i < cards.size(); ++i ) {
+            if (cards.get(i).getTitle().equals("The Geophysicist")){
+                index = i;
+            }
+        }
+        return cards.remove(index);
+    }
+
+    public Card getMagnetite() {
+        int index = -1;
+        for (int i =0 ; i < cards.size(); ++i ) {
+            if (cards.get(i).getTitle().equals("Magnetite")){
+                index = i;
+            }
+        }
+        return cards.remove(index);
     }
 }

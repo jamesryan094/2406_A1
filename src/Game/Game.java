@@ -34,6 +34,7 @@ class Game {
     private ArrayList<Player> winners = new ArrayList<>();
     private boolean isFirstTurn;
     private boolean newRound;
+    private boolean comboPlayed;
 
 
     Game(int num, String userName){
@@ -43,6 +44,7 @@ class Game {
         isWon = false;
         numPasses = 0;
         isFirstTurn = true;
+        comboPlayed = false;
 //        resetPlayersInRound clears the attribute's list then repopulates. Is called here to populate, clearing has no effect on empty list
         resetPlayersInRound();
 //        roundNum = 0;
@@ -78,10 +80,19 @@ class Game {
     void initialDeal(){
         deck.removeRuleCards();
         deck.shuffle();
-        for(Player player:this.players){
+        ArrayList<Card> userHand = new ArrayList<>();
+        userHand.add(deck.getGeophys());
+        userHand.add(deck.getMagnetite());
+        userHand.addAll(deck.dealHand(NUM_CARDS_PER_HAND));
+        players[0].setCurrentHand(userHand);
+        for (int i = 1; i < players.length; i++) {
             ArrayList<Card> hand= deck.dealHand(NUM_CARDS_PER_HAND);
-            player.setCurrentHand(hand);
+            players[i].setCurrentHand(hand);
         }
+//        for(Player player:this.players){
+//            ArrayList<Card> hand= deck.dealHand(NUM_CARDS_PER_HAND);
+//            player.setCurrentHand(hand);
+//        }
         this.currentPlayer = players[dealerIndex];
     }
 
@@ -237,6 +248,7 @@ class Game {
 //        When a robot plays first card of round:
         String trumpChoice;
         Card cardChoice;
+        resetComboPlayed();
         //first turn of game
         if (isFirstTurn){
             cardChoice = currentPlayer.playAnyMineralCard();
@@ -414,5 +426,19 @@ class Game {
     public boolean isNewRound() {
         return (numPasses == numPlayers - 1 - winners.size());
 
+    }
+
+    public void playCombo() {
+        this.lastPlayedCard = currentPlayer.playCombo();
+        comboPlayed = true;
+        resetRound();
+    }
+
+    public boolean comboPlayed() {
+        return comboPlayed;
+    }
+
+    public void resetComboPlayed() {
+        comboPlayed = false;
     }
 }
