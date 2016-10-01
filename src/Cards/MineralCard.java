@@ -45,9 +45,9 @@ public class MineralCard extends Card{
                 "\nClassification: " + classification +
                 "\nCrystal System: " + crystalSystem +
                 "\nOccurrence: " + occurrence +
-                "\nTrumps.Hardness: " + hardness.toString() +
+                "\nHardness: " + hardness.toString() +
                 "\nSpecific Gravity: " + specificGravity.toString() +
-                "\nTrumps.Cleavage: " + cleavage +
+                "\nCleavage: " + cleavage +
                 "\nCrustal Abundance: " + crustalAbundance +
                 "\nEconomic Value: " + economicValue.toString() +
                 "\n--------------------");

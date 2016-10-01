@@ -20,6 +20,15 @@ public class NonHumanPlayer extends Player {
         return getHand().remove(cardChoice);
     }
 
+    public Card playAnyMineralCard() {
+        for(int i=0;i<getHand().size();++i){
+            if (getHand().get(i).getCardType().equals("play")){
+                return getHand().remove(i);
+            }
+        }
+        return null;
+    }
+
     @Override
     public boolean hasPlayableCards(Card lastPlayedCard, String currentTrump) {
         boolean haveCard = false;
@@ -35,6 +44,14 @@ public class NonHumanPlayer extends Player {
     public void drawCard(Deck deck) {
         getHand().add(deck.removeCard(0));
     }
+
+//    @Override
+//    public Card playAnyCard() {
+//        for(int i=0;i<getHand().size();++i){
+//            return getHand().remove(i);
+//        }
+//        return null;
+//    }
 
     @Override
     public Card playCard(int cardChoiceIndex) {

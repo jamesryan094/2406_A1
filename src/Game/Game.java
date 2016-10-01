@@ -32,7 +32,8 @@ class Game {
     private int numPasses;
     private Player lastPlayer;
     private ArrayList<Player> winners = new ArrayList<>();
-
+    private boolean isFirstTurn;
+    private boolean newRound;
 
 
     Game(int num, String userName){
@@ -41,6 +42,8 @@ class Game {
         players = generatePlayers(userName);
         isWon = false;
         numPasses = 0;
+        isFirstTurn = true;
+//        resetPlayersInRound clears the attribute's list then repopulates. Is called here to populate, clearing has no effect on empty list
         resetPlayersInRound();
 //        roundNum = 0;
 //        System.out.println("Player array assigned to Game attribute; players");
@@ -142,7 +145,7 @@ class Game {
 //    }
 
     boolean isHumanUp(){
-        if (getCurrentPlayer().isHuman()){
+        if (this.getCurrentPlayer().isHuman()){
             return true;
         }
         else{
@@ -201,7 +204,7 @@ class Game {
         setCardHasBeenPlayed(true);
     }
 
-    public void playFirstTurn(int cardChoice) {
+    public void playTrumpCard(int cardChoice) {
 //        When a user plays a Trump Card:
         Card chosenCard = currentPlayer.playCard(cardChoice);
 //        String trumpChoice = chosenCard.getTitle();
@@ -214,16 +217,40 @@ class Game {
         setCardHasBeenPlayed(true);
     }
 
-    public void playFirstTurn() {
-//    When a robot plays first:
-
-        Card cardChoice = currentPlayer.playAnyCard();
+//    public void playTrumpCard() {
+////    When a robot plays first:
+//
+//        Card cardChoice = currentPlayer.playAnyMineralCard();
+//        String trumpChoice;
+//        if(cardChoice.getCardType().equals("play")||cardChoice.isGeologist()){
+//            trumpChoice = currentPlayer.getTrumpCategoryChoice();
+//        }
+//        else{
+//            trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+//        }
+//        setCurrentTrumpCategory(trumpChoice);
+//        setLastPlayedAttributes(cardChoice);
+//        setCardHasBeenPlayed(true);
+//
+//    }
+    public void playFirstTurn(){
+//        When a robot plays first card of round:
         String trumpChoice;
-        if(cardChoice.getCardType().equals("play")||cardChoice.isGeologist()){
+        Card cardChoice;
+        //first turn of game
+        if (isFirstTurn){
+            cardChoice = currentPlayer.playAnyMineralCard();
             trumpChoice = currentPlayer.getTrumpCategoryChoice();
         }
-        else{
-            trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+        //first turn of ROUND
+        else {
+            cardChoice = currentPlayer.playAnyCard();
+            if (cardChoice.getCardType().equals("play") || cardChoice.isGeologist()){
+                trumpChoice = currentPlayer.getTrumpCategoryChoice();
+            }
+            else {
+                trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+            }
         }
         setCurrentTrumpCategory(trumpChoice);
         setLastPlayedAttributes(cardChoice);
@@ -231,7 +258,7 @@ class Game {
 
     }
 
-    private String getTrumpChoiceFromTrumpCard(String trumpTitle){
+    public String getTrumpChoiceFromTrumpCard(String trumpTitle){
         String trumpChoice;
         switch (trumpTitle){
             case "The Miner":
@@ -285,7 +312,7 @@ class Game {
         currentPlayer.setHasPassed(true);
         removePlayerFromRound();
         if((deck.getCards().size() != 0)&&currentPlayer.getHand().size()!=0) {
-            System.out.println(currentPlayer.getName() + " draws a card!");
+//            System.out.println(currentPlayer.getName() + " draws a card!");
             currentPlayer.drawCard(deck);
         }
         else{
@@ -302,14 +329,13 @@ class Game {
 
     public void incrementNumPasses() {
         numPasses +=1 ;
-        System.out.println("in incrementNumPasses(), numPasses incremented, numPasses = " + numPasses);
+//        System.out.println("in incrementNumPasses(), numPasses incremented, numPasses = " + numPasses);
     }
 
     public void resetRound() {
 //        todo: refactor to use get/setters
 //        if(!winners.contains(currentPlayer))
         resetNumPasses();
-        setCurrentPlayer(getLastPlayerInRound());
         resetPlayersInRound();
         setCardHasBeenPlayed(false);
         for (Player player:players){
@@ -359,13 +385,13 @@ class Game {
     public void updateWinners() {
         if(!winners.contains(currentPlayer)){
             winners.add(currentPlayer);
-            System.out.println("Congratulations " + currentPlayer.getName() + "! You have been added to the winner list!");
+//            System.out.println("Congratulations " + currentPlayer.getName() + "! You have been added to the winner list!");
 //            currentPlayer.setHasPassed(true);
 //            currentPlayer.setHasPassed(true);
         }
         if(winners.size() == getPlayers().length-1){
             setIsWon();
-            System.out.println("Game Completed! Game over!");
+//            System.out.println("Game Completed! Game over!");
         }
 //        if (winners.size() == getPlayers().length - 1){
 //            setIsWon();
@@ -375,5 +401,18 @@ class Game {
 
     void setIsWon(){
         isWon = true;
+    }
+
+    public void setFirstTurn(boolean firstTurn) {
+        isFirstTurn = firstTurn;
+    }
+
+    public boolean isFirstTurn() {
+        return isFirstTurn;
+    }
+
+    public boolean isNewRound() {
+        return (numPasses == numPlayers - 1 - winners.size());
+
     }
 }

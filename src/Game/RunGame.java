@@ -1,6 +1,7 @@
 package Game;
 //Todo: Ensure ALL input is collected in THIS file.
 import Cards.Card;
+import Player.Player;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class RunGame {
             "\n>>>";
 
     static Scanner keys = new Scanner(System.in);
-    static final String TURN_MENU_MESSAGE = "(0)View Hand\n(1)Play Card\n(2)Pass";
+    static final String TURN_MENU_MESSAGE = "(0)Inspect Hand\n(1)Play Card\n(2)Pass";
 
     public static void main(String[] args) {
         System.out.print(MENU_MESSAGE);
@@ -28,95 +29,96 @@ public class RunGame {
                 Game newGame = prepareNewGame();
                 System.out.println("Ready to Start! Have Fun!\n");
                 while (!newGame.isWon()) {
-                    if (newGame.checkWinner()){
-                        newGame.updateWinners();
-                    }
-                    if (newGame.getNumPasses() == (newGame.getNumPlayers()-1)-newGame.getWinners().size()) {
-//                        if everyone passes: reset round, set player to round winner.
-                        newGame.resetRound();
-                        System.out.println("\nRound Won By: " + newGame.getCurrentPlayer().getName() + "! Good Job!\nRound Reset\n");
-                    }
-                    int turnChoice;
-//                    If the current player has not passed && if the current player is not in the winner list(is still playing)
-                    if(!newGame.getCurrentPlayer().getHasPassed()&&!newGame.getWinners().contains(newGame.getCurrentPlayer())){
-
-
-                        System.out.println("\nPress Enter to Continue >>>");
-                        keys.nextLine();
-
-                        System.out.println("Current Player: " + newGame.getCurrentPlayer().getName() + "\n--------------------");
-
-
-                        if (!newGame.isHumanUp()) {
-                            if (!newGame.cardHasBeenPlayed()) {
-                                newGame.playFirstTurn();
-                                System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
-
-                                System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
-                                System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
-
-                                newGame.incrementCurrentPlayer();
-                            } else {
-                                if (newGame.getCurrentPlayer().hasPlayableCards(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())) {
-                                    newGame.playTurn();
-                                    System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
-                                    System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
-                                    System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+                    Player currentPlayer = newGame.getCurrentPlayer();
+                    //if they haven't won
+                    if (!newGame.getWinners().contains(currentPlayer)) {
+                        int turnChoice;
+//                    If the current player has not passed
+                        if(!currentPlayer.getHasPassed()){
+                            boolean isNewRound = newGame.isNewRound();
+                            if (isNewRound) {
+    //                        if everyone passes: reset round, set player to round winner.
+                                newGame.resetRound();
+                                System.out.println("\nRound Won By: " + currentPlayer.getName() + "! Good Job!\n\nRound Reset!\n");
+                            }
+                            System.out.println("\nPress Enter to Continue >>>");
+                            keys.nextLine();
+                            System.out.println("Current Player: " + currentPlayer.getName() + "\n--------------------");
+                            if (!newGame.isHumanUp()) {
+                                if (isNewRound || newGame.isFirstTurn()) {
+                                    newGame.playFirstTurn();
+                                    displayTurnResults(newGame);
                                 } else {
-                                    System.out.println(newGame.getCurrentPlayer().getName() + " choose to Pass");
-                                    newGame.passTurn();
-                                    newGame.incrementNumPasses();
+                                    if (currentPlayer.hasPlayableCards(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())) {
+                                        newGame.playTurn();
+                                       displayTurnResults(newGame);
+                                    } else {
+                                        System.out.println(newGame.getCurrentPlayer().getName() + " chose to Pass");
+                                        newGame.passTurn();
+                                        newGame.incrementNumPasses();
+                                    }
+                                }
+                                if (newGame.checkWinner()){
+                                    newGame.updateWinners();
+                                    System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
                                 }
                                 newGame.incrementCurrentPlayer();
                             }
-                        } else {
-                            while (newGame.isHumanUp()) {
-                                turnChoice = getValidTurnChoice();
-                                switch (turnChoice) {
-                                    case 0:
-                                        System.out.println("Display Hand: ");
-                                        displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
-
-                                        break;
-                                    case 1:
-                                        System.out.println("Play Card");
-                                        displayHandMenu(newGame.getCurrentPlayer().getHand(), turnChoice, newGame);
-//                                        System.out.println("Cool");
-                                        if (newGame.getHumanPlayedCard()) {
-                                            System.out.println(newGame.getCurrentPlayer().getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
-                                            System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
-                                            System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
-
+                            else {
+                                while (newGame.isHumanUp()) {
+                                    turnChoice = getValidTurnChoice();
+                                    switch (turnChoice) {
+                                        case 0:
+                                            System.out.println("Inspect Hand: ");
+                                            displayHandMenu(currentPlayer.getHand(), turnChoice, newGame, isNewRound);
+                                            break;
+                                        case 1:
+                                            System.out.println("Play Card: ");
+                                            displayHandMenu(currentPlayer.getHand(), turnChoice, newGame, isNewRound);
+                                            if (newGame.getHumanPlayedCard()) {
+                                                displayTurnResults(newGame);
+                                                newGame.resetHumanPlayedCard();
+                                                if (newGame.checkWinner()){
+                                                    newGame.updateWinners();
+                                                    System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
+                                                }
+                                                newGame.incrementCurrentPlayer();
+                                            }
+                                            break;
+                                        case 2:
+                                            System.out.println(newGame.getCurrentPlayer().getName() + " chose to Pass");
+                                            newGame.passTurn();
+                                            newGame.incrementNumPasses();
                                             newGame.incrementCurrentPlayer();
-                                            newGame.resetHumanPlayedCard();
-                                        }
-                                        break;
-
-                                    case 2:
-                                        System.out.println(newGame.getCurrentPlayer().getName() + " choose to Pass");
-                                        newGame.passTurn();
-
-                                        newGame.incrementNumPasses();
-                                        newGame.incrementCurrentPlayer();
-                                        break;
+                                            break;
+                                    }
                                 }
                             }
                         }
+                        else{
+                            newGame.incrementCurrentPlayer();
+                        }
+                        newGame.setFirstTurn(false);
                     }
-                    else{
+                    else {
+                        System.out.println(currentPlayer.getName() + " already won!");
                         newGame.incrementCurrentPlayer();
                     }
-//                System.out.println("End of Loop");
-//                    if(newGame.getWinners().contains(newGame.getCurrentPlayer())){
-//                        System.out.println(newGame.getCurrentPlayer().getName() + " has already won! They're sitting out");
-//                        newGame.incrementCurrentPlayer();
-//                    }
                 }
+                System.out.println("IS OVEEERRRRRRR OH NOOOOOOOOOO");
             }
             System.out.print(MENU_MESSAGE);
             menuChoice = getValidMenuChoice();
         }
         System.out.println("Thank you for playing :V");
+    }
+
+    private static void displayTurnResults(Game newGame) {
+        Player currentPlayer = newGame.getCurrentPlayer();
+        System.out.println(currentPlayer.getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
+
+        System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
+        System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
     }
 
 
@@ -212,7 +214,7 @@ public class RunGame {
         }
         return turnMenuChoice;
     }
-    public static void displayHandMenu(ArrayList<Card> userHand, int menuChoice, Game newGame){
+    public static void displayHandMenu(ArrayList<Card> userHand, int menuChoice, Game newGame, boolean isNewRound){
         int handMenuChoice;
         Scanner keys = new Scanner(System.in);
 
@@ -229,34 +231,79 @@ public class RunGame {
             }
 //            Else User wants to play card.
             else {
-                if (cardChoice.getCardType().equals("trump")) {
-                    if(newGame.cardHasBeenPlayed()) {
+                if (newGame.isFirstTurn()) {
+                    if (cardChoice.getCardType().equals("trump")) {
+                        System.out.println("Can't play Supertrump on first turn.");
+                    }
+                    //first turn and is a mineral card
+                    else {
+                        String trumpChoice = getTrumpCategoryFromUser();
+                        newGame.playFirstTurn(cardIndex, trumpChoice);
+                    }
+                }
+                else if (isNewRound){
+                    //new round and user chose trump
+                    if (cardChoice.getCardType().equals("trump")) {
                         if (cardChoice.isGeologist()) {
                             String trumpChoice = getTrumpCategoryFromUser();
                             newGame.playFirstTurn(cardIndex, trumpChoice);
                         } else {
-                            newGame.playFirstTurn(cardIndex);
+                            newGame.playTrumpCard(cardIndex);
                         }
-                    }else{
-                        System.out.println("\nYou must begin a round with a Mineral Card! Please try again.");
                     }
-                }
-                else{
-                    if (!newGame.cardHasBeenPlayed()) {
+                    //new round and user chose a mineral card
+                    else {
                         String trumpChoice = getTrumpCategoryFromUser();
                         newGame.playFirstTurn(cardIndex, trumpChoice);
-                        }
-                    else {
-                        if (cardChoice.canPlayOn(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
-
-                            newGame.setHumanPlayedCard();
-                            newGame.setLastPlayedAttributes(cardChoice);
-                            userHand.remove(cardChoice);
-                        }else {
-                            System.out.println("Can't play that card, sorry.");
-                        }
                     }
                 }
+                //not new round and not first turn
+                else {
+                    if (cardChoice.canPlayOn(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
+                        if (cardChoice.getCardType().equals("trump") && !cardChoice.isGeologist()){
+                            String trumpChoice = newGame.getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+                            newGame.setCurrentTrumpCategory(trumpChoice);
+                        }
+                        else if (cardChoice.isGeologist()){
+                            String trumpChoice = getTrumpCategoryFromUser();
+                            newGame.setCurrentTrumpCategory(trumpChoice);
+                        }
+                        newGame.setHumanPlayedCard();
+                        newGame.setLastPlayedAttributes(cardChoice);
+                        userHand.remove(cardChoice);
+                    }else {
+//                            Todo: maybe give more information here. eg, X is not preferable to Y for [TRUMP] (X.TRUMP < Y.TRUMP).
+                        System.out.println("Can't play that card, sorry.");
+                    }
+                }
+//                //Not first turn and playing trump card
+//                if (!newGame.isFirstTurn() && cardChoice.getCardType().equals("trump")) {
+//                    if (cardChoice.isGeologist()) {
+//                        String trumpChoice = getTrumpCategoryFromUser();
+//                        newGame.playFirstTurn(cardIndex, trumpChoice);
+//                    } else {
+//                        newGame.playTrumpCard(cardIndex);
+//                    }
+//                }
+//                else{
+//                    //first turn
+//                    if (newGame.isNewRound()) {
+//                        String trumpChoice = getTrumpCategoryFromUser();
+//                        newGame.playFirstTurn(cardIndex, trumpChoice);
+//                        }
+//                        //not first turn and not supertrump
+//                    else {
+//                        if (cardChoice.canPlayOn(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
+//
+//                            newGame.setHumanPlayedCard();
+//                            newGame.setLastPlayedAttributes(cardChoice);
+//                            userHand.remove(cardChoice);
+//                        }else {
+////                            Todo: maybe give more information here. eg, X is not preferable to Y for [TRUMP] (X.TRUMP < Y.TRUMP).
+//                            System.out.println("Can't play that card, sorry.");
+//                        }
+//                    }
+//                }
             }
         }
     }

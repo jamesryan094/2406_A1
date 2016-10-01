@@ -93,7 +93,7 @@ public abstract class Player {
 
     public abstract String getTrumpCategoryChoice();
 
-    public abstract Card playAnyCard();
+    public abstract Card playAnyMineralCard();
 
     public abstract boolean hasPlayableCards(Card lastPlayedCard, String currentTrump);
 //Todo: drawCard may not be abstract.
@@ -108,4 +108,14 @@ public abstract class Player {
         this.hasPassed = hasPassed;
     }
 
+    public boolean hasMineralCards(){
+        for(int i=0;i<getHand().size();++i){
+            if (getHand().get(i).getCardType().equals("play")){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public abstract Card playAnyCard();
 }

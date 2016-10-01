@@ -21,11 +21,15 @@ public abstract class Card {
         title = (String) cardAttributes.get(3);
     }
 
+//    public void printAttributes(){
+//        System.out.println("File Name: " +fileName +
+//                "\nImage Name: " + imageName +
+//                "\nCard Type: " + cardType +
+//                "\nTitle: " + title +
+//                "\n--------------------");
+//    }
     public void printAttributes(){
-        System.out.println("File Name: " +fileName +
-                "\nImage Name: " + imageName +
-                "\nCards.Card Type: " + cardType +
-                "\nTitle: " + title +
+        System.out.println("\nTitle: " + title +
                 "\n--------------------");
     }
 

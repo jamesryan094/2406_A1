@@ -25,7 +25,7 @@ public class HumanPlayer extends Player{
     }
 
     @Override
-    public Card playAnyCard() {
+    public Card playAnyMineralCard() {
         return null;
     }
 
@@ -37,6 +37,11 @@ public class HumanPlayer extends Player{
     @Override
     public void drawCard(Deck deck) {
         getHand().add(deck.removeCard(0));
+    }
+
+    @Override
+    public Card playAnyCard() {
+        return null;
     }
 
 
