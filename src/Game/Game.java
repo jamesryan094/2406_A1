@@ -80,19 +80,19 @@ class Game {
     void initialDeal(){
         deck.removeRuleCards();
         deck.shuffle();
-        ArrayList<Card> userHand = new ArrayList<>();
-        userHand.add(deck.getGeophys());
-        userHand.add(deck.getMagnetite());
-        userHand.addAll(deck.dealHand(NUM_CARDS_PER_HAND));
-        players[0].setCurrentHand(userHand);
-        for (int i = 1; i < players.length; i++) {
-            ArrayList<Card> hand= deck.dealHand(NUM_CARDS_PER_HAND);
-            players[i].setCurrentHand(hand);
-        }
-//        for(Player player:this.players){
+//        ArrayList<Card> userHand = new ArrayList<>();
+//        userHand.add(deck.getGeophys());
+//        userHand.add(deck.getMagnetite());
+//        userHand.addAll(deck.dealHand(NUM_CARDS_PER_HAND));
+//        players[2].setCurrentHand(userHand);
+//        for (int i = 0; i < players.length-1; i++) {
 //            ArrayList<Card> hand= deck.dealHand(NUM_CARDS_PER_HAND);
-//            player.setCurrentHand(hand);
+//            players[i].setCurrentHand(hand);
 //        }
+        for(Player player:this.players){
+            ArrayList<Card> hand= deck.dealHand(NUM_CARDS_PER_HAND);
+            player.setCurrentHand(hand);
+        }
         this.currentPlayer = players[dealerIndex];
     }
 
@@ -298,25 +298,31 @@ class Game {
 
 
     public void playTurn() {
-        boolean haveCard = false;
-        Card cardChoice = null;
-        for(int i=0;i<currentPlayer.getHand().size();++i){
-            if (currentPlayer.getHand().get(i).canPlayOn(lastPlayedCard, currentTrumpCategory)&&!haveCard){
-                cardChoice = currentPlayer.playCard(i);
-                haveCard=true;
+        if (currentPlayer.hasCombo()){
+            playCombo();
+        }
+        else {
+
+            boolean haveCard = false;
+            Card cardChoice = null;
+            for(int i=0;i<currentPlayer.getHand().size();++i){
+                if (currentPlayer.getHand().get(i).canPlayOn(lastPlayedCard, currentTrumpCategory)&&!haveCard){
+                    cardChoice = currentPlayer.playCard(i);
+                    haveCard=true;
                 }
             }
-        if (cardChoice.getCardType().equals("trump")) {
-            String trumpChoice;
-            if(cardChoice.isGeologist()){
-                trumpChoice = currentPlayer.getTrumpCategoryChoice();
-            }else {
-                trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+            if (cardChoice.getCardType().equals("trump")) {
+                String trumpChoice;
+                if(cardChoice.isGeologist()){
+                    trumpChoice = currentPlayer.getTrumpCategoryChoice();
+                }else {
+                    trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+                }
+                setCurrentTrumpCategory(trumpChoice);
+                resetRoundTrump();
             }
-            setCurrentTrumpCategory(trumpChoice);
-            resetRoundTrump();
+            setLastPlayedAttributes(cardChoice);
         }
-        setLastPlayedAttributes(cardChoice);
 
     }
 

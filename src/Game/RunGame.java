@@ -45,8 +45,7 @@ public class RunGame {
                             keys.nextLine();
                             System.out.println("Current Player: " + currentPlayer.getName() + "\n--------------------");
                             if (!newGame.isHumanUp()) {
-                                boolean comboPlayed = newGame.comboPlayed();
-                                if (isNewRound || newGame.isFirstTurn() || comboPlayed) {
+                                if (isNewRound || newGame.isFirstTurn()) {
                                     newGame.playFirstTurn();
                                     displayTurnResults(newGame);
                                 } else {
@@ -59,11 +58,19 @@ public class RunGame {
                                         newGame.incrementNumPasses();
                                     }
                                 }
+                                boolean comboPlayed = newGame.comboPlayed();
                                 if (newGame.checkWinner()){
                                     newGame.updateWinners();
                                     System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
                                 }
-                                newGame.incrementCurrentPlayer();
+                                if (!comboPlayed) {
+                                    newGame.incrementCurrentPlayer();
+                                }
+                                else {
+                                    System.out.println(currentPlayer.getName() + " IS A COMBOBREAKER!!! They go again.");
+                                    newGame.playFirstTurn();
+                                    newGame.resetComboPlayed();
+                                }
                             }
                             else {
                                 while (newGame.isHumanUp()) {
