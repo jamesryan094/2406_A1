@@ -53,6 +53,7 @@ public class RunGame {
                             keys.nextLine();
                             System.out.println("Current Player: " + currentPlayer.getName() + "\n--------------------");
                             if (!newGame.isHumanUp()) {
+//                                Robot is up:
                                 if (isNewRound || newGame.isFirstTurn()) {
                                     newGame.playFirstTurn();
                                     displayTurnResults(newGame);
@@ -132,6 +133,7 @@ public class RunGame {
                             }
                         }
                         else{
+                            System.out.println('\n' + currentPlayer.getName() + " is out for the round.");
                             newGame.incrementCurrentPlayer();
                         }
                         newGame.setFirstTurn(false);
@@ -163,14 +165,17 @@ public class RunGame {
 
         System.out.println("Current Trump Category: " + newGame.getCurrentTrumpCategory());
         System.out.println("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+
+        if (newGame.getLastPlayedCard().getCardType().equals("trump")){
+            System.out.println('\n' + currentPlayer.getName() + " played a trump!\n" +
+            "Everybody is back in the round!\n");
+        }
     }
 
 
     static Game prepareNewGame() {
         int numPlayersChoice = getValidNumPlayers();
-        Scanner keys = new Scanner(System.in);
-        System.out.println("Enter Username: ");
-        String userName = keys.nextLine();
+        String userName = getValidUserName();
         Game newGame = new Game(numPlayersChoice, userName);
         System.out.println("\nRandomly assigning dealer...");
         newGame.assignDealer();
@@ -180,6 +185,20 @@ public class RunGame {
         newGame.incrementCurrentPlayer();
         printUserCards(newGame);
         return newGame;
+    }
+
+    private static String getValidUserName() {
+        Scanner keys = new Scanner(System.in);
+        System.out.println("Enter Username: ");
+        String userName = keys.nextLine();
+        String strippedName = userName.replaceAll("\\s+", "");
+        while (strippedName.isEmpty()){
+            System.out.println("Invalid username: Username can not be blank.");
+            System.out.println("Enter Username: ");
+            userName = keys.nextLine();
+            strippedName = userName.replaceAll("\\s+", "");
+        }
+        return userName;
     }
 
     private static void printUserCards(Game newGame) {
@@ -194,17 +213,30 @@ public class RunGame {
 
     public static int getValidNumPlayers(){
         Scanner keys = new Scanner(System.in);
-        int num;
+        String potentialNum;
 
         System.out.println("How many players (3-5)?");
-        num = keys.nextInt();
-        keys.nextLine();
+        potentialNum = keys.nextLine();
 
-        while ((num != 3) && (num != 4) && (num != 5)){
-            System.out.println("Invalid choice, try again");
-            System.out.println("How many players (3-5)?");
-            num = keys.nextInt();
-            keys.nextLine();
+        int num = 0;
+        boolean isValid = false;
+        while (!isValid) {
+            try {
+                num = Integer.parseInt(potentialNum);
+
+                if ((num < Game.MIN_PLAYERS) || (num > Game.MAX_PLAYERS)){
+                    System.out.println("Invalid choice, try again");
+                    System.out.println("How many players (3-5)?");
+                    potentialNum = keys.nextLine();
+                } else{
+                    isValid = true;
+                }
+            } catch (NumberFormatException numE) {
+                System.out.println("Please enter a valid number");
+                System.out.println("How many players (3-5)?");
+                potentialNum = keys.nextLine();
+            }
+
         }
         return num;
     }

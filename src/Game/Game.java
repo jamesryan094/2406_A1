@@ -33,6 +33,8 @@ class Game {
             "Economic Value: is ranked from lowest to highest as:\n" +
             "trivial < low < moderate < high < very high < I’m rich!\n";
     private final Deck deck;
+    final static int MIN_PLAYERS = 3;
+    final static int MAX_PLAYERS = 5;
     private Player[] players;
     private ArrayList<Player> playersInRound = new ArrayList<>();
     private int numPlayers;
