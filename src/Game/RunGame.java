@@ -84,7 +84,8 @@ public class RunGame {
                             else {
                                 while (newGame.isHumanUp()) {
                                     boolean comboPlayed = newGame.comboPlayed();
-                                    turnChoice = getValidTurnChoice();
+//                                    turnChoice = getValidTurnChoice();
+                                    turnChoice = getNumInRange(0, 3, TURN_MENU_MESSAGE);
                                     switch (turnChoice) {
                                         case 0:
                                             System.out.println("Inspect Hand: ");
@@ -174,7 +175,10 @@ public class RunGame {
 
 
     static Game prepareNewGame() {
-        int numPlayersChoice = getValidNumPlayers();
+        String numPlayerPrompt = "How many players (3-5)?";
+//        int numPlayersChoice = getValidNumPlayers();
+//        System.out.println("How many players (3-5)?");
+        int numPlayersChoice = getNumInRange(Game.MIN_PLAYERS, Game.MAX_PLAYERS, numPlayerPrompt);
         String userName = getValidUserName();
         Game newGame = new Game(numPlayersChoice, userName);
         System.out.println("\nRandomly assigning dealer...");
@@ -290,14 +294,49 @@ public class RunGame {
         }
         return turnMenuChoice;
     }
+
+    static int getNumInRange(int min, int max, String menuPrompt){
+        Scanner keys = new Scanner(System.in);
+        String potentialNum;
+
+//        System.out.println("How many players (3-5)?");
+        System.out.println(menuPrompt);
+        potentialNum = keys.nextLine();
+
+        int num = 0;
+        boolean isValid = false;
+        while (!isValid) {
+            try {
+                num = Integer.parseInt(potentialNum);
+
+                if ((num < min) || (num > max)){
+                    System.out.println("Invalid choice, try again");
+                    System.out.println(menuPrompt);
+                    potentialNum = keys.nextLine();
+                } else{
+                    isValid = true;
+                }
+            } catch (NumberFormatException numE) {
+                System.out.println("Please enter a valid number");
+                System.out.println(menuPrompt);
+                potentialNum = keys.nextLine();
+            }
+
+        }
+        return num;
+    }
+
     public static void displayHandMenu(ArrayList<Card> userHand, int menuChoice, Game newGame, boolean isNewRound, boolean comboPlayed){
         int handMenuChoice;
         Scanner keys = new Scanner(System.in);
 
 
         printCards(userHand);
-        handMenuChoice = keys.nextInt();
-        keys.nextLine();
+//        handMenuChoice = keys.nextInt();
+//        keys.nextLine();
+        String handMenuPrompt = "Enter Card Index >>> ";
+
+        handMenuChoice = getNumInRange(0, userHand.size(), handMenuPrompt);
 
         if (handMenuChoice != 0){
             Card cardChoice = userHand.get(handMenuChoice -1);
@@ -390,9 +429,10 @@ public class RunGame {
         String TRUMP_CATEGORY_MESSAGE = "(1) Cleavage\n(2) Crustal Abundance\n(3) Economic Value" +
                 "\n(4) Hardness\n(5) Specific Gravity";
         String[] trumpStrings = {"Cleavage", "Crustal Abundance", "Economic Value", "Hardness", "Specific Gravity"};
-        System.out.println(TRUMP_CATEGORY_MESSAGE);
-        trumpChoice = keys.nextInt();
-        keys.nextLine();
+//        System.out.println(TRUMP_CATEGORY_MESSAGE);
+//        trumpChoice = keys.nextInt();
+//        keys.nextLine();
+        trumpChoice = getNumInRange(1, 5, TRUMP_CATEGORY_MESSAGE);
         return trumpStrings[trumpChoice-1];
 
 
@@ -406,8 +446,14 @@ public class RunGame {
             System.out.println("("+ (i+1) + ") " + userHand.get(i).getTitle());
         }
         System.out.println("(0) Back");
-        System.out.print("Enter Card Index >>> ");
     }
+
+//    public static String getCardNames(ArrayList<Card> userHand){
+//        StringBuffer handAsString;
+//        for(int i=0; i < userHand.size(); ++i){
+//            handAsString += "("+ (i+1) + ") " + userHand.get(i).getTitle());
+//        }
+//    }
 
 
 
