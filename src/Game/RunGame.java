@@ -15,6 +15,8 @@ public class RunGame {
     static String MENU_MESSAGE = "MINERAL SUPER TRUMPS" +
             "\n--------------------" +
             "\n(P)lay" +
+            "\n(I)nstructions" +
+            "\n(T)rump Hierarchies" +
             "\n(Q)uit" +
             "\n>>>";
 
@@ -25,7 +27,13 @@ public class RunGame {
         System.out.print(MENU_MESSAGE);
         String menuChoice = getValidMenuChoice();
         while (!menuChoice.equals("Q")) {
-            if (menuChoice.equals("P")) {
+            if(menuChoice.equals("I")){
+                printInstructions();
+            }
+            else if(menuChoice.equals("T")){
+                printTrumpHierarchies();
+            }
+            else if (menuChoice.equals("P")) {
                 Game newGame = prepareNewGame();
                 System.out.println("Ready to Start! Have Fun!\n");
                 while (!newGame.isWon()) {
@@ -67,7 +75,7 @@ public class RunGame {
                                     newGame.incrementCurrentPlayer();
                                 }
                                 else {
-                                    System.out.println(currentPlayer.getName() + " IS A COMBOBREAKER!!! They go again.");
+                                    System.out.println(currentPlayer.getName() + " played the COMBO! They win the round and get to go again.");
                                     newGame.playFirstTurn();
                                     newGame.resetComboPlayed();
                                 }
@@ -101,7 +109,7 @@ public class RunGame {
                                                 }
                                                 else {
                                                     newGame.playCombo();
-                                                    System.out.println(currentPlayer.getName() + " IS A COMBOBREAKER!!! They go again.");
+                                                    System.out.println(currentPlayer.getName() + " played the COMBO! They win the round and get to go again.");
                                                     if (newGame.checkWinner()){
                                                         newGame.updateWinners();
                                                         System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
@@ -139,6 +147,14 @@ public class RunGame {
             menuChoice = getValidMenuChoice();
         }
         System.out.println("Thank you for playing :V");
+    }
+
+    private static void printTrumpHierarchies() {
+        System.out.println(Game.TRUMP_HIERARCHIES);
+    }
+
+    private static void printInstructions() {
+        System.out.println(Game.INSTRUCTIONS);
     }
 
     private static void displayTurnResults(Game newGame) {
@@ -200,7 +216,7 @@ public class RunGame {
         String userInput = keys.nextLine().toUpperCase();
 
         while (!isValid){
-            if ((userInput.equals("Q")) || (userInput.equals("P"))){
+            if ((userInput.equals("Q")) || (userInput.equals("P")) || (userInput.equals("I")) || (userInput.equals("T"))){
                 isValid = true;
             }
             else if (userInput.length()>1){

@@ -16,6 +16,22 @@ import java.util.Random;
 
 class Game {
     private static final int NUM_CARDS_PER_HAND = 8;
+    public static final String TRUMP_HIERARCHIES = "Information on trump categories:\n\n" +
+            "Hardness: relates to Moh’s hardness scale of minerals from 1 to 10. Where a\n" +
+            "range of values is presented, the highest value should be used.\n\n" +
+            "Specific Gravity: in grams per cubic centimeter. Where a range of values is\n" +
+            "presented, the highest value should be used.\n\n" +
+            "Cleavage: refers to the number of cleavage planes and how well the planes\n" +
+            "are typically expressed in the crystal. For example, “1 perfect, 2 poor” means\n" +
+            "the mineral has 1 perfect cleavage plane, and 2 poor cleavage planes. The\n" +
+            "order of ranking from lowest to highest is:\n" +
+            "none < poor/none < 1 poor < 2 poor < 1 good < 1 good, 1 poor < 2\n" +
+            "good < 3 good < 1 perfect < 1 perfect, 1 good < 1 perfect, 2 good < 2\n" +
+            "perfect, 1 good < 3 perfect < 4 perfect < 6 perfect.\n\n" +
+            "Crustal Abundance: is ranked from lowest to highest as:\n" +
+            "ultratrace < trace < low < moderate < high < very high.\n\n" +
+            "Economic Value: is ranked from lowest to highest as:\n" +
+            "trivial < low < moderate < high < very high < I’m rich!\n";
     private final Deck deck;
     private Player[] players;
     private ArrayList<Player> playersInRound = new ArrayList<>();
@@ -35,6 +51,41 @@ class Game {
     private boolean isFirstTurn;
     private boolean newRound;
     private boolean comboPlayed;
+    final static String INSTRUCTIONS = "How to play:\n" +
+            "1. A dealer (randomly chosen) shuffles the cards and deals each player 8\n" +
+            "cards. Each player can look at their cards, but should not show them to\n" +
+            "other players. The remaining card pack is placed face down on the table.\n\n" +
+            "2. The player to the left of the dealer goes first by placing a mineral card on\n" +
+            "the table. The player must state the mineral name, one of the five trump\n" +
+            "categories (i.e., either Hardness, Specific Gravity, Cleavage, Crustal\n" +
+            "Abundance, or Economic Value), and the top value of that category. For\n" +
+            "example, a player placing the Glaucophane card may state “Glaucophane,\n" +
+            "Specific Gravity, 3.2”\n\n" +
+            "3. The player next to the left takes the next turn. This player must play a\n" +
+            "mineral card that has a higher value in the trump category than the card\n" +
+            "played by the previous player. In the case of the example of the\n" +
+            "Glaucophane card above, the player must place a card that has a value for\n" +
+            "specific gravity above 3.2. The game continues with the next player to the\n" +
+            "left, and so on.\n\n" +
+            "4. If a player does not have any mineral cards that are of higher value for the\n" +
+            "specific trump category being played, then the player must pass and pick up\n" +
+            "one card from the card pack on the table. The player then cannot play again\n" +
+            "until all but one player has passed, or until another player throws a\n" +
+            "supertrump card to change the trump category, as described below. A player\n" +
+            "is allowed to pass even if they still hold cards that could be played. \n\n" +
+            "5. If the player has a supertrump card (The Miner, The Geologist, The\n" +
+            "Geophysicist, The Petrologist, The Mineralogist, The Gemmologist) they\n" +
+            "may play this card at any of their turns. By placing a supertrump card, the\n" +
+            "player changes the trump category according to the instructions on the\n" +
+            "supertrump card. At this stage, any other player who had passed on the previous\n" +
+            "round is now able to play again. If a player happens to hold both The\n" +
+            "Geophysicist card and the Magnetite card in their hand, then that player can\n" +
+            "place both cards together to win the round.\n\n" +
+            "6. The game continues with players taking turns to play cards until all but one\n" +
+            "player has passed. The last player then gets to lead out the next round and\n" +
+            "chooses the trump category to be played.\n\n" +
+            "7. The winner of the game is the first player to lose all of their cards. The\n" +
+            "game continues until all but one player (i.e., the loser) has lost their cards.\n";
 
 
     Game(int num, String userName){
