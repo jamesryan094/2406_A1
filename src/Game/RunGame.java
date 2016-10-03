@@ -362,6 +362,7 @@ public class RunGame {
                         if (cardChoice.isGeologist()) {
                             String trumpChoice = getTrumpCategoryFromUser();
                             newGame.playFirstTurn(cardIndex, trumpChoice);
+                            newGame.resetRoundTrump();
                         } else {
                             newGame.playTrumpCard(cardIndex);
                         }
@@ -376,12 +377,15 @@ public class RunGame {
                 else {
                     if (cardChoice.canPlayOn(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
                         if (cardChoice.getCardType().equals("trump") && !cardChoice.isGeologist()){
-                            String trumpChoice = newGame.getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
-                            newGame.setCurrentTrumpCategory(trumpChoice);
+//                            String trumpChoice = newGame.getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+//                            newGame.setCurrentTrumpCategory(trumpChoice);
+                            newGame.playTrumpCard(cardIndex);
                         }
                         else if (cardChoice.isGeologist()){
                             String trumpChoice = getTrumpCategoryFromUser();
-                            newGame.setCurrentTrumpCategory(trumpChoice);
+//                            newGame.setCurrentTrumpCategory(trumpChoice);
+                            newGame.playFirstTurn(cardIndex, trumpChoice);
+                            newGame.resetRoundTrump();
                         }
                         newGame.setHumanPlayedCard();
                         newGame.setLastPlayedAttributes(cardChoice);
@@ -426,7 +430,7 @@ public class RunGame {
     private static String getTrumpCategoryFromUser() {
         Scanner keys = new Scanner(System.in);
         int trumpChoice;
-        String TRUMP_CATEGORY_MESSAGE = "(1) Cleavage\n(2) Crustal Abundance\n(3) Economic Value" +
+        String TRUMP_CATEGORY_MESSAGE = "Select a Trump Category: \n(1) Cleavage\n(2) Crustal Abundance\n(3) Economic Value" +
                 "\n(4) Hardness\n(5) Specific Gravity";
         String[] trumpStrings = {"Cleavage", "Crustal Abundance", "Economic Value", "Hardness", "Specific Gravity"};
 //        System.out.println(TRUMP_CATEGORY_MESSAGE);
