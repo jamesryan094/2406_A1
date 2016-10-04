@@ -17,13 +17,18 @@ import Cards.Card;
 import Cards.MineralCard;
 import Cards.TrumpCard;
 
-
+/**
+ * Class builds a Mineral Supertrump deck from file.
+ * Created by James on 23/08/2016.
+ */
 public class GenerateDeckFromPLIST {
-    /**
-     * Created by James on 23/08/2016.
-     * Generate ArrayList of String objects containing data parsed from PLIST file.
-     */
 
+    /**
+     * Generate Deck type object that stores Card type
+     * objects created based on data parsed from a PLIST file.
+     *
+     * @return a deck of Mineral Supertrump cards formatted as Card type objects.
+     */
     public static Deck buildDeck() {
         Deck deck = new Deck();
 //        Open the plist file as a file
@@ -48,38 +53,39 @@ public class GenerateDeckFromPLIST {
                     for (int j = 0; j < childNodes.getLength(); j++) {
                         Node attributeValNode = childNodes.item(j);
                         String attributeValName = attributeValNode.getNodeName();
-                        if (attributeValName.equals("array")){
-                            ArrayList<String> occurrenceArray = new ArrayList<>();
-                            NodeList arrayStrings = attributeValNode.getChildNodes();
+                        switch (attributeValName) {
+                            case "array":
+                                ArrayList<String> occurrenceArray = new ArrayList<>();
+                                NodeList arrayStrings = attributeValNode.getChildNodes();
 //                            Need to nest another loop to iterate through and pull each occurrence string separately
-                            for (int k = 0; k < arrayStrings.getLength(); ++k){
-                                Node stringNode = arrayStrings.item(k);
-                                if (stringNode.getNodeType() == Node.ELEMENT_NODE && stringNode.getNodeName().equals("string")){
-                                    Element occurrenceString = (Element) stringNode;
+                                for (int k = 0; k < arrayStrings.getLength(); ++k) {
+                                    Node stringNode = arrayStrings.item(k);
+                                    if (stringNode.getNodeType() == Node.ELEMENT_NODE && stringNode.getNodeName().equals("string")) {
+                                        Element occurrenceString = (Element) stringNode;
 
-                                    String occurrenceText = occurrenceString.getTextContent();
-                                    occurrenceArray.add(occurrenceText);
+                                        String occurrenceText = occurrenceString.getTextContent();
+                                        occurrenceArray.add(occurrenceText);
+                                    }
                                 }
-                            }
-                            valArray.add(occurrenceArray.toString());
-                        }
-                        else if (attributeValName.equals("string")) {
-                            valArray.add(attributeValNode.getTextContent());
-                        }
-                        else if (attributeValName.equals("key")){
-                            String keyText = attributeValNode.getTextContent();
-//                            Only these words are values stored as <key>, the rest are all geniune keys.
-                            if (keyText.equals("play") || keyText.equals("trump") || keyText.equals("rule")){
+                                valArray.add(occurrenceArray.toString());
+                                break;
+                            case "string":
                                 valArray.add(attributeValNode.getTextContent());
-                            }
+                                break;
+                            case "key":
+                                String keyText = attributeValNode.getTextContent();
+//                            Only these words are values stored as <key>, the rest are all geniune keys.
+                                if (keyText.equals("play") || keyText.equals("trump") || keyText.equals("rule")) {
+                                    valArray.add(attributeValNode.getTextContent());
+                                }
+                                break;
                         }
                     }
                     if (valArray.size() == 13) {
                         Card tempCard = new MineralCard(valArray);
 //                        tempCard.printAttributes();
                         deck.addToDeck(tempCard);
-                    }
-                    else{
+                    } else {
                         Card tempCard = new TrumpCard(valArray);
 //                        tempCard.printAttributes();
                         deck.addToDeck(tempCard);
@@ -93,11 +99,7 @@ public class GenerateDeckFromPLIST {
 //            deck.displayCards();
 
 
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
         return deck;

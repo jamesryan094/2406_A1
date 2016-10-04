@@ -1,15 +1,14 @@
 package Game;
-//Todo: Ensure ALL input is collected in THIS file.
 import Cards.Card;
 import Player.Player;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//Todo: Game loops if player before human passes. refactor code so increment player is done elsewhere (in play/pass)
 /**
- * Created by james on 6/09/2016.
+ * Acts as conduit between player and system by taking input and print output, controls flow of game.
  *
+ * Created by james on 6/09/2016.
  */
 public class RunGame {
     static String MENU_MESSAGE = "MINERAL SUPER TRUMPS" +
@@ -112,6 +111,7 @@ public class RunGame {
                                                 else {
                                                     newGame.playCombo();
                                                     System.out.println(currentPlayer.getName() + " played the COMBO! They win the round and get to go again.");
+                                                    newGame.resetComboPlayed();
                                                     if (newGame.checkWinner()){
                                                         newGame.updateWinners();
                                                         System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
@@ -140,11 +140,11 @@ public class RunGame {
                         newGame.setFirstTurn(false);
                     }
                     else {
-                        System.out.println(currentPlayer.getName() + " already won!");
+                        System.out.println('\n' + currentPlayer.getName() + " already won!");
                         newGame.incrementCurrentPlayer();
                     }
                 }
-                System.out.println("IS OVEEERRRRRRR OH NOOOOOOOOOO");
+                System.out.println("Game completed! Well done everyone!\n");
             }
             System.out.print(MENU_MESSAGE);
             menuChoice = getValidMenuChoice();
@@ -176,13 +176,12 @@ public class RunGame {
 
     static Game prepareNewGame() {
         String numPlayerPrompt = "How many players (3-5)?";
-//        int numPlayersChoice = getValidNumPlayers();
-//        System.out.println("How many players (3-5)?");
         int numPlayersChoice = getNumInRange(Game.MIN_PLAYERS, Game.MAX_PLAYERS, numPlayerPrompt);
         String userName = getValidUserName();
         Game newGame = new Game(numPlayersChoice, userName);
         System.out.println("\nRandomly assigning dealer...");
         newGame.assignDealer();
+        System.out.println("Dealer: " + newGame.getDealer().getName());
         System.out.println("\n"+ newGame.getDealer().getName() + " is dealing the cards...");
         newGame.initialDeal();
         System.out.println("Cards dealt\n");
