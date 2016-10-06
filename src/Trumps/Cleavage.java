@@ -2,8 +2,9 @@ package Trumps;
 
 
 /**
- * Created by james on 14/09/2016.
  * Take cleavage attribute value as String and assign corresponding Enumeration.
+ * Provides functionality for comparing two values of Cleavage
+ * Created by james on 14/09/2016.
  */
 public class Cleavage extends TrumpCategory{
     private enum CLEAVAGE{NONE, POOR_NONE, POOR1, POOR2, GOOD1, GOOD1_POOR1,

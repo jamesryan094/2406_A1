@@ -1,6 +1,8 @@
 package Trumps;
 
 /**
+ * Take Crustal Abundance attribute value as String and assign corresponding Enumeration.
+ * Provides functionality for comparing two values of Crustal Abundance
  * Created by james on 14/09/2016.
  */
 public class CrustalAbundance extends TrumpCategory{

@@ -2,12 +2,10 @@ package Trumps;
 
 /**
  * Created by james on 14/09/2016.
- * Parent class of trump category classes
- * Child Classes: (Trumps.Cleavage, Trumps.CrustalAbundance, Trumps.EconomicValue, Trumps.Hardness, Trumps.SpecificGravity)
+ * Parent class of trump category classes that holds method for parsing the ranges required for
+ * Hardness and Specific Gravity classes and toString method for all subclasses.
  */
 class TrumpCategory {
-//    public enum CATEGORY {CLEAVAGE, CRUSTAL_ABUNDANCE, ECONOMIC_VALUE, HARDNESS, SPECIFIC_GRAVITY, ERROR}
-//    String[] trumpStrings = {"Cleavage", "Crustal Abundance", "Economic Value", "Hardness", "Specific Gravity"};
     String asStr;
 
     double parseRange(String rangeString){

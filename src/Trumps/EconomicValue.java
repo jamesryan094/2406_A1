@@ -1,6 +1,8 @@
 package Trumps;
 
 /**
+ * Take Economic Value attribute value as String and assign corresponding Enumeration.
+ * Provides functionality for comparing two values of Economic Value.
  * Created by james on 10/09/2016.
  */
 
@@ -42,10 +44,6 @@ public class EconomicValue extends TrumpCategory{
         return eValue;
     }
 
-//    public String toString(){
-//        return asStr;
-//    }
-
     public ECONOMIC_VALUE getValue(){
         return value;
     }
@@ -55,11 +53,3 @@ public class EconomicValue extends TrumpCategory{
     }
 
 }
-
-//    public static void compare() {
-//
-//Cards.Card c1= new card
-//        c2 =
-//                if(c1.enconvalue <= c2.)
-
-//    }
