@@ -6,25 +6,40 @@ import Deck.Deck;
 import java.util.ArrayList;
 
 /**
- *
+ * Player objects represent a person playing Mineral Supertrumps.
+ * Abstract superclass to human and nonHuman player, outlining their methods and permissions, before being
+ * specified further in appropriate subclasses. The distinction between human and nonhuman player was pertenant to the game's functioning.
+ * While many methods seem to overlap, others are so vastly different that the abstract player superclass became necessary.
  * Created by james on 6/09/2016.
  */
 public abstract class Player {
+
     private int id;
     private ArrayList<Card> hand;
-    private final String[] NAMES = {"Matt", "Mark", "Luke", "John"};
     private String name;
     private boolean isHuman;
     private boolean hasPassed;
 
+    /**
+     * Super constructor for nonHuman players.
+     * Assigns a name based on id attribute
+     * @param id a number used to differentiate between players and correspond to player's index in Game attribute 'players'
+     */
     Player(int id) {
         isHuman = false;
         this.id = id;
+        String[] NAMES = {"Matt", "Mark", "Luke", "John"};
         name = NAMES[id - 1];
         hand = new ArrayList<>();
         hasPassed = false;
     }
 
+    /**
+     * Super constructor for Human players.
+     * Assigns a name based on passed in Username argument.
+     * @param id the human player's ID (will be 0).
+     * @param userName retrieved from the user in runGame, used to reference player throughout game.
+     */
     Player(int id, String userName) {
         isHuman = true;
         this.id = id;
@@ -33,90 +48,34 @@ public abstract class Player {
         hasPassed = false;
     }
 
-    public void setCurrentHand(ArrayList<Card> currentHand) {
-        this.hand = currentHand;
-    }
+    //Combo Functionality
 
-    public int getId() {
-        return id;
-    }
+    /**
+     * Removes the "The Geophysicist" and the "Magnetite" card from the current player's hand on one turn.
+     * @return Magnetite card
+     */
+    public Card playCombo() {
+        Card mag = null;
+        Card geoPhys = null;
 
-    public String getName() {
-        return name;
-    }
-
-//    public void setIsDealer(boolean isDealer) {
-//        this.isDealer = isDealer;
-//    }
-
-//    public void playCard(int CardID){
-//
-//    }
-
-    public boolean isHuman() {
-        return this.isHuman;
-    }
-
-//    public void displayHandDetails() {
-//        for (int i = 0; i < this.hand.size(); ++i) {
-//            hand.get(i).printAttributes();
-//        }
-//    }
-
-    public ArrayList<Card> getHand() {
-        return hand;
-    }
-
-//    public void displayHandMenu(){
-//        int menuChoice;
-//        Scanner keys = new Scanner(System.in);
-//        for(int i=0; i < this.hand.size(); ++i){
-//            System.out.println("("+ i + ") " + hand.get(i).getTitle());
-//        }
-//        menuChoice = keys.nextInt();
-//        keys.nextLine();
-//        hand.get(menuChoice).printAttributes();
-//    }
-
-    public boolean equals(Player otherPlayer) {
-        if ((this.getName().equals(otherPlayer.getName())) && (this.getId() == otherPlayer.getId())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public abstract Card playCard(int cardChoice);
-
-    public abstract String getTrumpCategoryChoice();
-
-    public abstract Card playAnyMineralCard();
-
-    public abstract boolean hasPlayableCards(Card lastPlayedCard, String currentTrump);
-
-    //Todo: drawCard may not be abstract.
-    public abstract void drawCard(Deck deck);
-
-    public boolean getHasPassed() {
-        return hasPassed;
-    }
-
-
-    public void setHasPassed(boolean hasPassed) {
-        this.hasPassed = hasPassed;
-    }
-
-    public boolean hasMineralCards() {
-        for (int i = 0; i < getHand().size(); ++i) {
-            if (getHand().get(i).getCardType().equals("play")) {
-                return true;
+        for (Card aHand : hand) {
+            if (aHand.getTitle().equals("The Geophysicist")) {
+                geoPhys = aHand;
+            }
+            if (aHand.getTitle().equals("Magnetite")) {
+                mag = aHand;
             }
         }
-        return false;
+        hand.remove(geoPhys);
+        hand.remove(mag);
+        return mag;
     }
 
-    public abstract Card playAnyCard();
-
+    /**
+     * Determines weather the current player's hand currently contains both the "The Geophysicist"
+     * and the "Magnetite".
+     * @return true if current player's hand contains the combo.
+     */
     public boolean hasCombo() {
         int numComboCards = 0;
         for (Card card :
@@ -128,24 +87,46 @@ public abstract class Player {
         return numComboCards == 2;
     }
 
-    public Card playCombo() {
-        int magnetiteIndex = -1;
-        int geophysIndex = -1;
-        Card mag = null;
-        Card geoPhys = null;
+    //Abstract Declarations
+    public abstract Card playCard(int cardChoice);
 
-        for (int i = 0; i < hand.size(); i++) {
-            if (hand.get(i).getTitle().equals("The Geophysicist")) {
-//                geophysIndex = i;
-                geoPhys = hand.get(i);
-            }
-            if (hand.get(i).getTitle().equals("Magnetite")) {
-//                magnetiteIndex = i;
-                mag = hand.get(i);
-            }
-        }
-        hand.remove(geoPhys);
-        hand.remove(mag);
-        return mag;
+    public abstract Card playAnyCard();
+
+    public abstract String getTrumpCategoryChoice();
+
+    public abstract Card playAnyMineralCard();
+
+    public abstract boolean hasPlayableCards(Card lastPlayedCard, String currentTrump);
+
+    //Todo: drawCard may not be abstract.
+    public abstract void drawCard(Deck deck);
+
+    //Getters/Setters
+    public void setCurrentHand(ArrayList<Card> currentHand) {
+        this.hand = currentHand;
+    }
+
+    public void setHasPassed(boolean hasPassed) {
+        this.hasPassed = hasPassed;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean getHasPassed() {
+        return hasPassed;
+    }
+
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isHuman() {
+        return this.isHuman;
     }
 }

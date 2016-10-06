@@ -2,14 +2,13 @@ package Cards;
 
 import java.util.ArrayList;
 
+/**
+ * Builds Cards.Card superclass based on information parsed from PLIST file.
+ * No Cards.Card type objects will be directly instantiated, instead each game card
+ * will belong more specifically to one of two subclasses.
+ * Created by James on 31/08/2016.
+ */
 public abstract class Card {
-    /**
-     * Created by James on 31/08/2016.
-     * Builds Cards.Card superclass based on information parsed from PLIST file.
-     * No Cards.Card type objects will be directly instantiated, instead each game card
-     * will belong more specifically to one of two subclasses.
-     */
-
     private String fileName, imageName, cardType, title;
 
     /**
