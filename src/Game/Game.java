@@ -137,7 +137,6 @@ class Game {
     void assignDealer(){
         Random rn = new Random();
         dealerIndex = rn.nextInt(numPlayers);
-        players[dealerIndex].setIsDealer(true);
     }
 
     /**

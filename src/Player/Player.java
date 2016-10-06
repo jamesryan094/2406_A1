@@ -6,31 +6,29 @@ import Deck.Deck;
 import java.util.ArrayList;
 
 /**
+ *
  * Created by james on 6/09/2016.
  */
 public abstract class Player {
     private int id;
     private ArrayList<Card> hand;
-    private boolean isDealer;
     private final String[] NAMES = {"Matt", "Mark", "Luke", "John"};
     private String name;
     private boolean isHuman;
     private boolean hasPassed;
 
-    public Player(int id) {
+    Player(int id) {
         isHuman = false;
         this.id = id;
         name = NAMES[id - 1];
-        isDealer = false;
         hand = new ArrayList<>();
         hasPassed = false;
     }
 
-    public Player(int id, String userName) {
+    Player(int id, String userName) {
         isHuman = true;
         this.id = id;
         name = userName;
-        isDealer = false;
         hand = new ArrayList<>();
         hasPassed = false;
     }
@@ -47,9 +45,9 @@ public abstract class Player {
         return name;
     }
 
-    public void setIsDealer(boolean isDealer) {
-        this.isDealer = isDealer;
-    }
+//    public void setIsDealer(boolean isDealer) {
+//        this.isDealer = isDealer;
+//    }
 
 //    public void playCard(int CardID){
 //
@@ -59,11 +57,11 @@ public abstract class Player {
         return this.isHuman;
     }
 
-    public void displayHandDetails() {
-        for (int i = 0; i < this.hand.size(); ++i) {
-            hand.get(i).printAttributes();
-        }
-    }
+//    public void displayHandDetails() {
+//        for (int i = 0; i < this.hand.size(); ++i) {
+//            hand.get(i).printAttributes();
+//        }
+//    }
 
     public ArrayList<Card> getHand() {
         return hand;
@@ -137,11 +135,11 @@ public abstract class Player {
         Card geoPhys = null;
 
         for (int i = 0; i < hand.size(); i++) {
-            if (hand.get(i).getTitle().equals("The Geophysicist")){
+            if (hand.get(i).getTitle().equals("The Geophysicist")) {
 //                geophysIndex = i;
                 geoPhys = hand.get(i);
             }
-            if (hand.get(i).getTitle().equals("Magnetite")){
+            if (hand.get(i).getTitle().equals("Magnetite")) {
 //                magnetiteIndex = i;
                 mag = hand.get(i);
             }

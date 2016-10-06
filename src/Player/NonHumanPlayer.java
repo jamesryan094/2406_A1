@@ -5,6 +5,7 @@ import Deck.Deck;
 import java.util.Random;
 
 /**
+ *
  * Created by james on 22/09/2016.
  */
 public class NonHumanPlayer extends Player {

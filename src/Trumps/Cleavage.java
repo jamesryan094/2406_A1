@@ -1,17 +1,15 @@
 package Trumps;
 
-import Cards.MineralCard;
 
 /**
  * Created by james on 14/09/2016.
- * Take cleavage String parsed from PLIST and assign corresponding Enumeration.
+ * Take cleavage attribute value as String and assign corresponding Enumeration.
  */
 public class Cleavage extends TrumpCategory{
     private enum CLEAVAGE{NONE, POOR_NONE, POOR1, POOR2, GOOD1, GOOD1_POOR1,
     GOOD2, GOOD3, PERFECT1, PERFECT1_GOOD1, PERFECT1_GOOD2, PERFECT2_GOOD1,
     PERFECT3, PERFECT4, PERFECT6, ERROR}
     private CLEAVAGE value;
-//    private String asStr;
 
     public Cleavage(String cleavageString){
         asStr = cleavageString;
@@ -72,29 +70,11 @@ public class Cleavage extends TrumpCategory{
         return cValue;
     }
 
-//    public String toString(){
-//        return asStr;
-//    }
-
     public CLEAVAGE getValue(){
         return value;
     }
 
-//    public boolean canPlayOn(CLEAVAGE otherValue){
-//        if (this.value.compareTo(otherValue) == 1) {
-//            return true;
-//        }
-//        else{
-//            return false;
-//        }
-//    }
-
     public boolean isGreaterThan(Cleavage otherCleavage){
-        if((getValue().compareTo(otherCleavage.getValue())) > 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return (getValue().compareTo(otherCleavage.getValue())) > 0;
     }
 }

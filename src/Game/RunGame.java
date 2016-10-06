@@ -1,4 +1,5 @@
 package Game;
+
 import Cards.Card;
 import Player.Player;
 
@@ -7,144 +8,143 @@ import java.util.Scanner;
 
 /**
  * Acts as conduit between player and system by taking input and print output, controls flow of game.
+ * Instantiates Game object then manipulates attributes based on actions of human and nonHuman players.
+ * Establishes rules of the game
+ * Error checks input from user and provides output for user.
  *
  * Created by james on 6/09/2016.
  */
 public class RunGame {
-    static String MENU_MESSAGE = "MINERAL SUPER TRUMPS" +
+
+    private static String MENU_MESSAGE = "MINERAL SUPER TRUMPS" +
             "\n--------------------" +
             "\n(P)lay" +
             "\n(I)nstructions" +
             "\n(T)rump Hierarchies" +
             "\n(Q)uit" +
             "\n>>>";
-
-    static Scanner keys = new Scanner(System.in);
-    static final String TURN_MENU_MESSAGE = "(0)Inspect Hand\n(1)Play Card\n(2)Combo\n(3)Pass";
+    private static Scanner keys = new Scanner(System.in);
+    private static final String TURN_MENU_MESSAGE = "(0)Inspect Hand\n(1)Play Card\n(2)Combo\n(3)Pass";
 
     public static void main(String[] args) {
         System.out.print(MENU_MESSAGE);
         String menuChoice = getValidMenuChoice();
         while (!menuChoice.equals("Q")) {
-            if(menuChoice.equals("I")){
-                printInstructions();
-            }
-            else if(menuChoice.equals("T")){
-                printTrumpHierarchies();
-            }
-            else if (menuChoice.equals("P")) {
-                Game newGame = prepareNewGame();
-                System.out.println("Ready to Start! Have Fun!\n");
-                while (!newGame.isWon()) {
-                    Player currentPlayer = newGame.getCurrentPlayer();
-                    //if they haven't won
-                    if (!newGame.getWinners().contains(currentPlayer)) {
-                        int turnChoice;
+            switch (menuChoice) {
+                case "I":
+                    printInstructions();
+                    break;
+                case "T":
+                    printTrumpHierarchies();
+                    break;
+                case "P":
+                    Game newGame = prepareNewGame();
+                    System.out.println("Ready to Start! Have Fun!\n");
+                    while (!newGame.isWon()) {
+                        Player currentPlayer = newGame.getCurrentPlayer();
+                        //if they haven't won
+                        if (!newGame.getWinners().contains(currentPlayer)) {
+                            int turnChoice;
 //                    If the current player has not passed
-                        if(!currentPlayer.getHasPassed()){
-                            boolean isNewRound = newGame.isNewRound();
-                            if (isNewRound) {
-    //                        if everyone passes: reset round, set player to round winner.
-                                newGame.resetRound();
-                                System.out.println("\nRound Won By: " + currentPlayer.getName() + "! Good Job!\n\nRound Reset!\n");
-                            }
-                            System.out.println("\nPress Enter to Continue >>>");
-                            keys.nextLine();
-                            System.out.println("Current Player: " + currentPlayer.getName() + "\n--------------------");
-                            if (!newGame.isHumanUp()) {
+                            if (!currentPlayer.getHasPassed()) {
+                                boolean isNewRound = newGame.isNewRound();
+                                if (isNewRound) {
+                                    //                        if everyone passes: reset round, set player to round winner.
+                                    newGame.resetRound();
+                                    System.out.println("\nRound Won By: " + currentPlayer.getName() + "! Good Job!\n\nRound Reset!\n");
+                                }
+                                System.out.println("\nPress Enter to Continue >>>");
+                                keys.nextLine();
+                                System.out.println("Current Player: " + currentPlayer.getName() + "\n--------------------");
+                                if (!newGame.isHumanUp()) {
 //                                Robot is up:
-                                if (isNewRound || newGame.isFirstTurn()) {
-                                    newGame.playFirstTurn();
-                                    displayTurnResults(newGame);
-                                } else {
-                                    if (currentPlayer.hasPlayableCards(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())) {
-                                        newGame.playTurn();
-                                       displayTurnResults(newGame);
+                                    if (isNewRound || newGame.isFirstTurn()) {
+                                        newGame.playFirstTurn();
+                                        displayTurnResults(newGame);
                                     } else {
-                                        System.out.println(newGame.getCurrentPlayer().getName() + " chose to Pass");
-                                        newGame.passTurn();
-                                        newGame.incrementNumPasses();
-                                    }
-                                }
-                                boolean comboPlayed = newGame.comboPlayed();
-                                if (newGame.checkWinner()){
-                                    newGame.updateWinners();
-                                    System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
-                                }
-                                if (!comboPlayed) {
-                                    newGame.incrementCurrentPlayer();
-                                }
-                                else {
-                                    System.out.println(currentPlayer.getName() + " played the COMBO! They win the round and get to go again.");
-                                    newGame.playFirstTurn();
-                                    newGame.resetComboPlayed();
-                                }
-                            }
-                            else {
-                                while (newGame.isHumanUp()) {
-                                    boolean comboPlayed = newGame.comboPlayed();
-//                                    turnChoice = getValidTurnChoice();
-                                    turnChoice = getNumInRange(0, 3, TURN_MENU_MESSAGE);
-                                    switch (turnChoice) {
-                                        case 0:
-                                            System.out.println("Inspect Hand: ");
-                                            displayHandMenu(currentPlayer.getHand(), turnChoice, newGame, isNewRound, comboPlayed);
-                                            break;
-                                        case 1:
-                                            System.out.println("Play Card: ");
-                                            displayHandMenu(currentPlayer.getHand(), turnChoice, newGame, isNewRound, comboPlayed);
-                                            if (newGame.getHumanPlayedCard()) {
-                                                displayTurnResults(newGame);
-                                                newGame.resetHumanPlayedCard();
-                                                if (newGame.checkWinner()){
-                                                    newGame.updateWinners();
-                                                    System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
-                                                }
-                                                newGame.incrementCurrentPlayer();
-                                            }
-                                            break;
-                                        case 2:
-                                            if(currentPlayer.hasCombo()){
-                                                if (newGame.isFirstTurn()){
-                                                    System.out.println("Can't play combo on first turn.");
-                                                }
-                                                else {
-                                                    newGame.playCombo();
-                                                    System.out.println(currentPlayer.getName() + " played the COMBO! They win the round and get to go again.");
-                                                    newGame.resetComboPlayed();
-                                                    if (newGame.checkWinner()){
-                                                        newGame.updateWinners();
-                                                        System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
-                                                        newGame.incrementCurrentPlayer();
-                                                    }
-                                                }
-                                            }
-                                            else {
-                                                System.out.println("You do not have the combo.");
-                                            }
-                                            break;
-                                        case 3:
+                                        if (currentPlayer.hasPlayableCards(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())) {
+                                            newGame.playTurn();
+                                            displayTurnResults(newGame);
+                                        } else {
                                             System.out.println(newGame.getCurrentPlayer().getName() + " chose to Pass");
                                             newGame.passTurn();
                                             newGame.incrementNumPasses();
-                                            newGame.incrementCurrentPlayer();
-                                            break;
+                                        }
+                                    }
+                                    boolean comboPlayed = newGame.comboPlayed();
+                                    if (newGame.checkWinner()) {
+                                        newGame.updateWinners();
+                                        System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
+                                    }
+                                    if (!comboPlayed) {
+                                        newGame.incrementCurrentPlayer();
+                                    } else {
+                                        System.out.println(currentPlayer.getName() + " played the COMBO! They win the round and get to go again.");
+                                        newGame.playFirstTurn();
+                                        newGame.resetComboPlayed();
+                                    }
+                                } else {
+                                    while (newGame.isHumanUp()) {
+                                        boolean comboPlayed = newGame.comboPlayed();
+//                                    turnChoice = getValidTurnChoice();
+                                        turnChoice = getNumInRange(0, 3, TURN_MENU_MESSAGE);
+                                        switch (turnChoice) {
+                                            case 0:
+                                                System.out.println("Inspect Hand: ");
+                                                displayHandMenu(currentPlayer.getHand(), turnChoice, newGame, isNewRound, comboPlayed);
+                                                break;
+                                            case 1:
+                                                System.out.println("Play Card: ");
+                                                displayHandMenu(currentPlayer.getHand(), turnChoice, newGame, isNewRound, comboPlayed);
+                                                if (newGame.getHumanPlayedCard()) {
+                                                    displayTurnResults(newGame);
+                                                    newGame.resetHumanPlayedCard();
+                                                    if (newGame.checkWinner()) {
+                                                        newGame.updateWinners();
+                                                        System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
+                                                    }
+                                                    newGame.incrementCurrentPlayer();
+                                                }
+                                                break;
+                                            case 2:
+                                                if (currentPlayer.hasCombo()) {
+                                                    if (newGame.isFirstTurn()) {
+                                                        System.out.println("Can't play combo on first turn.");
+                                                    } else {
+                                                        newGame.playCombo();
+                                                        System.out.println(currentPlayer.getName() + " played the COMBO! They win the round and get to go again.");
+                                                        newGame.resetComboPlayed();
+                                                        if (newGame.checkWinner()) {
+                                                            newGame.updateWinners();
+                                                            System.out.println("Congratulations " + newGame.getCurrentPlayer().getName() + "! You have been added to the winner list!");
+                                                            newGame.incrementCurrentPlayer();
+                                                        }
+                                                    }
+                                                } else {
+                                                    System.out.println("You do not have the combo.");
+                                                }
+                                                break;
+                                            case 3:
+                                                System.out.println(newGame.getCurrentPlayer().getName() + " chose to Pass");
+                                                newGame.passTurn();
+                                                newGame.incrementNumPasses();
+                                                newGame.incrementCurrentPlayer();
+                                                break;
+                                        }
                                     }
                                 }
+                            } else {
+                                System.out.println('\n' + currentPlayer.getName() + " is out for the round.");
+                                newGame.incrementCurrentPlayer();
                             }
-                        }
-                        else{
-                            System.out.println('\n' + currentPlayer.getName() + " is out for the round.");
+                            newGame.setFirstTurn(false);
+                        } else {
+                            System.out.println('\n' + currentPlayer.getName() + " already won!");
                             newGame.incrementCurrentPlayer();
                         }
-                        newGame.setFirstTurn(false);
                     }
-                    else {
-                        System.out.println('\n' + currentPlayer.getName() + " already won!");
-                        newGame.incrementCurrentPlayer();
-                    }
-                }
-                System.out.println("Game completed! Well done everyone!\n");
+                    System.out.println("Game completed! Well done everyone!\n");
+                    break;
             }
             System.out.print(MENU_MESSAGE);
             menuChoice = getValidMenuChoice();
@@ -160,6 +160,11 @@ public class RunGame {
         System.out.println(Game.INSTRUCTIONS);
     }
 
+    /**
+     * Prints the currently selected trump category and the corresponding trump value
+     * of the most recently played card.
+     * @param newGame the game object that stores the last played card.
+     */
     private static void displayTurnResults(Game newGame) {
         Player currentPlayer = newGame.getCurrentPlayer();
         System.out.println(currentPlayer.getName() + " Played: " + newGame.getLastPlayedCard().getTitle());
@@ -173,8 +178,12 @@ public class RunGame {
         }
     }
 
-
-    static Game prepareNewGame() {
+    /**
+     * Instantiates a game object based on information taken as input and prepares the game for
+     * playing by setting setting a dealer, dealing cards to each player, and setting a current, first player.
+     * @return the prepared game object
+     */
+    private static Game prepareNewGame() {
         String numPlayerPrompt = "How many players (3-5)?";
         int numPlayersChoice = getNumInRange(Game.MIN_PLAYERS, Game.MAX_PLAYERS, numPlayerPrompt);
         String userName = getValidUserName();
@@ -190,6 +199,10 @@ public class RunGame {
         return newGame;
     }
 
+    /**
+     * Prompts user for username. Username is valid if input is not blank or not exclusively whitespace.
+     * @return a valid, non blank player username.
+     */
     private static String getValidUserName() {
         Scanner keys = new Scanner(System.in);
         System.out.println("Enter Username: ");
@@ -207,43 +220,17 @@ public class RunGame {
     private static void printUserCards(Game newGame) {
         System.out.println("Your hand contains: ");
         ArrayList<Card> hand = newGame.getPlayers()[0].getHand();
-        for (int i = 0; i < hand.size(); ++i){
-            System.out.println(hand.get(i).getTitle());
+        for (Card aHand : hand) {
+            System.out.println(aHand.getTitle());
         }
         System.out.println("");
     }
 
-
-    public static int getValidNumPlayers(){
-        Scanner keys = new Scanner(System.in);
-        String potentialNum;
-
-        System.out.println("How many players (3-5)?");
-        potentialNum = keys.nextLine();
-
-        int num = 0;
-        boolean isValid = false;
-        while (!isValid) {
-            try {
-                num = Integer.parseInt(potentialNum);
-
-                if ((num < Game.MIN_PLAYERS) || (num > Game.MAX_PLAYERS)){
-                    System.out.println("Invalid choice, try again");
-                    System.out.println("How many players (3-5)?");
-                    potentialNum = keys.nextLine();
-                } else{
-                    isValid = true;
-                }
-            } catch (NumberFormatException numE) {
-                System.out.println("Please enter a valid number");
-                System.out.println("How many players (3-5)?");
-                potentialNum = keys.nextLine();
-            }
-
-        }
-        return num;
-    }
-
+    /**
+     * Prompts user for Menu Choice. Menu Choice is valid if input is one of 4 predetermined characters.
+     * Will constantly reprompt the user until a valid character is entered (not case sensitive).
+     * @return a valid menu choice.
+     */
     private static String getValidMenuChoice() {
         Boolean isValid = false;
         Scanner keys = new Scanner(System.in);
@@ -275,26 +262,15 @@ public class RunGame {
 
     }
 
-    static void displayTurnMenu(){
-        System.out.println(TURN_MENU_MESSAGE);
-    }
-
-    static int getValidTurnChoice(){
-        int turnMenuChoice;
-        Scanner keys = new Scanner(System.in);
-        displayTurnMenu();
-        turnMenuChoice = keys.nextInt();
-        keys.nextLine();
-        while (turnMenuChoice != 0 && turnMenuChoice!= 1 && turnMenuChoice != 2 && turnMenuChoice != 3){
-            System.out.println("invalid choice, please try again");
-            displayTurnMenu();
-            turnMenuChoice = keys.nextInt();
-            keys.nextLine();
-        }
-        return turnMenuChoice;
-    }
-
-    static int getNumInRange(int min, int max, String menuPrompt){
+    /**
+     * Checks input when user is to select a whole integer value in a range.
+     * Returns an integer representing a menu choice.
+     * @param min the lower boundary of the acceptable range of choices.
+     * @param max the upper boundary of the acceptable range of choices.
+     * @param menuPrompt argument to display the appropriate message when prompting/reprompti
+     * @return a valid menu choice as int.
+     */
+    private static int getNumInRange(int min, int max, String menuPrompt){
         Scanner keys = new Scanner(System.in);
         String potentialNum;
 
@@ -325,9 +301,19 @@ public class RunGame {
         return num;
     }
 
-    public static void displayHandMenu(ArrayList<Card> userHand, int menuChoice, Game newGame, boolean isNewRound, boolean comboPlayed){
+    /**
+     * Provides main functionality for user when playing their turn.
+     * A list of options are displayed to user. From here user can choose to
+     * inspect card details, play a card, play the combo or pass.
+     * @param userHand the human players current hand of cards as an ArrayList cast to Card objects.
+     * @param menuChoice the intention of the user. HandMenu will decide how to respond to a card choice
+     *                   based on the previous menu choice (inspect or play) @see turnMenu
+     * @param newGame the game object.
+     * @param isNewRound determines weather human player is to pick a trump category after playing a mineral card or not
+     * @param comboPlayed allows a human to play another card after playing a combo.
+     */
+    private static void displayHandMenu(ArrayList<Card> userHand, int menuChoice, Game newGame, boolean isNewRound, boolean comboPlayed){
         int handMenuChoice;
-        Scanner keys = new Scanner(System.in);
 
 
         printCards(userHand);
@@ -426,39 +412,24 @@ public class RunGame {
         }
     }
 
+    /**
+     * Prompts user for trump category choice as int.
+     * Validates input with getNumInRange() and returns a valid trump choice.
+     * @return a string representing the trump value selected to play.
+     */
     private static String getTrumpCategoryFromUser() {
-        Scanner keys = new Scanner(System.in);
         int trumpChoice;
         String TRUMP_CATEGORY_MESSAGE = "Select a Trump Category: \n(1) Cleavage\n(2) Crustal Abundance\n(3) Economic Value" +
                 "\n(4) Hardness\n(5) Specific Gravity";
         String[] trumpStrings = {"Cleavage", "Crustal Abundance", "Economic Value", "Hardness", "Specific Gravity"};
-//        System.out.println(TRUMP_CATEGORY_MESSAGE);
-//        trumpChoice = keys.nextInt();
-//        keys.nextLine();
         trumpChoice = getNumInRange(1, 5, TRUMP_CATEGORY_MESSAGE);
         return trumpStrings[trumpChoice-1];
-
-
-
     }
 
-
-
-    public static void printCards(ArrayList<Card> userHand){
+    private static void printCards(ArrayList<Card> userHand){
         for(int i=0; i < userHand.size(); ++i){
             System.out.println("("+ (i+1) + ") " + userHand.get(i).getTitle());
         }
         System.out.println("(0) Back");
     }
-
-//    public static String getCardNames(ArrayList<Card> userHand){
-//        StringBuffer handAsString;
-//        for(int i=0; i < userHand.size(); ++i){
-//            handAsString += "("+ (i+1) + ") " + userHand.get(i).getTitle());
-//        }
-//    }
-
-
-
-
-}
+    }

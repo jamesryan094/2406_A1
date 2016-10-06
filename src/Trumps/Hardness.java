@@ -15,11 +15,6 @@ public class Hardness extends  TrumpCategory {
     }
 
     public boolean isGreaterThan(Hardness otherHardness){
-        if (getValue() > otherHardness.getValue()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return getValue() > otherHardness.getValue();
     }
 }

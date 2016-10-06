@@ -5,12 +5,12 @@ package Trumps;
  * Parent class of trump category classes
  * Child Classes: (Trumps.Cleavage, Trumps.CrustalAbundance, Trumps.EconomicValue, Trumps.Hardness, Trumps.SpecificGravity)
  */
-public class TrumpCategory {
-    public enum CATEGORY {CLEAVAGE, CRUSTAL_ABUNDANCE, ECONOMIC_VALUE, HARDNESS, SPECIFIC_GRAVITY, ERROR}
-    String[] trumpStrings = {"Cleavage", "Crustal Abundance", "Economic Value", "Hardness", "Specific Gravity"};
-    protected String asStr;
+class TrumpCategory {
+//    public enum CATEGORY {CLEAVAGE, CRUSTAL_ABUNDANCE, ECONOMIC_VALUE, HARDNESS, SPECIFIC_GRAVITY, ERROR}
+//    String[] trumpStrings = {"Cleavage", "Crustal Abundance", "Economic Value", "Hardness", "Specific Gravity"};
+    String asStr;
 
-    protected double parseRange(String rangeString){
+    double parseRange(String rangeString){
         String rangeStringStripped = rangeString.replaceAll("\\s+", "");
         if (rangeStringStripped.contains("-")){
             int upperRangeIndex = rangeStringStripped.indexOf('-') + 1;

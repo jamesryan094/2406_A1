@@ -16,15 +16,7 @@ import java.util.Random;
  */
 public class TestingSpace {
     public static void main(String[] args) {
-//        Random rn = new Random();
-//        int trumpChoiceNum;
-//        trumpChoiceNum = rn.nextInt(6);
-//        System.out.println(trumpChoiceNum);
-//        for (int i=0; i<100; ++i){
-//            trumpChoiceNum = rn.nextInt(6);
-//            System.out.println(trumpChoiceNum);
-//        }
-
+//        Testing the result of .size() method on empty Player cast ArrayList.
         ArrayList<Player> player = new ArrayList<>();
         System.out.println(player.size());
 

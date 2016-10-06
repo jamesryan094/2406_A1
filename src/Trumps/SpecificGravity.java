@@ -17,12 +17,7 @@ public class SpecificGravity extends TrumpCategory {
     }
 
     public boolean isGreaterThan(SpecificGravity otherSpecificGravity){
-        if (getValue() > otherSpecificGravity.getValue()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return getValue() > otherSpecificGravity.getValue();
     }
 
 }

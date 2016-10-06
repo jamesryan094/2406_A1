@@ -4,6 +4,7 @@ import Cards.Card;
 import Deck.Deck;
 
 /**
+ *
  * Created by james on 19/09/2016.
  */
 public class HumanPlayer extends Player{

@@ -4,34 +4,35 @@ import java.util.ArrayList;
 import Trumps.*;
 
 /**
+ * One of two types of playable cards in the game.
+ * Groups information on a particular mineral and store playable values in a comparable form.
  * Created by james on 6/09/2016.
- *
  */
 public class MineralCard extends Card{
-
 
     private String chemistry, classification,
             crystalSystem, occurrence;
 
-//    private ArrayList occurrence = new ArrayList();
-
-//  Trump Categories
+    //  Trump Categories
     private Cleavage cleavage;
     private CrustalAbundance crustalAbundance;
     private EconomicValue economicValue;
     private Hardness hardness;
     private SpecificGravity specificGravity;
 
-
+    /**
+     * Takes information for every attribute from the passed in ArrayList,
+     * stores the non playable information as strings,
+     * Passes playable values to respective class constructors to store as Trump objects.
+     * @see Trumps
+     * @param cardAttributes a String cast ArrayList holding all of a mineral card's information
+     */
     public MineralCard(ArrayList<String> cardAttributes) {
         super(cardAttributes);
         chemistry = cardAttributes.get(4);
         classification = cardAttributes.get(5);
         crystalSystem = cardAttributes.get(6);
         occurrence = cardAttributes.get(7);
-//        for (int x = 0; x < occurrenceList.size(); ++x) {
-//            occurrence.add(occurrenceList.get(x));
-//        }
         hardness = new Hardness(cardAttributes.get(8));
         specificGravity = new SpecificGravity(cardAttributes.get(9));
         cleavage = new Cleavage(cardAttributes.get(10));
@@ -39,21 +40,13 @@ public class MineralCard extends Card{
         economicValue = new EconomicValue(cardAttributes.get(12));
     }
 
-    public void printAttributes(){
-        super.printAttributes();
-        System.out.println("Chemistry: " + chemistry +
-                "\nClassification: " + classification +
-                "\nCrystal System: " + crystalSystem +
-                "\nOccurrence: " + occurrence +
-                "\nHardness: " + hardness.toString() +
-                "\nSpecific Gravity: " + specificGravity.toString() +
-                "\nCleavage: " + cleavage +
-                "\nCrustal Abundance: " + crustalAbundance +
-                "\nEconomic Value: " + economicValue.toString() +
-                "\n--------------------");
-    }
-
-
+    /**
+     * Determines the current trump category in play and
+     * compares card's own value of that category, with the current card in play.
+     * @param otherCard The current card in play.
+     * @param currentTrumpCategory The current trump category in play.
+     * @return true if this card has a higher than the current card in play, or true if the last card played was a trump
+     */
     public boolean canPlayOn(Card otherCard, String currentTrumpCategory){
         if (otherCard.getCardType().equals("trump")){
             return true;
@@ -102,35 +95,26 @@ public class MineralCard extends Card{
         return false;
     }
 
-
-
-    public TrumpCategory getCurrentTrumpValue(String currentTrumpCategory, Card cardInPlay){
-        String[] trumpStrings = {"Cleavage", "Crustal Abundance", "Economic Value", "Hardness", "Specific Gravity"};
-        TrumpCategory valueAsString;
-        switch (currentTrumpCategory){
-            case "Cleavage":
-                valueAsString = this.cleavage;
-                break;
-            case "Crustal Abundance":
-                valueAsString = this.crustalAbundance;
-                break;
-            case "Economic Value":
-                valueAsString = this.economicValue;
-                break;
-            case "Hardness":
-                valueAsString = this.hardness;
-                break;
-            case "Specific Gravity":
-                valueAsString = this.specificGravity;
-                break;
-            default:
-                System.out.println("Error");
-                valueAsString = this.cleavage;
-                break;
-        }
-        return valueAsString;
+    public void printAttributes(){
+        super.printAttributes();
+        System.out.println("Chemistry: " + chemistry +
+                "\nClassification: " + classification +
+                "\nCrystal System: " + crystalSystem +
+                "\nOccurrence: " + occurrence +
+                "\nHardness: " + hardness.toString() +
+                "\nSpecific Gravity: " + specificGravity.toString() +
+                "\nCleavage: " + cleavage +
+                "\nCrustal Abundance: " + crustalAbundance +
+                "\nEconomic Value: " + economicValue.toString() +
+                "\n--------------------");
     }
 
+    //    ***Getters***
+    private Hardness getHardness(){return hardness;}
+    private Cleavage getCleavage() {return cleavage;}
+    private EconomicValue getEconomicValue(){return economicValue;}
+    private SpecificGravity getSpecificGravity(){return specificGravity;}
+    private CrustalAbundance getCrustalAbundance(){return crustalAbundance;}
 
     public String getCurrentTrumpValueAsString(String currentTrumpCategory){
         String valueAsString;
@@ -156,14 +140,5 @@ public class MineralCard extends Card{
         }
         return valueAsString;
     }
-
-
-
-    //    ***Getters***
-    public Hardness getHardness(){return hardness;}
-    public Cleavage getCleavage() {return cleavage;}
-    public EconomicValue getEconomicValue(){return economicValue;}
-    public SpecificGravity getSpecificGravity(){return specificGravity;}
-    public CrustalAbundance getCrustalAbundance(){return crustalAbundance;}
 
 }
