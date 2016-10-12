@@ -6,11 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /** Created by james on 9/10/2016. */
-class InstructionsMenu implements ActionListener {
+class ReturnToMenu implements ActionListener {
   private JPanel mineralSTContainer;
   private CardLayout mineralSTLayout;
 
-  InstructionsMenu(JPanel mineralST) {
+  ReturnToMenu(JPanel mineralST) {
     mineralSTContainer = mineralST;
     mineralSTLayout = (CardLayout) mineralST.getLayout();
   }

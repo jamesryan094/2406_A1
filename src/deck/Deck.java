@@ -1,9 +1,9 @@
-package Deck;
+package deck;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import Cards.Card;
+import cards.Card;
 
 /**
  * ArrayList to store, shuffle and deal Cards. Card type objects.
@@ -60,30 +60,5 @@ public class Deck {
     return cards;
   }
 
-  //For testing the combo mechanic.
-  //    public Card getGeophys() {
-  //        int index = -1;
-  //        for (int i =0 ; i < cards.size(); ++i ) {
-  //            if (cards.get(i).getTitle().equals("The Geophysicist")){
-  //                index = i;
-  //            }
-  //        }
-  //        return cards.remove(index);
-  //    }
-  //
-  //    public Card getMagnetite() {
-  //        int index = -1;
-  //        for (int i =0 ; i < cards.size(); ++i ) {
-  //            if (cards.get(i).getTitle().equals("Magnetite")){
-  //                index = i;
-  //            }
-  //        }
-  //        return cards.remove(index);
-  //    }
-
-  //For testing cards in deck
-  //    public void displayCards(){
-  //        cards.forEach(Card::printAttributes);
-  //    }
 
 }

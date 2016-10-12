@@ -1,7 +1,7 @@
-package Cards;
+package cards;
 
 import java.util.ArrayList;
-import Trumps.*;
+import trumps.*;
 
 /**
  * One of two types of playable cards in the game. Groups information on a particular mineral and
@@ -23,7 +23,7 @@ public class MineralCard extends Card {
    * information as strings, Passes playable values to respective class constructors to store as
    * Trump objects.
    *
-   * @see Trumps
+   * @see trumps
    * @param cardAttributes a String cast ArrayList holding all of a mineral card's information
    */
   public MineralCard(ArrayList<String> cardAttributes) {

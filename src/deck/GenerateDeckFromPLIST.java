@@ -1,4 +1,4 @@
-package Deck;
+package deck;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -13,9 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Cards.Card;
-import Cards.MineralCard;
-import Cards.TrumpCard;
+import cards.Card;
+import cards.MineralCard;
+import cards.TrumpCard;
 
 /** Class builds a Mineral Supertrump deck from file. Created by James on 23/08/2016. */
 public class GenerateDeckFromPLIST {
@@ -81,19 +81,13 @@ public class GenerateDeckFromPLIST {
           }
           if (valArray.size() == 13) {
             Card tempCard = new MineralCard(valArray);
-            //                        tempCard.printAttributes();
             deck.addToDeck(tempCard);
           } else {
             Card tempCard = new TrumpCard(valArray);
-            //                        tempCard.printAttributes();
             deck.addToDeck(tempCard);
           }
         }
       }
-      //            deck.displayCards();
-      //            deck.shuffle();
-      //            deck.displayCards();
-
     } catch (ParserConfigurationException | SAXException | IOException e) {
       e.printStackTrace();
     }
