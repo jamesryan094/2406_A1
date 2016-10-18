@@ -1,7 +1,7 @@
-package Player;
+package player;
 
-import Cards.Card;
-import Deck.Deck;
+import cards.Card;
+import deck.Deck;
 
 /**
  * Human players are little restriction on what they can try in a game however, have the same

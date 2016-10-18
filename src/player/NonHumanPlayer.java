@@ -1,7 +1,7 @@
-package Player;
+package player;
 
-import Cards.Card;
-import Deck.Deck;
+import cards.Card;
+import deck.Deck;
 import java.util.Random;
 
 /**

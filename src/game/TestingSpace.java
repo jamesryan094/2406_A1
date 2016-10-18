@@ -1,15 +1,10 @@
-package Game;//import Cards.Card;
+package game;//import Cards.Card;
 //import Cards.MineralCard;
 //import Deck.Deck;
 //import Deck.GenerateDeckFromPLIST;
-import Cards.*;
-import Deck.*;
-import Game.*;
-import Player.*;
-import Trumps.*;
+import player.*;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by james on 14/09/2016.

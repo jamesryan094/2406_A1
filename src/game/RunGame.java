@@ -1,7 +1,7 @@
-package Game;
+package game;
 
-import Cards.Card;
-import Player.Player;
+import cards.Card;
+import player.Player;
 
 import java.util.ArrayList;
 import java.util.Scanner;

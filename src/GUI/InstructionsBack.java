@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /** Created by james on 12/10/2016. */
-public class InstructionsBack implements ActionListener {
+class InstructionsBack implements ActionListener {
   private JPanel instructionsContainer;
   private CardLayout instructionsLayout;
 

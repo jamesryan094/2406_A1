@@ -1,13 +1,13 @@
-package Game;
+package game;
 
-import Cards.Card;
+import cards.Card;
 
-import Deck.Deck;
-import Deck.GenerateDeckFromPLIST;
+import deck.Deck;
+import deck.GenerateDeckFromPLIST;
 
-import Player.Player;
-import Player.HumanPlayer;
-import Player.NonHumanPlayer;
+import player.Player;
+import player.HumanPlayer;
+import player.NonHumanPlayer;
 
 import java.util.ArrayList;
 import java.util.Random;
