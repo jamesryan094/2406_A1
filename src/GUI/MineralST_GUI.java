@@ -44,6 +44,12 @@ public class MineralST_GUI {
   public JPanel testPanel;
   public JPanel playGame;
   public JPanel players;
+  public JPanel userControlPanel;
+  public JPanel userCards;
+  private JPanel controlPanelEast;
+  private JButton previosCard;
+  private JButton nextCard;
+  private JButton playCard;
   public JRadioButton[] numPlayersButtonGroup = {a3PlayersRadioButton, a4PlayersRadioButton, a5PlayersRadioButton};
 
   public MineralST_GUI() {
@@ -132,13 +138,21 @@ public class MineralST_GUI {
 //    prepareGameInputPanel.addContainerListener(new CheckButtonGroup(this));
     readyToPlayButton.addActionListener(new CheckReadytoPlay(this));
 //    readyToPlayButton.addActionListener(new TestEvent(MineralST, testPanel));
+
+
+    //PLAY GAME EVENT LISTENERS
+
+    previosCard.addActionListener(new PreviousCard(this));
+    nextCard.addActionListener(new NextCard(this));
   }
 
   public static void main(String[] args) {
     JFrame mineralST = new JFrame("Mineral Supertrumps!");
-    mineralST.setSize(700, 700);
+//    mineralST.setSize(700, 700);
+    mineralST.setExtendedState(JFrame.MAXIMIZED_BOTH);
     mineralST.setContentPane(new MineralST_GUI().MineralST);
     mineralST.setVisible(true);
     mineralST.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
   }
 }

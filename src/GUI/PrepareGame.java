@@ -1,10 +1,12 @@
 package GUI;
 
+import cards.Card;
 import game.Game;
 import player.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by james on 19/10/2016.
@@ -17,8 +19,10 @@ public class PrepareGame {
         JPanel mineralSTContainer = gui.MineralST;
         CardLayout mineralSTLayout = (CardLayout) mineralSTContainer.getLayout();
         Game newGame = new Game(numPlayers, userName);
+        newGame.assignDealer();
+        newGame.initialDeal();
         populatePlayers(gui, newGame);
-        generateDeck(gui);
+        generateHandIcons(gui, newGame);
         mineralSTLayout.show(mineralSTContainer, "playGameCard");
     }
 
@@ -35,8 +39,20 @@ public class PrepareGame {
         }
     }
 
-    private static void generateDeck(MineralST_GUI gui) {
-
+    private static void generateHandIcons(MineralST_GUI gui, Game newGame) {
+        //For each card in the human player's hand
+        ArrayList<Card> userHand = newGame.getPlayers()[0].getHand();
+        for(int i = 0; i < userHand.size();++i){
+            JPanel cardPanel = new JPanel();
+            JLabel cardLabel = new JLabel();
+//            cardLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
+//            cardLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+//            System.out.println("src/GUI/images/cards/" + userHand.get(i).getFileName());
+            ImageIcon cardIcon = new ImageIcon("src/GUI/images/cards/" + userHand.get(i).getFileName());
+            cardLabel.setIcon(cardIcon);
+            cardPanel.add(cardLabel);
+            gui.userCards.add(cardPanel);
+        }
     }
 
 }

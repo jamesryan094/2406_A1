@@ -41,4 +41,8 @@ public abstract class Card {
   public boolean isGeologist() {
     return title.equals("The Geologist");
   }
+
+  public String getFileName() {
+    return fileName;
+  }
 }

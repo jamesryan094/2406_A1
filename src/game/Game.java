@@ -136,7 +136,7 @@ public class Game {
    * Generates random number within range (0 - numPlayers, (inclusive)), assigns the player at this
    * index in Players array as the dealer for the game.
    */
-  void assignDealer() {
+  public void assignDealer() {
     Random rn = new Random();
     dealerIndex = rn.nextInt(numPlayers);
   }
@@ -147,7 +147,7 @@ public class Game {
    * determine who to deal to. Dealing involves removing the a Card from the game's deck attribute
    * and placing it in the appropriate Player's hand attribute.
    */
-  void initialDeal() {
+  public void initialDeal() {
     deck.removeRuleCards();
     deck.shuffle();
 
@@ -197,6 +197,9 @@ public class Game {
 
   public Player[] getPlayers() {
     return players;
+  }
+  public Deck getDeck(){
+    return this.deck;
   }
 
   boolean isWon() {
