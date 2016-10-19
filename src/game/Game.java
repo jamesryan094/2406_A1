@@ -19,7 +19,7 @@ import java.util.Random;
  *
  * <p>Created by james on 6/09/2016.
  */
-class Game {
+public class Game {
 
   static final int MIN_PLAYERS = 3;
   static final int MAX_PLAYERS = 5;
@@ -105,7 +105,7 @@ class Game {
    * @param num represent the desired number of players for the current game's party.
    * @param userName is used to identify the human player/alert the user to their being up.
    */
-  Game(int num, String userName) {
+  public Game(int num, String userName) {
     this.deck = GenerateDeckFromPLIST.buildDeck();
     numPlayers = num;
     players = generatePlayers(userName);
@@ -195,7 +195,7 @@ class Game {
     return players[dealerIndex];
   }
 
-  Player[] getPlayers() {
+  public Player[] getPlayers() {
     return players;
   }
 

@@ -42,13 +42,15 @@ public class MineralST_GUI {
   private JPanel prepareGameInputPanel;
   private JPanel testCard;
   public JPanel testPanel;
+  public JPanel playGame;
+  public JPanel players;
   public JRadioButton[] numPlayersButtonGroup = {a3PlayersRadioButton, a4PlayersRadioButton, a5PlayersRadioButton};
 
   public MineralST_GUI() {
 
         //MENU SCREEN EVENT LISTENERS
     //For selecting Play Game from Main menu
-    buttonPlayGame.addActionListener(new PrepareGame(MineralST));
+    buttonPlayGame.addActionListener(new PreGameScreen(MineralST));
 
     //For selecting Quit from the main menu
     buttonQuit.addActionListener(
