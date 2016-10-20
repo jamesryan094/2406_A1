@@ -48,14 +48,16 @@ public class MineralST_GUI {
   public JPanel players;
   public JPanel userControlPanel;
   public JPanel userCards;
-  private JPanel controlPanelEast;
+  public JPanel lastPlayedCard;
   private JButton previousCard;
   private JButton nextCard;
-  private JButton playCard;
+  public JButton playCardButton;
   public JLabel currentPlayerLabel;
-  private JButton playComboButton;
-  private JButton passButton;
-  private JButton continueButton;
+  public JButton playComboButton;
+  public JButton passButton;
+  public JButton continueButton;
+  public JLabel currentCategoryLabel;
+  public JLabel currentValueLabel;
   public JRadioButton[] numPlayersButtonGroup = {a3PlayersRadioButton, a4PlayersRadioButton, a5PlayersRadioButton};
 
   public MineralST_GUI() {
@@ -145,14 +147,15 @@ public class MineralST_GUI {
 
     previousCard.addActionListener(new PreviousCard(this));
     nextCard.addActionListener(new NextCard(this));
-//    playCard.addActionListener(new );
+//    playCardButton.addActionListener(new );
     continueButton.addActionListener(new ContinuePressed(this));
+    passButton.addActionListener(new HumanPassed(this));
   }
 
   public static void main(String[] args) {
     JFrame mineralST = new JFrame("Mineral Supertrumps!");
-//    mineralST.setSize(700, 700);
-    mineralST.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    mineralST.setBounds(200, 100, 750, 500);
+//    mineralST.setExtendedState(JFrame.MAXIMIZED_BOTH);
     mineralST.setContentPane(new MineralST_GUI().MineralST);
     mineralST.setVisible(true);
     mineralST.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

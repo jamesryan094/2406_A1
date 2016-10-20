@@ -91,7 +91,7 @@ public class Game {
   private int numPlayers;
   private static int dealerIndex;
 
-  private boolean isFirstTurn;
+  public boolean isFirstTurn;
   private boolean humanPlayedCard = false;
   private boolean comboPlayed;
   private boolean isWon;
@@ -230,19 +230,19 @@ public class Game {
     humanPlayedCard = false;
   }
 
-  Card getLastPlayedCard() {
+  public Card getLastPlayedCard() {
     return lastPlayedCard;
   }
 
-  void setLastPlayedAttributes(Card lastPlayedCard) {
+  public void setLastPlayedAttributes(Card lastPlayedCard) {
     this.lastPlayedCard = lastPlayedCard;
   }
 
-  String getCurrentTrumpCategory() {
+  public String getCurrentTrumpCategory() {
     return currentTrumpCategory;
   }
 
-  private String getTrumpChoiceFromTrumpCard(String trumpTitle) {
+  public String getTrumpChoiceFromTrumpCard(String trumpTitle) {
     String trumpChoice;
     switch (trumpTitle) {
       case "The Miner":
@@ -268,7 +268,7 @@ public class Game {
     return trumpChoice;
   }
 
-  private void setCurrentTrumpCategory(String currentTrumpCategory) {
+  public void setCurrentTrumpCategory(String currentTrumpCategory) {
     this.currentTrumpCategory = currentTrumpCategory;
   }
 
@@ -369,7 +369,7 @@ public class Game {
   /**
    * Increments the current player and has player draw a card from deck if the deck is not empty.
    */
-  void passTurn() {
+  public void passTurn() {
     currentPlayer.setHasPassed(true);
     if ((deck.getCards().size() != 0) && currentPlayer.getHand().size() != 0) {
       currentPlayer.drawCard(deck);
@@ -380,12 +380,12 @@ public class Game {
     numPasses = 0;
   }
 
-  void incrementNumPasses() {
+  public void incrementNumPasses() {
     numPasses += 1;
   }
 
   /** Resets the number of passes and replaces players who hav passes and not yet won */
-  void resetRound() {
+  public void resetRound() {
     resetNumPasses();
     for (Player player : players) {
       if (!winners.contains(player)) {
@@ -395,7 +395,7 @@ public class Game {
   }
 
   /** Replaces the players in the round after someone plays a Supertrump card */
-  void resetRoundTrump() {
+  public void resetRoundTrump() {
     resetNumPasses();
     for (Player player : players) {
       player.setHasPassed(false);
@@ -424,11 +424,11 @@ public class Game {
     isWon = true;
   }
 
-  boolean isFirstTurn() {
+  public boolean isFirstTurn() {
     return isFirstTurn;
   }
 
-  void setFirstTurn(boolean firstTurn) {
+  public void setFirstTurn(boolean firstTurn) {
     isFirstTurn = firstTurn;
   }
 
@@ -438,7 +438,7 @@ public class Game {
    *
    * @return true if number of passes is one less than number of players.
    */
-  boolean isNewRound() {
+  public boolean isNewRound() {
     return (numPasses == numPlayers - 1 - winners.size());
   }
 
@@ -446,7 +446,7 @@ public class Game {
    * Calls appropriate Player subclass methods for removing the two combo cards from player's hand.
    * Resets the round, as per the game rules, to have combo player go again.
    */
-  void playCombo() {
+  public void playCombo() {
     this.lastPlayedCard = currentPlayer.playCombo();
     comboPlayed = true;
     resetRound();
@@ -456,7 +456,7 @@ public class Game {
     return comboPlayed;
   }
 
-  void resetComboPlayed() {
+  public void resetComboPlayed() {
     comboPlayed = false;
   }
 }

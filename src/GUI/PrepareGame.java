@@ -21,6 +21,8 @@ public class PrepareGame {
         Game newGame = new Game(numPlayers, userName);
         newGame.assignDealer();
         newGame.initialDeal();
+        newGame.setFirstTurn(true);
+        newGame.resetRound();
         populatePlayers(gui, newGame);
         generateHandIcons(gui, newGame);
 //        newGame.incrementCurrentPlayer();

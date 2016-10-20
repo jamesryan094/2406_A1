@@ -1,6 +1,7 @@
 package GUI;
 
 import game.Game;
+import player.Player;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,17 @@ public class ContinuePressed implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Game.currentGame.incrementCurrentPlayer();
-        gui.currentPlayerLabel.setText("Current Player: " + Game.currentGame.getCurrentPlayer().getName());
+        Game newGame = Game.currentGame;
+        newGame.incrementCurrentPlayer();
+        Player currentPlayer = newGame.getCurrentPlayer();
+        gui.currentPlayerLabel.setText("Current Player: " + newGame.getCurrentPlayer().getName());
+        if (!currentPlayer.isHuman()){
+            PlayRobotTurn.playTurn(gui);
+        }
+        else{
+            PlayHumanTurn.enableUserButtons(gui);
+//            PlayHumanTurn.playTurn(gui);
+        }
+
     }
 }
