@@ -43,6 +43,7 @@ public class CheckReadytoPlay implements ActionListener {
 
 //            showPlayScreen();
             PrepareGame.buildMineralSTGame(gui, numPlayers, gui.usernameTextField.getText());
+//            return newGame;
         }
         else{
             final JPanel panel = new JPanel();

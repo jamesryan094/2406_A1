@@ -23,7 +23,10 @@ public class PrepareGame {
         newGame.initialDeal();
         populatePlayers(gui, newGame);
         generateHandIcons(gui, newGame);
+//        newGame.incrementCurrentPlayer();
+        gui.currentPlayerLabel.setText("Dealer: " + newGame.getCurrentPlayer().getName());
         mineralSTLayout.show(mineralSTContainer, "playGameCard");
+//        return newGame;
     }
 
     private static void populatePlayers(MineralST_GUI gui, Game newGame) {

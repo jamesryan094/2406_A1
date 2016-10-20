@@ -96,6 +96,8 @@ public class Game {
   private boolean comboPlayed;
   private boolean isWon;
 
+  public static Game currentGame;
+
   /**
    * Game constructor takes the desired number of players for the game, as well as a User's
    * username, and creates the appropriate number of human and nonHuman players. The userName is
@@ -113,6 +115,7 @@ public class Game {
     numPasses = 0;
     isFirstTurn = true;
     comboPlayed = false;
+    currentGame = this;
   }
 
   /**
@@ -177,7 +180,7 @@ public class Game {
    *
    * @return currentPlayer; the player who is to play the current turn.
    */
-  Player incrementCurrentPlayer() {
+  public Player incrementCurrentPlayer() {
     int currentPlayerId = currentPlayer.getId();
     if (currentPlayerId == players.length - 1) {
       currentPlayer = players[0];
@@ -187,7 +190,7 @@ public class Game {
     return currentPlayer;
   }
 
-  Player getCurrentPlayer() {
+  public Player getCurrentPlayer() {
     return currentPlayer;
   }
 

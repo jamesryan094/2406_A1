@@ -1,5 +1,7 @@
 package GUI;
 
+import game.Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -47,9 +49,13 @@ public class MineralST_GUI {
   public JPanel userControlPanel;
   public JPanel userCards;
   private JPanel controlPanelEast;
-  private JButton previosCard;
+  private JButton previousCard;
   private JButton nextCard;
   private JButton playCard;
+  public JLabel currentPlayerLabel;
+  private JButton playComboButton;
+  private JButton passButton;
+  private JButton continueButton;
   public JRadioButton[] numPlayersButtonGroup = {a3PlayersRadioButton, a4PlayersRadioButton, a5PlayersRadioButton};
 
   public MineralST_GUI() {
@@ -131,19 +137,16 @@ public class MineralST_GUI {
 
       //PREPARE PLAY GAME EVENT LISTENERS
     prepareGameMenuButton.addActionListener(new ReturnToMenu(MineralST));
-
-
     usernameTextField.addKeyListener(new CheckNumChars(usernameTextField, numPlayersButtonGroup));
-//    a4PlayersRadioButton.addActionListener(new TestRadioEvent(this));
-//    prepareGameInputPanel.addContainerListener(new CheckButtonGroup(this));
     readyToPlayButton.addActionListener(new CheckReadytoPlay(this));
-//    readyToPlayButton.addActionListener(new TestEvent(MineralST, testPanel));
 
 
     //PLAY GAME EVENT LISTENERS
 
-    previosCard.addActionListener(new PreviousCard(this));
+    previousCard.addActionListener(new PreviousCard(this));
     nextCard.addActionListener(new NextCard(this));
+//    playCard.addActionListener(new );
+    continueButton.addActionListener(new ContinuePressed(this));
   }
 
   public static void main(String[] args) {
