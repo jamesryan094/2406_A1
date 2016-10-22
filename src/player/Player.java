@@ -92,6 +92,8 @@ public abstract class Player {
 
   //Abstract Declarations
   public abstract Card playCard(int cardChoice);
+  public abstract void playCard(Card cardChoice);
+
 
   public abstract Card playAnyCard();
 

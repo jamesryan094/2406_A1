@@ -58,6 +58,8 @@ public class MineralST_GUI {
   public JButton continueButton;
   public JLabel currentCategoryLabel;
   public JLabel currentValueLabel;
+  public JLabel nextPlayerLabel;
+  public JLabel lastPlayerLabel;
   public JRadioButton[] numPlayersButtonGroup = {a3PlayersRadioButton, a4PlayersRadioButton, a5PlayersRadioButton};
 
   public MineralST_GUI() {
@@ -133,7 +135,7 @@ public class MineralST_GUI {
     buttonMenu3.addActionListener(new ReturnToMenu(MineralST));
 
 
-        //TRUMP CATEGORIES EVENT LISTENERS
+        //TRUMP HIERARCHIES EVENT LISTENERS
     //For selecting menu from trump hierarchies
     buttonMenuTrump.addActionListener(new ReturnToMenu(MineralST));
 
@@ -145,11 +147,11 @@ public class MineralST_GUI {
 
     //PLAY GAME EVENT LISTENERS
 
+    continueButton.addActionListener(new ContinuePressed(this));
     previousCard.addActionListener(new PreviousCard(this));
     nextCard.addActionListener(new NextCard(this));
-//    playCardButton.addActionListener(new );
-    continueButton.addActionListener(new ContinuePressed(this));
     passButton.addActionListener(new HumanPassed(this));
+    playCardButton.addActionListener(new PlayCardPressed(this));
   }
 
   public static void main(String[] args) {

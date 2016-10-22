@@ -23,19 +23,10 @@ public class PlayRobotTurn {
                 playNotFirstTurn(gui);
             }
         }
-        updateLastPlayedCard(newGame, gui);
+//        updateLastPlayedCard(newGame, gui);
     }
 
-    private static void updateLastPlayedCard(Game newGame, MineralST_GUI gui) {
-        JPanel cardPanel = new JPanel();
-        JLabel cardLabel = new JLabel();
-        ImageIcon cardIcon = new ImageIcon("src/GUI/images/cards/" + newGame.getLastPlayedCard().getFileName());
-        cardLabel.setIcon(cardIcon);
-        cardPanel.add(cardLabel);
-//        gui.lastPlayedCard.remove(0);
-        gui.lastPlayedCard.removeAll();
-        gui.lastPlayedCard.add(cardPanel);
-    }
+
 
     private static void playNotFirstTurn(MineralST_GUI gui) {
         Game newGame = Game.currentGame;
@@ -64,10 +55,11 @@ public class PlayRobotTurn {
                 newGame.resetRoundTrump();
             }
             newGame.setLastPlayedAttributes(cardChoice);
-            gui.currentCategoryLabel.setText("Current Trump Category: " + newGame.getCurrentTrumpCategory());
-            gui.currentValueLabel.setText("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+            UpdateLabels.updateLastPlayedCardGUI(gui, newGame);
         }
     }
+
+
 
     private static void playFirstTurn(Game newGame, MineralST_GUI gui) {
         String trumpChoice;
@@ -92,7 +84,13 @@ public class PlayRobotTurn {
         newGame.setLastPlayedAttributes(cardChoice);
         System.out.println(newGame.getCurrentTrumpCategory());
         System.out.println(newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
-        gui.currentCategoryLabel.setText("Current Trump Category: " + newGame.getCurrentTrumpCategory());
-        gui.currentValueLabel.setText("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+        UpdateLabels.updateLastPlayedCardGUI(gui, newGame);
     }
+
+//    private static void updateLastPlayedCardGUI(MineralST_GUI gui) {
+//        gui.lastPlayerLabel.setText("Last Card Played By: " + newGame.getCurrentPlayer().getName());
+//        gui.currentCategoryLabel.setText("Current Trump Category: " + newGame.getCurrentTrumpCategory());
+//        gui.currentValueLabel.setText("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
+//    }
+
 }

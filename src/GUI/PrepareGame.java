@@ -27,6 +27,7 @@ public class PrepareGame {
         generateHandIcons(gui, newGame);
 //        newGame.incrementCurrentPlayer();
         gui.currentPlayerLabel.setText("Dealer: " + newGame.getCurrentPlayer().getName());
+        gui.nextPlayerLabel.setText("Next Player: " + newGame.getNextPlayer().getName());
         mineralSTLayout.show(mineralSTContainer, "playGameCard");
 //        return newGame;
     }
@@ -44,8 +45,9 @@ public class PrepareGame {
         }
     }
 
-    private static void generateHandIcons(MineralST_GUI gui, Game newGame) {
+    public static void generateHandIcons(MineralST_GUI gui, Game newGame) {
         //For each card in the human player's hand
+        gui.userCards.removeAll();
         ArrayList<Card> userHand = newGame.getPlayers()[0].getHand();
         for(int i = 0; i < userHand.size();++i){
             JPanel cardPanel = new JPanel();
@@ -56,7 +58,10 @@ public class PrepareGame {
             ImageIcon cardIcon = new ImageIcon("src/GUI/images/cards/" + userHand.get(i).getFileName());
             cardLabel.setIcon(cardIcon);
             cardPanel.add(cardLabel);
+            cardPanel.setName(userHand.get(i).getTitle());
             gui.userCards.add(cardPanel);
+            gui.userCards.revalidate();
+            gui.userCards.repaint();
         }
     }
 

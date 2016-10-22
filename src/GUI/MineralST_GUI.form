@@ -403,7 +403,7 @@
               <grid id="8fcb8" binding="userCards" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints border-constraint="West"/>
                 <properties>
-                  <preferredSize width="210" height="300"/>
+                  <preferredSize width="220" height="300"/>
                 </properties>
                 <border type="none" title="Cards"/>
                 <children/>
@@ -412,7 +412,7 @@
                 <constraints border-constraint="East"/>
                 <properties>
                   <minimumSize width="210" height="300"/>
-                  <preferredSize width="210" height="300"/>
+                  <preferredSize width="220" height="300"/>
                 </properties>
                 <border type="none" title="Last Played Card:"/>
                 <children/>
@@ -494,7 +494,7 @@
                       </component>
                     </children>
                   </grid>
-                  <grid id="73d4b" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="73d4b" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints border-constraint="North"/>
                     <properties/>
@@ -505,12 +505,12 @@
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <text value="Current Player: "/>
+                          <text value="Last Card Played:"/>
                         </properties>
                       </component>
                       <component id="fcbbc" class="javax.swing.JLabel" binding="currentCategoryLabel">
                         <constraints>
-                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="Current Trump Category:"/>
@@ -518,10 +518,26 @@
                       </component>
                       <component id="127d8" class="javax.swing.JLabel" binding="currentValueLabel">
                         <constraints>
-                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="Current Trump Value: "/>
+                        </properties>
+                      </component>
+                      <component id="55b09" class="javax.swing.JLabel" binding="nextPlayerLabel">
+                        <constraints>
+                          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Next Player:"/>
+                        </properties>
+                      </component>
+                      <component id="fa507" class="javax.swing.JLabel" binding="lastPlayerLabel">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Last Card Played By: "/>
                         </properties>
                       </component>
                     </children>

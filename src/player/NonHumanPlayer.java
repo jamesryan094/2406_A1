@@ -70,6 +70,11 @@ public class NonHumanPlayer extends Player {
     return getHand().remove(cardChoiceIndex);
   }
 
+  @Override
+  public void playCard(Card cardChoice) {
+    getHand().remove(cardChoice);
+  }
+
   /**
    * Generates a random number between 0 and the number of trump categories (5). return a trump
    * choice as a string, corresponding the the random integer.

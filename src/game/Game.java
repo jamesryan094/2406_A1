@@ -222,7 +222,7 @@ public class Game {
     return humanPlayedCard;
   }
 
-  void setHumanPlayedCard() {
+  public void setHumanPlayedCard() {
     humanPlayedCard = true;
   }
 
@@ -316,6 +316,7 @@ public class Game {
     setHumanPlayedCard();
   }
 
+
   /**
    * Called only when a user plays a trump card that is not "The Geologist". Method will set the
    * current trump category based on card title.
@@ -328,6 +329,16 @@ public class Game {
     String trumpChoice = getTrumpChoiceFromTrumpCard(chosenCard.getTitle());
     setCurrentTrumpCategory(trumpChoice);
     setLastPlayedAttributes(chosenCard);
+    setHumanPlayedCard();
+    resetRoundTrump();
+  }
+
+  public void playTrumpCardGUI(Card cardChoice) {
+    //        When a user plays a Trump Card with GUI:
+    currentPlayer.playCard(cardChoice);
+    String trumpChoice = getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
+    setCurrentTrumpCategory(trumpChoice);
+    setLastPlayedAttributes(cardChoice);
     setHumanPlayedCard();
     resetRoundTrump();
   }
@@ -452,11 +463,43 @@ public class Game {
     resetRound();
   }
 
-  boolean comboPlayed() {
+  public boolean comboPlayed() {
     return comboPlayed;
   }
 
   public void resetComboPlayed() {
     comboPlayed = false;
   }
+
+  public Player getNextPlayer() {
+    Player nextPlayer;
+    int currentPlayerId = currentPlayer.getId();
+    if (currentPlayerId == players.length - 1) {
+      nextPlayer = players[0];
+    } else {
+      nextPlayer = players[currentPlayerId + 1];
+    }
+    return nextPlayer;
+  }
+
+  /**
+   * For gui when human plays a card
+   * @param cardChoice  Card object represent the card to be played
+   * @param trumpChoice the trump choice to be put in play
+     */
+  public void playFirstTurn(Card cardChoice, String trumpChoice) {
+    currentPlayer.playCard(cardChoice);
+    setCurrentTrumpCategory(trumpChoice);
+    setLastPlayedAttributes(cardChoice);
+//    setHumanPlayedCard();
+
+  }
+
+  public void playTurn(Card cardChoice)
+  {
+    currentPlayer.playCard(cardChoice);
+    setLastPlayedAttributes(cardChoice);
+
+  }
+
 }

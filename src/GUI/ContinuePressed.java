@@ -3,6 +3,7 @@ package GUI;
 import game.Game;
 import player.Player;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,7 +22,6 @@ public class ContinuePressed implements ActionListener {
         Game newGame = Game.currentGame;
         newGame.incrementCurrentPlayer();
         Player currentPlayer = newGame.getCurrentPlayer();
-        gui.currentPlayerLabel.setText("Current Player: " + newGame.getCurrentPlayer().getName());
         if (!currentPlayer.isHuman()){
             PlayRobotTurn.playTurn(gui);
         }
@@ -29,6 +29,22 @@ public class ContinuePressed implements ActionListener {
             PlayHumanTurn.enableUserButtons(gui);
 //            PlayHumanTurn.playTurn(gui);
         }
+        if (newGame.getLastPlayedCard() != null) {
+            updateLastPlayedCard(newGame, gui);
+        }
+        UpdateLabels.updateNextPlayerLabel(newGame, gui);
 
     }
+
+    public static void updateLastPlayedCard(Game newGame, MineralST_GUI gui) {
+        JPanel cardPanel = new JPanel();
+        JLabel cardLabel = new JLabel();
+        ImageIcon cardIcon = new ImageIcon("src/GUI/images/cards/" + newGame.getLastPlayedCard().getFileName());
+        cardLabel.setIcon(cardIcon);
+        cardPanel.add(cardLabel);
+//        gui.lastPlayedCard.remove(0);
+        gui.lastPlayedCard.removeAll();
+        gui.lastPlayedCard.add(cardPanel);
+    }
+
 }
