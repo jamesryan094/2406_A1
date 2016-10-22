@@ -22,8 +22,12 @@ public class PlayRobotTurn {
                 System.out.println("Not a new round");
                 playNotFirstTurn(gui);
             }
+            else {
+                newGame.passTurn();
+                newGame.incrementNumPasses();
+                System.out.println(newGame.getCurrentPlayer().getName() + " chose to pass");
+            }
         }
-//        updateLastPlayedCard(newGame, gui);
     }
 
 

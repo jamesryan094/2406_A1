@@ -85,7 +85,7 @@ public class Game {
 
   private Player[] players;
   private Player currentPlayer;
-  private ArrayList<Player> winners = new ArrayList<>();
+  public ArrayList<Player> winners = new ArrayList<>();
 
   private int numPasses;
   private int numPlayers;
@@ -387,7 +387,7 @@ public class Game {
     }
   }
 
-  private void resetNumPasses() {
+  public void resetNumPasses() {
     numPasses = 0;
   }
 
@@ -413,16 +413,16 @@ public class Game {
     }
   }
 
-  boolean checkWinner() {
+  public boolean checkWinner() {
     return getCurrentPlayer().getHand().size() == 0;
   }
 
-  ArrayList<Player> getWinners() {
+  public ArrayList<Player> getWinners() {
     return winners;
   }
 
   /** Adds a player to the winner list. Will set value to end game if all but one player in list */
-  void updateWinners() {
+  public void updateWinners() {
     if (!winners.contains(currentPlayer)) {
       winners.add(currentPlayer);
     }
@@ -431,7 +431,7 @@ public class Game {
     }
   }
 
-  private void setIsWon() {
+  public void setIsWon() {
     isWon = true;
   }
 

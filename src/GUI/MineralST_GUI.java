@@ -146,7 +146,6 @@ public class MineralST_GUI {
 
 
     //PLAY GAME EVENT LISTENERS
-
     continueButton.addActionListener(new ContinuePressed(this));
     previousCard.addActionListener(new PreviousCard(this));
     nextCard.addActionListener(new NextCard(this));

@@ -103,7 +103,6 @@ public abstract class Player {
 
   public abstract boolean hasPlayableCards(Card lastPlayedCard, String currentTrump);
 
-  //Todo: drawCard may not be abstract.
   public abstract void drawCard(Deck deck);
 
   //Getters/Setters
