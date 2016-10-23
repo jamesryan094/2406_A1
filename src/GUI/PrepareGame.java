@@ -23,6 +23,7 @@ public class PrepareGame {
         newGame.initialDeal();
         newGame.setFirstTurn(true);
         newGame.resetRound();
+        emptyScreen(gui, newGame);
         populatePlayers(gui, newGame);
         generateHandIcons(gui, newGame);
 //        newGame.incrementCurrentPlayer();
@@ -30,6 +31,22 @@ public class PrepareGame {
         gui.nextPlayerLabel.setText("Next Player: " + newGame.getNextPlayer().getName());
         mineralSTLayout.show(mineralSTContainer, "playGameCard");
 //        return newGame;
+    }
+
+    private static void emptyScreen(MineralST_GUI gui, Game newGame) {
+        for (Component component :
+                gui.players.getComponents()) {
+            if (component != null){
+                gui.players.remove(component);
+            }
+        }
+        for (Component component :
+                gui.lastPlayedCard.getComponents()) {
+            if(component!=null){
+                gui.lastPlayedCard.remove(component);
+            }
+        }
+        UpdateLabels.resetLabels(gui);
     }
 
     private static void populatePlayers(MineralST_GUI gui, Game newGame) {

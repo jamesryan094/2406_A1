@@ -19,4 +19,11 @@ public class UpdateLabels {
     public static void updateNextPlayerLabel(Game newGame, MineralST_GUI gui) {
         gui.nextPlayerLabel.setText("Next Player: " + newGame.getNextPlayer().getName());
     }
+
+    public static void resetLabels(MineralST_GUI gui) {
+//        gui.currentPlayerLabel.setText("Card in Play: " + newGame.getLastPlayedCard().getTitle());
+        gui.lastPlayerLabel.setText("Last Card Played By: ");
+        gui.currentCategoryLabel.setText("Current Trump Category: ");
+        gui.currentValueLabel.setText("Current Trump Value: ");
+    }
 }

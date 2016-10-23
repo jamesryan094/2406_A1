@@ -86,6 +86,10 @@ public class PlayHumanTurn {
                         JOptionPane.showMessageDialog(null, newGame.getCurrentPlayer().getName() + " has been added to the Winners List!", "Winner!", JOptionPane.INFORMATION_MESSAGE);
                         System.out.println(currentPlayer.getName() + " has been added to the winners list!");
                     }
+                    if(newGame.getWinners().size() == (newGame.getPlayers().length-1)){
+                        JOptionPane.showMessageDialog(null, "Game over! Well done everyone!", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
+                        new ReturnToMenu(gui.MineralST).showMainMenu();
+                    }
                 }
             }
         }
