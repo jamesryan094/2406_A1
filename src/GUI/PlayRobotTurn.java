@@ -23,7 +23,14 @@ public class PlayRobotTurn {
       } else {
         newGame.passTurn();
         newGame.incrementNumPasses();
+
+        JOptionPane.showMessageDialog(
+                null,
+                newGame.getCurrentPlayer().getName() + " chose to pass!",
+                "Pass!",
+                JOptionPane.INFORMATION_MESSAGE);
         System.out.println(newGame.getCurrentPlayer().getName() + " chose to pass");
+//        UpdateLabels.setPlayerPassed(gui, newGame);
       }
     }
     if (newGame.checkWinner()) {
@@ -73,6 +80,12 @@ public class PlayRobotTurn {
         }
         newGame.setCurrentTrumpCategory(trumpChoice);
         newGame.resetRoundTrump();
+        JOptionPane.showMessageDialog(
+                null,
+                newGame.getCurrentPlayer().getName() + " played a supertrump!" +
+                        "\nEverybody is back in the round!",
+                "Supertrump Played!",
+                JOptionPane.INFORMATION_MESSAGE);
       }
       newGame.setLastPlayedAttributes(cardChoice);
       newGame.setLastPlayer(newGame.getCurrentPlayer());

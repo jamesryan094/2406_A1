@@ -1,5 +1,6 @@
 package GUI;
 
+import com.sun.deploy.panel.UpdatePanelFactory;
 import game.Game;
 import player.Player;
 
@@ -22,9 +23,16 @@ public class ContinuePressed implements ActionListener {
 
     if (newGame.isNewRound()) {
       Player lastToPlay = newGame.getLastPlayer();
+      JOptionPane.showMessageDialog(
+          null,
+          "Round Won by: " + lastToPlay.getName(),
+          "Round Won!",
+          JOptionPane.INFORMATION_MESSAGE);
       System.out.println("\nRound Won by: " + lastToPlay.getName());
+      //Todo: implement
+      //Todo: find where trump card resets round.
+//      UpdateLabels.resetPlayersOut();
       if (newGame.getWinners().contains(lastToPlay)) {
-        //                newGame.resetRound();
         newGame.incrementCurrentPlayer();
       } else {
         newGame.setCurrentPlayer(lastToPlay);

@@ -1,6 +1,10 @@
 package GUI;
 
 import game.Game;
+import player.Player;
+
+import javax.swing.*;
+import java.awt.*;
 
 /** Created by james on 22/10/2016. */
 public class UpdateLabels {
@@ -25,6 +29,15 @@ public class UpdateLabels {
     //        gui.currentPlayerLabel.setText("Card in Play: " + newGame.getLastPlayedCard().getTitle());
     gui.lastPlayerLabel.setText("Last Card Played By: ");
     gui.currentCategoryLabel.setText("Current Trump Category: ");
-    gui.currentValueLabel.setText("Current Trump Value: ");
+//    gui.currentValueLabel.setText("Current Trump Value: ");
   }
+
+//  public static void setPlayerPassed(MineralST_GUI gui, Game newGame) {
+//    String playerName = newGame.getCurrentPlayer().getName();
+//    for (Component component : gui.players.getComponents()) {
+//        if (component.getName().equals(playerName)){
+//
+//        }
+//    }
+//  }
 }

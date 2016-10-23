@@ -23,6 +23,7 @@ public class PrepareGame {
     emptyScreen(gui, newGame);
     populatePlayers(gui, newGame);
     generateHandIcons(gui, newGame);
+    gui.currentValueLabel.setVisible(false);
     //        newGame.incrementCurrentPlayer();
     gui.currentPlayerLabel.setText("Dealer: " + newGame.getCurrentPlayer().getName());
     gui.nextPlayerLabel.setText("Next Player: " + newGame.getNextPlayer().getName());
@@ -54,6 +55,7 @@ public class PrepareGame {
       playerLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
       playerLabel.setHorizontalTextPosition(SwingConstants.CENTER);
       playerLabel.setIcon(playerIconImg);
+      playerLabel.setName(players[i].getName());
       gui.players.add(playerLabel);
     }
   }

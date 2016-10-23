@@ -47,6 +47,12 @@ public class PlayHumanTurn {
         } else {
           newGame.playTrumpCardGUI(cardChoice);
         }
+        JOptionPane.showMessageDialog(
+                null,
+                newGame.getCurrentPlayer().getName() + " played a supertrump!" +
+                        "\nEverybody is back in the round!",
+                "Supertrump Played!",
+                JOptionPane.INFORMATION_MESSAGE);
       } //CardType = mineral
       else {
         String trumpChoice = getTrumpCategoryFromUser(gui, newGame);
@@ -62,6 +68,12 @@ public class PlayHumanTurn {
           String trumpChoice = getTrumpCategoryFromUser(gui, newGame);
           newGame.playFirstTurn(cardChoice, trumpChoice);
           newGame.resetRoundTrump();
+          JOptionPane.showMessageDialog(
+                  null,
+                  newGame.getCurrentPlayer().getName() + " played a supertrump!" +
+                          "\nEverybody is back in the round!",
+                  "Supertrump Played!",
+                  JOptionPane.INFORMATION_MESSAGE);
         }
         //chose mineral card that can play on last played
         newGame.playTurn(cardChoice);
@@ -114,7 +126,7 @@ public class PlayHumanTurn {
         return cardChoice;
       }
     }
-    System.out.println("Something has gone terribly wrong");
+    System.out.println("Something has gone terribly wrong (gui.playHumanTurn.getSelectedCard())");
     return null;
   }
 
@@ -155,6 +167,7 @@ public class PlayHumanTurn {
     newGame.incrementNumPasses();
     PrepareGame.generateHandIcons(gui, newGame);
     disableUserButtons(gui);
+//    UpdateLabels.setPlayerPassed(gui, newGame);
 
     //        newGame.incrementCurrentPlayer();
   }
