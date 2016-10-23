@@ -52,6 +52,7 @@ public class PlayHumanTurn {
                 newGame.playFirstTurn(cardChoice, trumpChoice);
             }
             newGame.resetRound();
+//            newGame.incrementCurrentPlayer();
         }
         else {
             if (cardChoice.canPlayOn(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())) {
@@ -82,6 +83,7 @@ public class PlayHumanTurn {
                 if(newGame.checkWinner()){
                     if(!newGame.getWinners().contains(currentPlayer)){
                         newGame.winners.add(currentPlayer);
+                        JOptionPane.showMessageDialog(null, newGame.getCurrentPlayer().getName() + " has been added to the Winners List!", "Winner!", JOptionPane.INFORMATION_MESSAGE);
                         System.out.println(currentPlayer.getName() + " has been added to the winners list!");
                     }
                 }

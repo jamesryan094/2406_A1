@@ -13,13 +13,13 @@ public class PlayRobotTurn {
     public static void playTurn(MineralST_GUI gui){
         Game newGame = Game.currentGame;
         if (newGame.isNewRound() || newGame.isFirstTurn()) {
-            System.out.println("Is New Round");
+            System.out.println(newGame.getCurrentPlayer().getName() + " Is New Round");
             playFirstTurn(newGame, gui);
             newGame.resetRound();
         }
         else{
             if (newGame.getCurrentPlayer().hasPlayableCards(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
-                System.out.println("Not a new round");
+                System.out.println(newGame.getCurrentPlayer().getName() + " Not a new round");
                 playNotFirstTurn(gui);
             }
             else {
@@ -31,6 +31,7 @@ public class PlayRobotTurn {
         if(newGame.checkWinner()){
             if(!newGame.getWinners().contains(newGame.getCurrentPlayer())){
                 newGame.winners.add(newGame.getCurrentPlayer());
+                JOptionPane.showMessageDialog(null, newGame.getCurrentPlayer().getName() + " has been added to the Winners List!", "Winner!", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(newGame.getCurrentPlayer().getName() + " has been added to the winners list!");
             }
         }

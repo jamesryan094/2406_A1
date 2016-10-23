@@ -11,7 +11,7 @@ public class UpdateLabels {
 
     public static void updateLastPlayedCardGUI(MineralST_GUI gui, Game newGame) {
         gui.currentPlayerLabel.setText("Card in Play: " + newGame.getLastPlayedCard().getTitle());
-        gui.lastPlayerLabel.setText("Last Card Played By: " + newGame.getCurrentPlayer().getName());
+        gui.lastPlayerLabel.setText("Last Card Played By: " + newGame.getLastPlayer().getName());
         gui.currentCategoryLabel.setText("Current Trump Category: " + newGame.getCurrentTrumpCategory());
         gui.currentValueLabel.setText("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
     }

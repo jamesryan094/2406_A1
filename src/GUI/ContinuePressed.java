@@ -20,18 +20,28 @@ public class ContinuePressed implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Game newGame = Game.currentGame;
-
-        boolean isNewRound = newGame.isNewRound();
-        if (isNewRound) {
-            System.out.println(
-                    "\nRound Won by: " + newGame.getLastPlayer().getName());
-            newGame.setCurrentPlayer(newGame.getLastPlayer());
-        }else {
-            newGame.incrementCurrentPlayer();
-        }
         Player currentPlayer = newGame.getCurrentPlayer();
 
+        if (newGame.isNewRound()) {
+            Player lastToPlay = newGame.getLastPlayer();
+            System.out.println("\nRound Won by: " + lastToPlay.getName());
+            newGame.setCurrentPlayer(lastToPlay);
+            currentPlayer = newGame.getCurrentPlayer();
+            if (!currentPlayer.isHuman()){
+                PlayRobotTurn.playTurn(gui);
+                newGame.incrementCurrentPlayer();
 
+            }
+            else {
+                PlayHumanTurn.enableUserButtons(gui);
+            }
+
+        }
+        else {
+            newGame.incrementCurrentPlayer();
+        }
+
+        currentPlayer = newGame.getCurrentPlayer();
         if (!newGame.winners.contains(currentPlayer)) {
             if (!currentPlayer.getHasPassed()) {
                 if (!currentPlayer.isHuman()){
@@ -47,9 +57,11 @@ public class ContinuePressed implements ActionListener {
             }
             else{
                 System.out.println(currentPlayer.getName() + " has already passed!");
+//                newGame.incrementCurrentPlayer();
             }
         }else{
             System.out.println(currentPlayer.getName() + " has already won!");
+//            newGame.incrementCurrentPlayer();
         }
         UpdateLabels.updateNextPlayerLabel(newGame, gui);
 
