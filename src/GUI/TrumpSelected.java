@@ -6,24 +6,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by james on 21/10/2016.
- */
+/** Created by james on 21/10/2016. */
 public class TrumpSelected implements ActionListener {
-    String trumpChoice;
+  String trumpChoice;
 
-    public TrumpSelected(JComboBox trumpSelection) {
-        trumpChoice = String.valueOf(trumpSelection.getSelectedItem());
+  public TrumpSelected(JComboBox trumpSelection) {
+    trumpChoice = String.valueOf(trumpSelection.getSelectedItem());
+  }
 
-    }
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    updateTrumpCategory();
+  }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        updateTrumpCategory();
-
-    }
-
-    private void updateTrumpCategory() {
-        Game.currentGame.setCurrentTrumpCategory(trumpChoice);
-    }
+  private void updateTrumpCategory() {
+    Game.currentGame.setCurrentTrumpCategory(trumpChoice);
+  }
 }

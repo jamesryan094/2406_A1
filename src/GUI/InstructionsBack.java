@@ -13,7 +13,6 @@ class InstructionsBack implements ActionListener {
   InstructionsBack(JPanel instructions) {
     instructionsContainer = instructions;
     instructionsLayout = (CardLayout) instructions.getLayout();
-
   }
 
   public void actionPerformed(ActionEvent e) {

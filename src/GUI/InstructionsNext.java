@@ -13,7 +13,6 @@ class InstructionsNext implements ActionListener {
   InstructionsNext(JPanel instructions) {
     instructionsContainer = instructions;
     instructionsLayout = (CardLayout) instructions.getLayout();
-
   }
 
   public void actionPerformed(ActionEvent e) {

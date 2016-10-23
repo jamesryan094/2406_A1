@@ -23,4 +23,3 @@ class ReturnToMenu implements ActionListener {
     mineralSTLayout.show(mineralSTContainer, "mainMenu");
   }
 }
-

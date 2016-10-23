@@ -60,11 +60,13 @@ public class MineralST_GUI {
   public JLabel currentValueLabel;
   public JLabel nextPlayerLabel;
   public JLabel lastPlayerLabel;
-  public JRadioButton[] numPlayersButtonGroup = {a3PlayersRadioButton, a4PlayersRadioButton, a5PlayersRadioButton};
+  public JRadioButton[] numPlayersButtonGroup = {
+    a3PlayersRadioButton, a4PlayersRadioButton, a5PlayersRadioButton
+  };
 
   public MineralST_GUI() {
 
-        //MENU SCREEN EVENT LISTENERS
+    //MENU SCREEN EVENT LISTENERS
     //For selecting Play Game from Main menu
     buttonPlayGame.addActionListener(new PreGameScreen(MineralST));
 
@@ -106,15 +108,9 @@ public class MineralST_GUI {
           }
         });
 
-
-
-        //INSTRUCTIONS EVENT LISTENERS
+    //INSTRUCTIONS EVENT LISTENERS
     //For selecting Menu on instructions1
     buttonMenu1.addActionListener(new ReturnToMenu(MineralST));
-
-      //TODO: DELETE DELETE DELETE DELETE
-//      buttonMenu1.addActionListener(new RandomAction(title));
-//      buttonMenu1.addActionListener(new ChangeButtonText(buttonQuit));
 
     //For selecting next card on instructions1
     buttonNext1.addActionListener(new InstructionsNext(instructions));
@@ -134,16 +130,14 @@ public class MineralST_GUI {
     //For selecting menu on instructions3
     buttonMenu3.addActionListener(new ReturnToMenu(MineralST));
 
-
-        //TRUMP HIERARCHIES EVENT LISTENERS
+    //TRUMP HIERARCHIES EVENT LISTENERS
     //For selecting menu from trump hierarchies
     buttonMenuTrump.addActionListener(new ReturnToMenu(MineralST));
 
-      //PREPARE PLAY GAME EVENT LISTENERS
+    //PREPARE PLAY GAME EVENT LISTENERS
     prepareGameMenuButton.addActionListener(new ReturnToMenu(MineralST));
     usernameTextField.addKeyListener(new CheckNumChars(usernameTextField, numPlayersButtonGroup));
     readyToPlayButton.addActionListener(new CheckReadytoPlay(this));
-
 
     //PLAY GAME EVENT LISTENERS
     continueButton.addActionListener(new ContinuePressed(this));
@@ -157,12 +151,11 @@ public class MineralST_GUI {
   public static void main(String[] args) {
     JFrame mineralST = new JFrame("Mineral Supertrumps!");
     mineralST.setBounds(200, 100, 750, 500);
-//    mineralST.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    //    mineralST.setExtendedState(JFrame.MAXIMIZED_BOTH);
     mineralST.setContentPane(new MineralST_GUI().MineralST);
     mineralST.setVisible(true);
     mineralST.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
   }
 
-//  todo: disable cancel button when selecting trump category
+  //  todo: disable cancel button when selecting trump category
 }
