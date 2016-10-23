@@ -151,6 +151,7 @@ public class MineralST_GUI {
     nextCard.addActionListener(new NextCard(this));
     passButton.addActionListener(new HumanPassed(this));
     playCardButton.addActionListener(new PlayCardPressed(this));
+    playComboButton.addActionListener(new playComboPressed(this));
   }
 
   public static void main(String[] args) {
@@ -162,4 +163,6 @@ public class MineralST_GUI {
     mineralST.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
   }
+
+//  todo: disable cancel button when selecting trump category
 }

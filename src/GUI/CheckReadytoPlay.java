@@ -46,8 +46,7 @@ public class CheckReadytoPlay implements ActionListener {
 //            return newGame;
         }
         else{
-            final JPanel panel = new JPanel();
-            JOptionPane.showMessageDialog(panel, "You must enter a username to start a game.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You must enter a username to start a game.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
