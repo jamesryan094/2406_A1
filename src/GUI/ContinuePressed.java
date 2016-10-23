@@ -23,11 +23,9 @@ public class ContinuePressed implements ActionListener {
 
         boolean isNewRound = newGame.isNewRound();
         if (isNewRound) {
-            newGame.resetRound();
             System.out.println(
-                    "\nRound Won By: "
-                            + newGame.getCurrentPlayer().getName()
-                            + "! Good Job!\n\nRound Reset!\n");
+                    "\nRound Won by: " + newGame.getLastPlayer().getName());
+            newGame.setCurrentPlayer(newGame.getLastPlayer());
         }else {
             newGame.incrementCurrentPlayer();
         }
@@ -45,7 +43,7 @@ public class ContinuePressed implements ActionListener {
                 if (newGame.getLastPlayedCard() != null) {
                     updateLastPlayedCard(newGame, gui);
                 }
-                newGame.checkWinner();
+
             }
             else{
                 System.out.println(currentPlayer.getName() + " has already passed!");
@@ -63,7 +61,6 @@ public class ContinuePressed implements ActionListener {
         ImageIcon cardIcon = new ImageIcon("src/GUI/images/cards/" + newGame.getLastPlayedCard().getFileName());
         cardLabel.setIcon(cardIcon);
         cardPanel.add(cardLabel);
-//        gui.lastPlayedCard.remove(0);
         gui.lastPlayedCard.removeAll();
         gui.lastPlayedCard.add(cardPanel);
     }

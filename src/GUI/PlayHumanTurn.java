@@ -7,8 +7,6 @@ import player.Player;
 import javax.swing.*;
 import java.awt.*;
 
-import static GUI.PlayRobotTurn.newGame;
-
 /**
  * Created by james on 20/10/2016.
  */
@@ -25,8 +23,8 @@ public class PlayHumanTurn {
 
     public static void playTurn(MineralST_GUI gui) {
         Game newGame = Game.currentGame;
-//        Player currentPlayer = newGame.getCurrentPlayer();
-        Card cardChoice = getSelectedCard(gui);
+        Player currentPlayer = newGame.getCurrentPlayer();
+        Card cardChoice = getSelectedCard(gui, newGame);
 
         boolean cardPlayed = true;
 
@@ -53,6 +51,7 @@ public class PlayHumanTurn {
                 String trumpChoice = getTrumpCategoryFromUser(gui, newGame);
                 newGame.playFirstTurn(cardChoice, trumpChoice);
             }
+            newGame.resetRound();
         }
         else {
             if (cardChoice.canPlayOn(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())) {
@@ -75,14 +74,21 @@ public class PlayHumanTurn {
             }
         }
             if (cardPlayed){
+                newGame.setLastPlayer(newGame.getCurrentPlayer());
                 PrepareGame.generateHandIcons(gui, newGame);
                 ContinuePressed.updateLastPlayedCard(newGame, gui);
                 UpdateLabels.updateLastPlayedCardGUI(gui, newGame);
                 disableUserButtons(gui);
+                if(newGame.checkWinner()){
+                    if(!newGame.getWinners().contains(currentPlayer)){
+                        newGame.winners.add(currentPlayer);
+                        System.out.println(currentPlayer.getName() + " has been added to the winners list!");
+                    }
+                }
             }
         }
 
-    private static Card getSelectedCard(MineralST_GUI gui) {
+    private static Card getSelectedCard(MineralST_GUI gui, Game newGame) {
         Component[] userCardComponents = gui.userCards.getComponents();
 //        Card cardChoice = null;
         Card cardChoice;

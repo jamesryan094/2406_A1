@@ -10,12 +10,12 @@ import javax.swing.*;
  * Created by james on 20/10/2016.
  */
 public class PlayRobotTurn {
-    public static Game newGame;
     public static void playTurn(MineralST_GUI gui){
-        newGame = Game.currentGame;
+        Game newGame = Game.currentGame;
         if (newGame.isNewRound() || newGame.isFirstTurn()) {
             System.out.println("Is New Round");
             playFirstTurn(newGame, gui);
+            newGame.resetRound();
         }
         else{
             if (newGame.getCurrentPlayer().hasPlayableCards(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())){
@@ -26,6 +26,12 @@ public class PlayRobotTurn {
                 newGame.passTurn();
                 newGame.incrementNumPasses();
                 System.out.println(newGame.getCurrentPlayer().getName() + " chose to pass");
+            }
+        }
+        if(newGame.checkWinner()){
+            if(!newGame.getWinners().contains(newGame.getCurrentPlayer())){
+                newGame.winners.add(newGame.getCurrentPlayer());
+                System.out.println(newGame.getCurrentPlayer().getName() + " has been added to the winners list!");
             }
         }
     }
@@ -59,6 +65,7 @@ public class PlayRobotTurn {
                 newGame.resetRoundTrump();
             }
             newGame.setLastPlayedAttributes(cardChoice);
+            newGame.setLastPlayer(newGame.getCurrentPlayer());
             UpdateLabels.updateLastPlayedCardGUI(gui, newGame);
         }
     }
@@ -86,15 +93,11 @@ public class PlayRobotTurn {
         }
         newGame.setCurrentTrumpCategory(trumpChoice);
         newGame.setLastPlayedAttributes(cardChoice);
+        newGame.setLastPlayer(newGame.getCurrentPlayer());
         System.out.println(newGame.getCurrentTrumpCategory());
         System.out.println(newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
         UpdateLabels.updateLastPlayedCardGUI(gui, newGame);
     }
 
-//    private static void updateLastPlayedCardGUI(MineralST_GUI gui) {
-//        gui.lastPlayerLabel.setText("Last Card Played By: " + newGame.getCurrentPlayer().getName());
-//        gui.currentCategoryLabel.setText("Current Trump Category: " + newGame.getCurrentTrumpCategory());
-//        gui.currentValueLabel.setText("Current Trump Value: " + newGame.getLastPlayedCard().getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
-//    }
 
 }

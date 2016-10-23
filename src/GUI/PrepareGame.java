@@ -49,19 +49,27 @@ public class PrepareGame {
         //For each card in the human player's hand
         gui.userCards.removeAll();
         ArrayList<Card> userHand = newGame.getPlayers()[0].getHand();
-        for(int i = 0; i < userHand.size();++i){
+        if(userHand.size() == 0){
             JPanel cardPanel = new JPanel();
             JLabel cardLabel = new JLabel();
-//            cardLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
-//            cardLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-//            System.out.println("src/GUI/images/cards/" + userHand.get(i).getFileName());
-            ImageIcon cardIcon = new ImageIcon("src/GUI/images/cards/" + userHand.get(i).getFileName());
-            cardLabel.setIcon(cardIcon);
+            cardLabel.setBackground(Color.RED);
             cardPanel.add(cardLabel);
-            cardPanel.setName(userHand.get(i).getTitle());
             gui.userCards.add(cardPanel);
             gui.userCards.revalidate();
             gui.userCards.repaint();
+        }
+        else{
+            for(int i = 0; i < userHand.size();++i) {
+                JPanel cardPanel = new JPanel();
+                JLabel cardLabel = new JLabel();
+                ImageIcon cardIcon = new ImageIcon("src/GUI/images/cards/" + userHand.get(i).getFileName());
+                cardLabel.setIcon(cardIcon);
+                cardPanel.add(cardLabel);
+                cardPanel.setName(userHand.get(i).getTitle());
+                gui.userCards.add(cardPanel);
+                gui.userCards.revalidate();
+                gui.userCards.repaint();
+            }
         }
     }
 

@@ -97,6 +97,7 @@ public class Game {
   private boolean isWon;
 
   public static Game currentGame;
+  public Player lastPlayer;
 
   /**
    * Game constructor takes the desired number of players for the game, as well as a User's
@@ -502,4 +503,14 @@ public class Game {
 
   }
 
+  public void setLastPlayer(Player lastPlayer) {
+    this.lastPlayer = lastPlayer;
+  }
+  public Player getLastPlayer(){
+    return lastPlayer;
+  }
+
+  public void setCurrentPlayer(Player currentPlayer){
+        this.currentPlayer = currentPlayer;
+  }
 }
