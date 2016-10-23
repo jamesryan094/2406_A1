@@ -25,7 +25,12 @@ public class ContinuePressed implements ActionListener {
         if (newGame.isNewRound()) {
             Player lastToPlay = newGame.getLastPlayer();
             System.out.println("\nRound Won by: " + lastToPlay.getName());
-            newGame.setCurrentPlayer(lastToPlay);
+            if (newGame.getWinners().contains(lastToPlay)){
+//                newGame.resetRound();
+                newGame.incrementCurrentPlayer();
+            }else{
+                newGame.setCurrentPlayer(lastToPlay);
+            }
             currentPlayer = newGame.getCurrentPlayer();
             if (!currentPlayer.isHuman()){
                 PlayRobotTurn.playTurn(gui);
@@ -33,7 +38,9 @@ public class ContinuePressed implements ActionListener {
 
             }
             else {
-                PlayHumanTurn.enableUserButtons(gui);
+                if(!newGame.getWinners().contains(newGame.getCurrentPlayer())){
+                    PlayHumanTurn.enableUserButtons(gui);
+                }
             }
 
         }
