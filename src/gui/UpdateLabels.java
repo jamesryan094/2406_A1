@@ -1,10 +1,6 @@
-package GUI;
+package gui;
 
 import game.Game;
-import player.Player;
-
-import javax.swing.*;
-import java.awt.*;
 
 /** Created by james on 22/10/2016. */
 public class UpdateLabels {

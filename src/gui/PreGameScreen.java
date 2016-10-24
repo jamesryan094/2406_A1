@@ -1,25 +1,22 @@
-package GUI;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** Created by james on 9/10/2016. */
-class ReturnToMenu implements ActionListener {
+/** Created by james on 14/10/2016. */
+public class PreGameScreen implements ActionListener {
   private JPanel mineralSTContainer;
   private CardLayout mineralSTLayout;
 
-  ReturnToMenu(JPanel mineralST) {
+  public PreGameScreen(JPanel mineralST) {
     mineralSTContainer = mineralST;
     mineralSTLayout = (CardLayout) mineralST.getLayout();
   }
 
+  @Override
   public void actionPerformed(ActionEvent e) {
-    showMainMenu();
-  }
-
-  public void showMainMenu() {
-    mineralSTLayout.show(mineralSTContainer, "mainMenu");
+    mineralSTLayout.show(mineralSTContainer, "preparePlayGame");
   }
 }

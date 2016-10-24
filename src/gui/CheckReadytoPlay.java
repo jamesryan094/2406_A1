@@ -1,5 +1,5 @@
 //Todo: Refactor into two classes, one for error checking, one for preparing a new game.
-package GUI;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ public class CheckReadytoPlay implements ActionListener {
 
     public CheckReadytoPlay(MineralST_GUI mineralST_gui) {
         numPlayersGroup = mineralST_gui.numPlayersButtonGroup;
-        mineralSTContainer = mineralST_gui.MineralST;
+        mineralSTContainer = mineralST_gui.mineralST;
         mineralSTLayout = (CardLayout) mineralSTContainer.getLayout();
         this.testPanel = mineralST_gui.testPanel;
         gui = mineralST_gui;

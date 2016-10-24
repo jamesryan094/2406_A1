@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import cards.Card;
 import game.Game;
@@ -109,7 +109,7 @@ public class PlayHumanTurn {
               "Game over! Well done everyone!",
               "Game Over!",
               JOptionPane.INFORMATION_MESSAGE);
-          new ReturnToMenu(gui.MineralST).showMainMenu();
+          new ReturnToMenu(gui.mineralST).showMainMenu();
         }
       }
     }

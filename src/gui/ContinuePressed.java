@@ -1,6 +1,5 @@
-package GUI;
+package gui;
 
-import com.sun.deploy.panel.UpdatePanelFactory;
 import game.Game;
 import player.Player;
 

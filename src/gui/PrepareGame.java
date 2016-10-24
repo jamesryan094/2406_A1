@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import cards.Card;
 import game.Game;
@@ -13,7 +13,7 @@ public class PrepareGame {
 
   public static void buildMineralSTGame(MineralST_GUI gui, int numPlayers, String userName) {
     MineralST_GUI mineralSTgui = gui;
-    JPanel mineralSTContainer = gui.MineralST;
+    JPanel mineralSTContainer = gui.mineralST;
     CardLayout mineralSTLayout = (CardLayout) mineralSTContainer.getLayout();
     Game newGame = new Game(numPlayers, userName);
     newGame.assignDealer();

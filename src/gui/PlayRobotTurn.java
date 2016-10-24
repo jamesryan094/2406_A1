@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import cards.Card;
 import game.Game;
@@ -47,7 +47,7 @@ public class PlayRobotTurn {
       if (newGame.getWinners().size() == (newGame.getPlayers().length - 1)) {
         JOptionPane.showMessageDialog(
             null, "Game over! Well done everyone!", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
-        new ReturnToMenu(gui.MineralST).showMainMenu();
+        new ReturnToMenu(gui.mineralST).showMainMenu();
       }
     }
   }

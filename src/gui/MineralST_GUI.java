@@ -1,6 +1,4 @@
-package GUI;
-
-import game.Game;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +7,7 @@ import java.awt.event.ActionListener;
 
 /** Created by james on 8/10/2016. */
 public class MineralST_GUI {
-  public JPanel MineralST;
+  public JPanel mineralST;
   private JPanel mainMenu;
   private JLabel title;
   private JButton buttonPlayGame;
@@ -68,7 +66,7 @@ public class MineralST_GUI {
 
     //MENU SCREEN EVENT LISTENERS
     //For selecting Play Game from Main menu
-    buttonPlayGame.addActionListener(new PreGameScreen(MineralST));
+    buttonPlayGame.addActionListener(new PreGameScreen(mineralST));
 
     //For selecting Quit from the main menu
     buttonQuit.addActionListener(
@@ -93,8 +91,8 @@ public class MineralST_GUI {
         new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            CardLayout MineralSTLayout = (CardLayout) MineralST.getLayout();
-            MineralSTLayout.show(MineralST, "instructions");
+            CardLayout MineralSTLayout = (CardLayout) mineralST.getLayout();
+            MineralSTLayout.show(mineralST, "instructions");
           }
         });
 
@@ -103,14 +101,14 @@ public class MineralST_GUI {
         new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            CardLayout MineralSTLayout = (CardLayout) MineralST.getLayout();
-            MineralSTLayout.show(MineralST, "trumpHierarchies");
+            CardLayout MineralSTLayout = (CardLayout) mineralST.getLayout();
+            MineralSTLayout.show(mineralST, "trumpHierarchies");
           }
         });
 
     //INSTRUCTIONS EVENT LISTENERS
     //For selecting Menu on instructions1
-    buttonMenu1.addActionListener(new ReturnToMenu(MineralST));
+    buttonMenu1.addActionListener(new ReturnToMenu(mineralST));
 
     //For selecting next card on instructions1
     buttonNext1.addActionListener(new InstructionsNext(instructions));
@@ -119,7 +117,7 @@ public class MineralST_GUI {
     buttonBack2.addActionListener(new InstructionsBack(instructions));
 
     //For selecting menu on instructions2
-    buttonMenu2.addActionListener(new ReturnToMenu(MineralST));
+    buttonMenu2.addActionListener(new ReturnToMenu(mineralST));
 
     //For selecting next on instructions2
     buttonNext2.addActionListener(new InstructionsNext((instructions)));
@@ -128,14 +126,14 @@ public class MineralST_GUI {
     buttonBack3.addActionListener(new InstructionsBack(instructions));
 
     //For selecting menu on instructions3
-    buttonMenu3.addActionListener(new ReturnToMenu(MineralST));
+    buttonMenu3.addActionListener(new ReturnToMenu(mineralST));
 
     //TRUMP HIERARCHIES EVENT LISTENERS
     //For selecting menu from trump hierarchies
-    buttonMenuTrump.addActionListener(new ReturnToMenu(MineralST));
+    buttonMenuTrump.addActionListener(new ReturnToMenu(mineralST));
 
     //PREPARE PLAY GAME EVENT LISTENERS
-    prepareGameMenuButton.addActionListener(new ReturnToMenu(MineralST));
+    prepareGameMenuButton.addActionListener(new ReturnToMenu(mineralST));
     usernameTextField.addKeyListener(new CheckNumChars(usernameTextField, numPlayersButtonGroup));
     readyToPlayButton.addActionListener(new CheckReadytoPlay(this));
 
@@ -152,7 +150,7 @@ public class MineralST_GUI {
     JFrame mineralST = new JFrame("Mineral Supertrumps!");
     mineralST.setBounds(200, 100, 750, 500);
     //    mineralST.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    mineralST.setContentPane(new MineralST_GUI().MineralST);
+    mineralST.setContentPane(new MineralST_GUI().mineralST);
     mineralST.setVisible(true);
     mineralST.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
   }
