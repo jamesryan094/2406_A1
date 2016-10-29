@@ -39,6 +39,7 @@ public class PlayHumanTurn {
         newGame.playFirstTurn(cardChoice, trumpChoice);
       }
     } else if (newGame.isNewRound() || newGame.comboPlayed()) {
+      newGame.resetComboPlayed();
       if (cardChoice.getCardType().equals("trump")) {
         if (cardChoice.isGeologist()) {
           String trumpChoice = getTrumpCategoryFromUser(gui, newGame);

@@ -60,5 +60,26 @@ public class Deck {
     return cards;
   }
 
+  public Card getGeophys(){
+    Card geophys = null;
+    for(int i=0; i< cards.size(); ++i){
+      Card currentCard = cards.get(i);
+      if (currentCard.getTitle().equals("The Geophysicist")){
+        geophys = currentCard;
+      }
+    }
+    return geophys;
+  }
+
+  public Card getMagnetite(){
+    Card mag = null;
+    for(int i=0; i< cards.size(); ++i){
+      Card currentCard = cards.get(i);
+      if (currentCard.getTitle().equals("Magnetite")){
+        mag = currentCard;
+      }
+    }
+    return mag;
+  }
 
 }

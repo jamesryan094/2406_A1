@@ -155,21 +155,21 @@ public class Game {
     deck.removeRuleCards();
     deck.shuffle();
 
-    //For testing Combo mechanic.
-    //        ArrayList<Card> userHand = new ArrayList<>();
-    //        userHand.add(deck.getGeophys());
-    //        userHand.add(deck.getMagnetite());
-    //        userHand.addAll(deck.dealHand(NUM_CARDS_PER_HAND));
-    //        players[0].setCurrentHand(userHand);
-    //        for (int i = 1; i < players.length; i++) {
-    //            ArrayList<Card> hand= deck.dealHand(NUM_CARDS_PER_HAND);
-    //            players[i].setCurrentHand(hand);
-    //        }
+//    For testing Combo mechanic.
+            ArrayList<Card> userHand = new ArrayList<>();
+            userHand.add(deck.getGeophys());
+            userHand.add(deck.getMagnetite());
+            userHand.addAll(deck.dealHand(NUM_CARDS_PER_HAND));
+            players[0].setCurrentHand(userHand);
+            for (int i = 1; i < players.length; i++) {
+                ArrayList<Card> hand= deck.dealHand(NUM_CARDS_PER_HAND);
+                players[i].setCurrentHand(hand);
+            }
 
-    for (Player player : this.players) {
-      ArrayList<Card> hand = deck.dealHand(NUM_CARDS_PER_HAND);
-      player.setCurrentHand(hand);
-    }
+//    for (Player player : this.players) {
+//      ArrayList<Card> hand = deck.dealHand(NUM_CARDS_PER_HAND);
+//      player.setCurrentHand(hand);
+//    }
 
     //        Dealer set as current player so that "player to the left of the dealer" goes first, as per the rules.
     this.currentPlayer = players[dealerIndex];
