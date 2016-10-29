@@ -8,12 +8,14 @@ import javax.swing.*;
 
 /** Created by james on 20/10/2016. */
 public class PlayRobotTurn {
+
   public static void playTurn(MineralST_GUI gui) {
     Game newGame = Game.currentGame;
-    if (newGame.isNewRound() || newGame.isFirstTurn()) {
+    if (newGame.isNewRound() || newGame.isFirstTurn() || newGame.comboPlayed()) {
       System.out.println(newGame.getCurrentPlayer().getName() + " Is New Round");
       playFirstTurn(newGame, gui);
       newGame.resetRound();
+      newGame.resetComboPlayed();
     } else {
       if (newGame
           .getCurrentPlayer()
@@ -57,6 +59,10 @@ public class PlayRobotTurn {
     Player currentPlayer = newGame.getCurrentPlayer();
     if (currentPlayer.hasCombo()) {
       newGame.playCombo();
+      ContinuePressed.updateLastPlayedCard(newGame, gui);
+      UpdateLabels.updateLastPlayedCardGUI(gui, newGame);
+      JOptionPane.showMessageDialog(
+              null, newGame.getCurrentPlayer().getName() + " has played the combo! They get to go again!", "Combo Played!", JOptionPane.INFORMATION_MESSAGE);
     } else {
 
       boolean haveCard = false;
@@ -96,7 +102,7 @@ public class PlayRobotTurn {
   private static void playFirstTurn(Game newGame, MineralST_GUI gui) {
     String trumpChoice;
     Card cardChoice;
-    newGame.resetComboPlayed();
+//    newGame.resetComboPlayed();
     //first turn of game
     if (newGame.isFirstTurn) {
       cardChoice = newGame.getCurrentPlayer().playAnyMineralCard();

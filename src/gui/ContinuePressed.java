@@ -28,9 +28,7 @@ public class ContinuePressed implements ActionListener {
           "Round Won!",
           JOptionPane.INFORMATION_MESSAGE);
       System.out.println("\nRound Won by: " + lastToPlay.getName());
-      //Todo: implement
-      //Todo: find where trump card resets round.
-//      UpdateLabels.resetPlayersOut();
+
       if (newGame.getWinners().contains(lastToPlay)) {
         newGame.incrementCurrentPlayer();
       } else {
@@ -41,13 +39,21 @@ public class ContinuePressed implements ActionListener {
         PlayRobotTurn.playTurn(gui);
         newGame.incrementCurrentPlayer();
 
+
       } else {
         if (!newGame.getWinners().contains(newGame.getCurrentPlayer())) {
           PlayHumanTurn.enableUserButtons(gui);
         }
       }
 
-    } else {
+    }
+    else if (newGame.comboPlayed()){
+      System.out.println("in combo played");
+      PlayRobotTurn.playTurn(gui);
+      updateLastPlayedCard(newGame, gui);
+      UpdateLabels.updateLastPlayedCardGUI(gui, newGame);
+    }
+    else {
       newGame.incrementCurrentPlayer();
     }
 

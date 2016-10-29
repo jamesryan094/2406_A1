@@ -66,6 +66,7 @@ public class Deck {
       Card currentCard = cards.get(i);
       if (currentCard.getTitle().equals("The Geophysicist")){
         geophys = currentCard;
+        cards.remove(i);
       }
     }
     return geophys;
@@ -77,6 +78,7 @@ public class Deck {
       Card currentCard = cards.get(i);
       if (currentCard.getTitle().equals("Magnetite")){
         mag = currentCard;
+        cards.remove(i);
       }
     }
     return mag;

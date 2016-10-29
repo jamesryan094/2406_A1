@@ -156,20 +156,27 @@ public class Game {
     deck.shuffle();
 
 //    For testing Combo mechanic.
-            ArrayList<Card> userHand = new ArrayList<>();
-            userHand.add(deck.getGeophys());
-            userHand.add(deck.getMagnetite());
-            userHand.addAll(deck.dealHand(NUM_CARDS_PER_HAND));
-            players[0].setCurrentHand(userHand);
-            for (int i = 1; i < players.length; i++) {
-                ArrayList<Card> hand= deck.dealHand(NUM_CARDS_PER_HAND);
-                players[i].setCurrentHand(hand);
-            }
+//            ArrayList<Card> userHand = new ArrayList<>();
+//            userHand.add(deck.getGeophys());
+//            userHand.add(deck.getMagnetite());
+//            userHand.addAll(deck.dealHand(NUM_CARDS_PER_HAND));
+//            players[0].setCurrentHand(userHand);
+//            for (int i = 1; i < players.length; i++) {
+//                ArrayList<Card> hand= deck.dealHand(NUM_CARDS_PER_HAND);
+//                players[i].setCurrentHand(hand);
+//            }
 
-//    for (Player player : this.players) {
-//      ArrayList<Card> hand = deck.dealHand(NUM_CARDS_PER_HAND);
-//      player.setCurrentHand(hand);
-//    }
+//    Card geo = (deck.getGeophys());
+//    Card mag = (deck.getMagnetite());
+
+    for (Player player : this.players) {
+      ArrayList<Card> hand = deck.dealHand(NUM_CARDS_PER_HAND);
+      player.setCurrentHand(hand);
+    }
+//    players[1].getHand().add(geo);
+//    players[1].getHand().add(mag);
+
+
 
     //        Dealer set as current player so that "player to the left of the dealer" goes first, as per the rules.
     this.currentPlayer = players[dealerIndex];
