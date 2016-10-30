@@ -6,9 +6,16 @@ import player.Player;
 
 import javax.swing.*;
 
-/** Created by james on 20/10/2016. */
+/**
+ * Provides functionality for nonHuman players playing a turn in Mineral Supertrumps.
+ * Created by james on 20/10/2016. */
 public class PlayRobotTurn {
 
+  /**
+   * Once a card has been selected, playTurn determines validity of card choice, and what do do with said card
+   * based on attributes set in the current Game object
+   * @param gui The custom Mineral Supertrumps gui object
+   */
   public static void playTurn(MineralST_GUI gui) {
     Game newGame = Game.currentGame;
     if (newGame.isNewRound() || newGame.isFirstTurn() || newGame.comboPlayed()) {
@@ -54,6 +61,10 @@ public class PlayRobotTurn {
     }
   }
 
+  /**
+   * When a nonHuman player is playing any turn that is not the first turn (certain restrictions must be placed on the first turn)
+   * @param gui The custom Mineral Supertrumps gui object
+     */
   private static void playNotFirstTurn(MineralST_GUI gui) {
     Game newGame = Game.currentGame;
     Player currentPlayer = newGame.getCurrentPlayer();
@@ -99,10 +110,15 @@ public class PlayRobotTurn {
     }
   }
 
+  /**
+   * When a nonHuman player is playing the first turn
+   * Player is not allowed to play a trump card
+   * @param newGame The current Game object
+   * @param gui The custom Mineral Supertrumps gui object
+   */
   private static void playFirstTurn(Game newGame, MineralST_GUI gui) {
     String trumpChoice;
     Card cardChoice;
-//    newGame.resetComboPlayed();
     //first turn of game
     if (newGame.isFirstTurn) {
       cardChoice = newGame.getCurrentPlayer().playAnyMineralCard();

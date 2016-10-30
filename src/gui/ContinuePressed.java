@@ -7,14 +7,21 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** Created by james on 19/10/2016. */
+/**
+ * Handles the flow of the game. The Gui equivalent of Part 1's RunGame class.
+ * Called every time the user presses "Continue" on the Play Game screen
+ * Created by james on 19/10/2016. */
 public class ContinuePressed implements ActionListener {
   MineralST_GUI gui;
 
   public ContinuePressed(MineralST_GUI gui) {
     this.gui = gui;
   }
-
+  /**
+   * Increments current Player, checks if player has won the Game, checks if player has won the round
+   * Determines whether a human or robot is up to play and calls appropriate function.
+   * Updates labels if someone played a card
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     Game newGame = Game.currentGame;
@@ -78,6 +85,11 @@ public class ContinuePressed implements ActionListener {
     UpdateLabels.updateNextPlayerLabel(newGame, gui);
   }
 
+  /**
+   * Displays the last played card in the bottom right hand corner of the Play Game screen
+   * @param newGame The current Game object
+   * @param gui The custom Mineral Supertrumps gui object
+   */
   public static void updateLastPlayedCard(Game newGame, MineralST_GUI gui) {
     JPanel cardPanel = new JPanel();
     JLabel cardLabel = new JLabel();

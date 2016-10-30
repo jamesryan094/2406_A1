@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** Created by james on 19/10/2016. */
+/**
+ * Gets the next card in the players hand and displays it in the bottom left hand corner of the Play Game screen
+ * Created by james on 19/10/2016. */
 public class NextCard implements ActionListener {
   MineralST_GUI gui;
   JPanel cardContainer;

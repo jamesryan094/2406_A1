@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** Created by james on 9/10/2016. */
+/**
+ * Displays the Main Menu screen to the user
+ * Created by james on 9/10/2016. */
 class ReturnToMenu implements ActionListener {
   private JPanel mineralSTContainer;
   private CardLayout mineralSTLayout;

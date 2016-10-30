@@ -8,7 +8,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** Created by james on 23/10/2016. */
+/**
+ * Called when a user presses "Play Combo" option on the Play Game screen
+ * Created by james on 23/10/2016. */
 public class playComboPressed implements ActionListener {
 
   private final MineralST_GUI gui;
@@ -17,14 +19,16 @@ public class playComboPressed implements ActionListener {
     this.gui = gui;
   }
 
+  /**
+   * If user has combo, combo is played, the last played card is set to magnetite and the user begins a new round
+   * @param e the even created upon pressing "Play Combo" button
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     Game currentGame = Game.currentGame;
     Player currentPlayer = currentGame.getCurrentPlayer();
     if (!currentGame.isFirstTurn) {
       if (currentPlayer.hasCombo()) {
-        //                Todo: polish
-//        Card magnetite = currentPlayer.playCombo();
         currentGame.playCombo();
         ContinuePressed.updateLastPlayedCard(currentGame, gui);
         UpdateLabels.updateLastPlayedCardGUI(gui, currentGame);

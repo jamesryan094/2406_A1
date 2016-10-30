@@ -7,10 +7,12 @@ import player.Player;
 import javax.swing.*;
 import java.awt.*;
 
-/** Created by james on 20/10/2016. */
+/**
+ * Human players have little restriction on what they can try in a game however, have the same
+ * restrictions for what is considered valid in a game as a nonhuman player.
+ * Created by james on 20/10/2016. */
 public class PlayHumanTurn {
-  //    Game newGame;
-  //    MineralST_GUI gui;
+
 
   public static void enableUserButtons(MineralST_GUI gui) {
     gui.continueButton.setEnabled(false);
@@ -19,6 +21,11 @@ public class PlayHumanTurn {
     gui.passButton.setEnabled(true);
   }
 
+  /**
+   * Once a card has been selected, playTurn determines validity of card choice, and what do do with said card
+   * based on attributes set in the current Game object
+   * @param gui The custom Mineral Supertrumps gui object
+     */
   public static void playTurn(MineralST_GUI gui) {
     Game newGame = Game.currentGame;
     Player currentPlayer = newGame.getCurrentPlayer();
@@ -28,7 +35,6 @@ public class PlayHumanTurn {
 
     if (newGame.isFirstTurn()) {
       if (cardChoice.getCardType().equals("trump")) {
-        //                final JPanel panel = new JPanel();
         JOptionPane.showMessageDialog(
             null,
             "You can not start the game with a trump card!",
@@ -116,9 +122,14 @@ public class PlayHumanTurn {
     }
   }
 
+  /**
+   * Returns a reference to the card that is currently being displayed in the 'Cards' section of the user control panel
+   * @param gui The custom Mineral Supertrumps gui object
+   * @param newGame The current Game object
+   * @return Card: the last plated card
+     */
   private static Card getSelectedCard(MineralST_GUI gui, Game newGame) {
     Component[] userCardComponents = gui.userCards.getComponents();
-    //        Card cardChoice = null;
     Card cardChoice;
     for (Component component : userCardComponents) {
       if (component.isVisible()) {
@@ -131,9 +142,13 @@ public class PlayHumanTurn {
     return null;
   }
 
+  /**
+   * Creates and displays a dialogue box with a dropdown menu from which the user selects the trump category to play
+   * @param gui The custom Mineral Supertrumps gui object
+   * @param newGame The current Game object
+   * @return String: The user's trump category selection
+     */
   private static String getTrumpCategoryFromUser(MineralST_GUI gui, Game newGame) {
-    //        final JPanel panel = new JPanel();
-    //        JOptionPane.showMessageDialog(panel, "You must enter a username to start a game.", JOptionPane.OPTIONS_PROPERTY, JOptionPane.ERROR_MESSAGE);
     String[] trumps = {
       "Cleavage", "Crustal Abundance", "Economic Value", "Hardness", "Specific Gravity"
     };
@@ -145,12 +160,17 @@ public class PlayHumanTurn {
                 "Select Category",
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                trumps // Array of choices
-                ,
+                trumps, // Array of choices
                 trumps[0]); // Initial choice
     return trumpChoice;
   }
 
+  /**
+   * Returns card object from players hand that corresponds with the card currently being displayed
+   * @param currentPlayer The player from who's hand the card is being drawn.
+   * @param cardChoice The selected card
+   * @return Card: the selected Card
+     */
   private static Card getCard(Player currentPlayer, JPanel cardChoice) {
     for (Card card : currentPlayer.getHand()) {
       if (card.getTitle().equals(cardChoice.getName())) {
@@ -161,6 +181,10 @@ public class PlayHumanTurn {
     return null;
   }
 
+  /**
+   * When user chooses to pass: increment player, draw card if possible
+   * @param gui The custom Mineral Supertrumps gui object
+     */
   public static void passTurn(MineralST_GUI gui) {
     Game newGame = Game.currentGame;
     System.out.println(newGame.getCurrentPlayer().getName() + " chose to Pass");
@@ -168,11 +192,13 @@ public class PlayHumanTurn {
     newGame.incrementNumPasses();
     PrepareGame.generateHandIcons(gui, newGame);
     disableUserButtons(gui);
-//    UpdateLabels.setPlayerPassed(gui, newGame);
 
-    //        newGame.incrementCurrentPlayer();
   }
 
+  /**
+   * When the user is not the current player, disable the user control buttons, enable the continue button.
+   * @param gui The custom Mineral Supertrumps gui object
+     */
   private static void disableUserButtons(MineralST_GUI gui) {
     gui.continueButton.setEnabled(true);
     gui.playCardButton.setEnabled(false);

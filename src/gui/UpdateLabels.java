@@ -2,9 +2,17 @@ package gui;
 
 import game.Game;
 
-/** Created by james on 22/10/2016. */
+/**
+ * Updates JLabels on the user's control panel where appropriate
+ * Created by james on 22/10/2016. */
 public class UpdateLabels {
 
+  /**
+   * gets the last played card from the current game object and creates appropriate icon to
+   * display to user in "last played card" section
+   * @param gui The custom Mineral Supertrumps gui object
+   * @param newGame The current Game object
+   */
   public static void updateLastPlayedCardGUI(MineralST_GUI gui, Game newGame) {
     gui.currentPlayerLabel.setText("Card in Play: " + newGame.getLastPlayedCard().getTitle());
     gui.lastPlayerLabel.setText("Last Card Played By: " + newGame.getLastPlayer().getName());
@@ -21,19 +29,13 @@ public class UpdateLabels {
     gui.nextPlayerLabel.setText("Next Player: " + newGame.getNextPlayer().getName());
   }
 
+  /**
+   * Changes label "Dealer: " to "Last Card Played By: " after pressing continue for the first time
+   * The user does not need to know who the dealer is once the first turn has been played.
+   * @param gui The custom Mineral Supertrumps gui object
+   */
   public static void resetLabels(MineralST_GUI gui) {
-    //        gui.currentPlayerLabel.setText("Card in Play: " + newGame.getLastPlayedCard().getTitle());
     gui.lastPlayerLabel.setText("Last Card Played By: ");
     gui.currentCategoryLabel.setText("Current Trump Category: ");
-//    gui.currentValueLabel.setText("Current Trump Value: ");
   }
-
-//  public static void setPlayerPassed(MineralST_GUI gui, Game newGame) {
-//    String playerName = newGame.getCurrentPlayer().getName();
-//    for (Component component : gui.players.getComponents()) {
-//        if (component.getName().equals(playerName)){
-//
-//        }
-//    }
-//  }
 }

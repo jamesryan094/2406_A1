@@ -64,7 +64,7 @@ public class PrepareGame {
    * player icons, with corresponding user names displayed below
    * @param gui The custom Mineral Supertrumps gui object
    * @param newGame The current Game object
-     */
+   */
   private static void populatePlayers(MineralST_GUI gui, Game newGame) {
     Player[] players = newGame.getPlayers();
     int numPlayers = newGame.getPlayers().length;
