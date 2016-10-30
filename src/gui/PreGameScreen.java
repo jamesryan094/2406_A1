@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** Created by james on 14/10/2016. */
+/**
+ * Displays the Prepare Game Screen to the user
+ * Created by james on 14/10/2016. */
 public class PreGameScreen implements ActionListener {
   private JPanel mineralSTContainer;
   private CardLayout mineralSTLayout;

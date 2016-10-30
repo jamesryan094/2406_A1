@@ -8,9 +8,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-/** Created by james on 19/10/2016. */
+/**
+ * Takes information for Prepare Game screen and builds new Game object with it.
+ * Shows the Play Game Screen
+ * Created by james on 19/10/2016. */
 public class PrepareGame {
 
+  /**
+   * Takes information for Prepare Game screen and builds new Game object with it.
+   * Shows the Play Game Screen
+   * @param gui The custom Mineral Supertrumps gui object
+   * @param numPlayers the radioButton selection form the Prepare Game screen
+   * @param userName the text input from the Prepare Game screen
+     */
   public static void buildMineralSTGame(MineralST_GUI gui, int numPlayers, String userName) {
     MineralST_GUI mineralSTgui = gui;
     JPanel mineralSTContainer = gui.mineralST;
@@ -24,13 +34,17 @@ public class PrepareGame {
     populatePlayers(gui, newGame);
     generateHandIcons(gui, newGame);
     gui.currentValueLabel.setVisible(false);
-    //        newGame.incrementCurrentPlayer();
     gui.currentPlayerLabel.setText("Dealer: " + newGame.getCurrentPlayer().getName());
     gui.nextPlayerLabel.setText("Next Player: " + newGame.getNextPlayer().getName());
     mineralSTLayout.show(mineralSTContainer, "playGameCard");
-    //        return newGame;
   }
 
+  /**
+   * Removes all components from the Play Game screen
+   * Called when starting a new game to ensure that, one a game has been complete, another can be started seamlessly
+   * @param gui The custom Mineral Supertrumps gui object
+   * @param newGame The current Game object
+     */
   private static void emptyScreen(MineralST_GUI gui, Game newGame) {
     for (Component component : gui.players.getComponents()) {
       if (component != null) {
@@ -45,6 +59,12 @@ public class PrepareGame {
     UpdateLabels.resetLabels(gui);
   }
 
+  /**
+   * Takes the num players radio button choice from Prepare Game screen and generate the appropriate number of
+   * player icons, with corresponding user names displayed below
+   * @param gui The custom Mineral Supertrumps gui object
+   * @param newGame The current Game object
+     */
   private static void populatePlayers(MineralST_GUI gui, Game newGame) {
     Player[] players = newGame.getPlayers();
     int numPlayers = newGame.getPlayers().length;
@@ -60,6 +80,12 @@ public class PrepareGame {
     }
   }
 
+  /**
+   * Iterates through the human user's hand and generates and image for each card.
+   * Images is places in the "Cards" section of the screen
+   * @param gui The custom Mineral Supertrumps gui object
+   * @param newGame The current Game object
+     */
   public static void generateHandIcons(MineralST_GUI gui, Game newGame) {
     //For each card in the human player's hand
     gui.userCards.removeAll();

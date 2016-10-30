@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * For Prepare Game screen, after selecting "Play Game":
+ * Ensure user has entered all necessary, valid information to create a new game object.
  * Created by james on 18/10/2016.
  */
 public class CheckReadytoPlay implements ActionListener {
@@ -26,6 +28,12 @@ public class CheckReadytoPlay implements ActionListener {
         this.playGame = gui.playGame;
     }
 
+    /**
+     * Called when "play Game" button is pressed from Prepare Game screen.
+     * Checks user has entered a username and selected a desired number of players.
+     * If valid, a new game object is created and the user is taken to the Play Game screen
+     * @param e the event created upon pressing "Play Game".
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         int numPlayers = -1;
@@ -35,7 +43,7 @@ public class CheckReadytoPlay implements ActionListener {
             }
         }
         if (CheckNumChars.wordNotBlank(gui.usernameTextField.getText())) {
-            System.out.println("You Selected " + (numPlayers));
+//            System.out.println("You Selected " + (numPlayers));
             PrepareGame.buildMineralSTGame(gui, numPlayers, gui.usernameTextField.getText());
         }
         else{
