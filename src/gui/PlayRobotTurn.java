@@ -9,14 +9,14 @@ import javax.swing.*;
 /**
  * Provides functionality for nonHuman players playing a turn in Mineral Supertrumps.
  * Created by james on 20/10/2016. */
-public class PlayRobotTurn {
+class PlayRobotTurn {
 
   /**
    * Once a card has been selected, playTurn determines validity of card choice, and what do do with said card
    * based on attributes set in the current Game object
    * @param gui The custom Mineral Supertrumps gui object
    */
-  public static void playTurn(MineralST_GUI gui) {
+  static void playTurn(MineralST_GUI gui) {
     Game newGame = Game.currentGame;
     if (newGame.isNewRound() || newGame.isFirstTurn() || newGame.comboPlayed()) {
       System.out.println(newGame.getCurrentPlayer().getName() + " Is New Round");
@@ -39,9 +39,9 @@ public class PlayRobotTurn {
                 "Pass!",
                 JOptionPane.INFORMATION_MESSAGE);
         System.out.println(newGame.getCurrentPlayer().getName() + " chose to pass");
-//        UpdateLabels.setPlayerPassed(gui, newGame);
       }
     }
+    //Check if the player has won
     if (newGame.checkWinner()) {
       if (!newGame.getWinners().contains(newGame.getCurrentPlayer())) {
         newGame.winners.add(newGame.getCurrentPlayer());
@@ -62,12 +62,14 @@ public class PlayRobotTurn {
   }
 
   /**
-   * When a nonHuman player is playing any turn that is not the first turn (certain restrictions must be placed on the first turn)
+   * When a nonHuman player is playing any turn that is not the first turn
+   * (certain restrictions must be placed on the first turn)
    * @param gui The custom Mineral Supertrumps gui object
      */
   private static void playNotFirstTurn(MineralST_GUI gui) {
     Game newGame = Game.currentGame;
     Player currentPlayer = newGame.getCurrentPlayer();
+    //Play the combo if possible
     if (currentPlayer.hasCombo()) {
       newGame.playCombo();
       ContinuePressed.updateLastPlayedCard(newGame, gui);
@@ -125,7 +127,7 @@ public class PlayRobotTurn {
       trumpChoice = newGame.getCurrentPlayer().getTrumpCategoryChoice();
       newGame.setFirstTurn(false);
     }
-    //first turn of ROUND
+    //first turn of round
     else {
       cardChoice = newGame.getCurrentPlayer().playAnyCard();
       if (cardChoice.getCardType().equals("play") || cardChoice.isGeologist()) {
@@ -134,6 +136,7 @@ public class PlayRobotTurn {
         trumpChoice = newGame.getTrumpChoiceFromTrumpCard(cardChoice.getTitle());
       }
     }
+
     newGame.setCurrentTrumpCategory(trumpChoice);
     newGame.setLastPlayedAttributes(cardChoice);
     newGame.setLastPlayer(newGame.getCurrentPlayer());

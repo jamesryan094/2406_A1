@@ -11,10 +11,10 @@ import java.awt.*;
  * Human players have little restriction on what they can try in a game however, have the same
  * restrictions for what is considered valid in a game as a nonhuman player.
  * Created by james on 20/10/2016. */
-public class PlayHumanTurn {
+class PlayHumanTurn {
 
 
-  public static void enableUserButtons(MineralST_GUI gui) {
+  static void enableUserButtons(MineralST_GUI gui) {
     gui.continueButton.setEnabled(false);
     gui.playCardButton.setEnabled(true);
     gui.playComboButton.setEnabled(true);
@@ -26,13 +26,14 @@ public class PlayHumanTurn {
    * based on attributes set in the current Game object
    * @param gui The custom Mineral Supertrumps gui object
      */
-  public static void playTurn(MineralST_GUI gui) {
+  static void playTurn(MineralST_GUI gui) {
     Game newGame = Game.currentGame;
     Player currentPlayer = newGame.getCurrentPlayer();
     Card cardChoice = getSelectedCard(gui, newGame);
 
     boolean cardPlayed = true;
 
+    //If it is the very forst turn of the game.
     if (newGame.isFirstTurn()) {
       if (cardChoice.getCardType().equals("trump")) {
         JOptionPane.showMessageDialog(
@@ -44,6 +45,7 @@ public class PlayHumanTurn {
         String trumpChoice = getTrumpCategoryFromUser(gui, newGame);
         newGame.playFirstTurn(cardChoice, trumpChoice);
       }
+    //Else if it is the beginning of a new round
     } else if (newGame.isNewRound() || newGame.comboPlayed()) {
       newGame.resetComboPlayed();
       if (cardChoice.getCardType().equals("trump")) {
@@ -66,7 +68,6 @@ public class PlayHumanTurn {
         newGame.playFirstTurn(cardChoice, trumpChoice);
       }
       newGame.resetRound();
-      //            newGame.incrementCurrentPlayer();
     } else {
       if (cardChoice.canPlayOn(newGame.getLastPlayedCard(), newGame.getCurrentTrumpCategory())) {
         if (cardChoice.getCardType().equals("trump") && !cardChoice.isGeologist()) {
@@ -185,7 +186,7 @@ public class PlayHumanTurn {
    * When user chooses to pass: increment player, draw card if possible
    * @param gui The custom Mineral Supertrumps gui object
      */
-  public static void passTurn(MineralST_GUI gui) {
+  static void passTurn(MineralST_GUI gui) {
     Game newGame = Game.currentGame;
     System.out.println(newGame.getCurrentPlayer().getName() + " chose to Pass");
     newGame.passTurn();

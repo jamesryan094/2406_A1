@@ -5,7 +5,7 @@ import game.Game;
 /**
  * Updates JLabels on the user's control panel where appropriate
  * Created by james on 22/10/2016. */
-public class UpdateLabels {
+class UpdateLabels {
 
   /**
    * gets the last played card from the current game object and creates appropriate icon to
@@ -13,7 +13,7 @@ public class UpdateLabels {
    * @param gui The custom Mineral Supertrumps gui object
    * @param newGame The current Game object
    */
-  public static void updateLastPlayedCardGUI(MineralST_GUI gui, Game newGame) {
+  static void updateLastPlayedCardGUI(MineralST_GUI gui, Game newGame) {
     gui.currentPlayerLabel.setText("Card in Play: " + newGame.getLastPlayedCard().getTitle());
     gui.lastPlayerLabel.setText("Last Card Played By: " + newGame.getLastPlayer().getName());
     gui.currentCategoryLabel.setText(
@@ -25,7 +25,7 @@ public class UpdateLabels {
                 .getCurrentTrumpValueAsString(newGame.getCurrentTrumpCategory()));
   }
 
-  public static void updateNextPlayerLabel(Game newGame, MineralST_GUI gui) {
+  static void updateNextPlayerLabel(Game newGame, MineralST_GUI gui) {
     gui.nextPlayerLabel.setText("Next Player: " + newGame.getNextPlayer().getName());
   }
 
@@ -34,7 +34,7 @@ public class UpdateLabels {
    * The user does not need to know who the dealer is once the first turn has been played.
    * @param gui The custom Mineral Supertrumps gui object
    */
-  public static void resetLabels(MineralST_GUI gui) {
+  static void resetLabels(MineralST_GUI gui) {
     gui.lastPlayerLabel.setText("Last Card Played By: ");
     gui.currentCategoryLabel.setText("Current Trump Category: ");
   }

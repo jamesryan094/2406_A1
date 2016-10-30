@@ -8,11 +8,11 @@ import java.awt.event.ActionListener;
 /**
  * Displays the Prepare Game Screen to the user
  * Created by james on 14/10/2016. */
-public class PreGameScreen implements ActionListener {
+class PreGameScreen implements ActionListener {
   private JPanel mineralSTContainer;
   private CardLayout mineralSTLayout;
 
-  public PreGameScreen(JPanel mineralST) {
+  PreGameScreen(JPanel mineralST) {
     mineralSTContainer = mineralST;
     mineralSTLayout = (CardLayout) mineralST.getLayout();
   }

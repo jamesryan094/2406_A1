@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Takes information for Prepare Game screen and builds new Game object with it.
  * Shows the Play Game Screen
  * Created by james on 19/10/2016. */
-public class PrepareGame {
+class PrepareGame {
 
   /**
    * Takes information for Prepare Game screen and builds new Game object with it.
@@ -21,7 +21,7 @@ public class PrepareGame {
    * @param numPlayers the radioButton selection form the Prepare Game screen
    * @param userName the text input from the Prepare Game screen
      */
-  public static void buildMineralSTGame(MineralST_GUI gui, int numPlayers, String userName) {
+  static void buildMineralSTGame(MineralST_GUI gui, int numPlayers, String userName) {
     MineralST_GUI mineralSTgui = gui;
     JPanel mineralSTContainer = gui.mineralST;
     CardLayout mineralSTLayout = (CardLayout) mineralSTContainer.getLayout();
@@ -86,7 +86,7 @@ public class PrepareGame {
    * @param gui The custom Mineral Supertrumps gui object
    * @param newGame The current Game object
      */
-  public static void generateHandIcons(MineralST_GUI gui, Game newGame) {
+  static void generateHandIcons(MineralST_GUI gui, Game newGame) {
     //For each card in the human player's hand
     gui.userCards.removeAll();
     ArrayList<Card> userHand = newGame.getPlayers()[0].getHand();

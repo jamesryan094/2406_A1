@@ -8,12 +8,12 @@ import java.awt.event.ActionListener;
 /**
  * Gets the previous card in the players hand and displays it in the bottom left hand corner of the Play Game screen
  * Created by james on 19/10/2016. */
-public class PreviousCard implements ActionListener {
+class PreviousCard implements ActionListener {
   MineralST_GUI gui;
-  JPanel cardContainer;
-  CardLayout cardCardLayout;
+  private JPanel cardContainer;
+  private CardLayout cardCardLayout;
 
-  public PreviousCard(MineralST_GUI gui) {
+  PreviousCard(MineralST_GUI gui) {
     this.gui = gui;
     cardContainer = gui.userCards;
     cardCardLayout = (CardLayout) cardContainer.getLayout();
